@@ -1,0 +1,111 @@
+{
+  "challenges": [
+    {
+      "challengeId": "winter-challenge-2025",
+      "name": "Winter Challenge 2025",
+      "description": "Complete winter-themed goals",
+      "goals": [
+        {
+          "goalId": "complete-tutorial",
+          "name": "Complete Tutorial",
+          "description": "Finish the game tutorial",
+          "type": "absolute",
+          "eventSource": "statistic",
+          "defaultAssigned": true,
+          "requirement": {
+            "statCode": "tutorial_completed",
+            "operator": ">=",
+            "targetValue": 1
+          },
+          "reward": {
+            "type": "WALLET",
+            "rewardId": "GOLD",
+            "quantity": 100
+          },
+          "prerequisites": []
+        },
+        {
+          "goalId": "kill-10-snowmen",
+          "name": "Kill 10 Snowmen",
+          "description": "Defeat 10 snowmen enemies",
+          "type": "absolute",
+          "eventSource": "statistic",
+          "defaultAssigned": false,
+          "requirement": {
+            "statCode": "snowmen_killed",
+            "operator": ">=",
+            "targetValue": 10
+          },
+          "reward": {
+            "type": "ITEM",
+            "rewardId": "winter_sword",
+            "quantity": 1
+          },
+          "prerequisites": ["complete-tutorial"]
+        },
+        {
+          "goalId": "reach-level-5",
+          "name": "Reach Level 5",
+          "description": "Achieve character level 5",
+          "type": "absolute",
+          "eventSource": "statistic",
+          "defaultAssigned": false,
+          "requirement": {
+            "statCode": "player_level",
+            "operator": ">=",
+            "targetValue": 5
+          },
+          "reward": {
+            "type": "WALLET",
+            "rewardId": "GEMS",
+            "quantity": 50
+          },
+          "prerequisites": ["kill-10-snowmen"]
+        }
+      ]
+    },
+    {
+      "challengeId": "daily-quests",
+      "name": "Daily Quests",
+      "description": "Complete daily objectives",
+      "goals": [
+        {
+          "goalId": "login-today",
+          "name": "Login Today",
+          "description": "Log in to the game",
+          "type": "daily",
+          "eventSource": "login",
+          "requirement": {
+            "statCode": "daily_login",
+            "operator": ">=",
+            "targetValue": 1
+          },
+          "reward": {
+            "type": "WALLET",
+            "rewardId": "GOLD",
+            "quantity": 10
+          },
+          "prerequisites": []
+        },
+        {
+          "goalId": "play-3-matches",
+          "name": "Play 3 Matches",
+          "description": "Complete 3 game matches",
+          "type": "daily",
+          "eventSource": "statistic",
+          "requirement": {
+            "statCode": "matches_played",
+            "operator": ">=",
+            "targetValue": 3
+          },
+          "reward": {
+            "type": "ITEM",
+            "rewardId": "loot_box",
+            "quantity": 1
+          },
+          "prerequisites": []
+        }
+      ]
+    }
+  ]
+}
