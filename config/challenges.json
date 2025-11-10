@@ -38,7 +38,7 @@
           },
           "reward": {
             "type": "ITEM",
-            "rewardId": "winter_sword",
+            "rewardId": "767d2217abe241aab2245794761e9dc4",
             "quantity": 1
           },
           "prerequisites": ["complete-tutorial"]
@@ -100,7 +100,7 @@
           },
           "reward": {
             "type": "ITEM",
-            "rewardId": "loot_box",
+            "rewardId": "689cac44689c452290b12922c4d135fd",
             "quantity": 1
           },
           "prerequisites": []
