@@ -21,7 +21,8 @@
             "rewardId": "GEMS",
             "quantity": 10
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-02",
@@ -39,7 +40,8 @@
             "rewardId": "GEMS",
             "quantity": 20
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-03",
@@ -57,7 +59,8 @@
             "rewardId": "GEMS",
             "quantity": 30
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-04",
@@ -75,7 +78,8 @@
             "rewardId": "GEMS",
             "quantity": 40
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-05",
@@ -93,7 +97,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-06",
@@ -111,7 +116,8 @@
             "rewardId": "GEMS",
             "quantity": 60
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-07",
@@ -129,7 +135,8 @@
             "rewardId": "GEMS",
             "quantity": 70
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-08",
@@ -147,7 +154,8 @@
             "rewardId": "GEMS",
             "quantity": 80
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-09",
@@ -165,7 +173,8 @@
             "rewardId": "GEMS",
             "quantity": 90
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-10",
@@ -183,7 +192,8 @@
             "rewardId": "GEMS",
             "quantity": 500
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-11",
@@ -201,7 +211,8 @@
             "rewardId": "GEMS",
             "quantity": 110
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-001-goal-12",
@@ -219,7 +230,8 @@
             "rewardId": "GEMS",
             "quantity": 120
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-001-goal-13",
@@ -237,7 +249,8 @@
             "rewardId": "GEMS",
             "quantity": 130
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-001-goal-14",
@@ -255,7 +268,8 @@
             "rewardId": "GEMS",
             "quantity": 140
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-001-goal-15",
@@ -273,7 +287,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-001-goal-16",
@@ -291,7 +306,8 @@
             "rewardId": "GEMS",
             "quantity": 160
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-001-goal-17",
@@ -309,7 +325,8 @@
             "rewardId": "GEMS",
             "quantity": 170
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-001-goal-18",
@@ -327,7 +344,8 @@
             "rewardId": "GEMS",
             "quantity": 180
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-001-goal-19",
@@ -345,7 +363,8 @@
             "rewardId": "GEMS",
             "quantity": 190
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-001-goal-20",
@@ -363,7 +382,8 @@
             "rewardId": "GEMS",
             "quantity": 1000
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-001-goal-21",
@@ -381,7 +401,8 @@
             "rewardId": "GEMS",
             "quantity": 210
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-001-goal-22",
@@ -399,7 +420,8 @@
             "rewardId": "GEMS",
             "quantity": 220
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-001-goal-23",
@@ -417,7 +439,8 @@
             "rewardId": "GEMS",
             "quantity": 230
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-001-goal-24",
@@ -435,7 +458,8 @@
             "rewardId": "GEMS",
             "quantity": 240
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-001-goal-25",
@@ -453,7 +477,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-001-goal-26",
@@ -471,7 +496,8 @@
             "rewardId": "GEMS",
             "quantity": 260
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-001-goal-27",
@@ -489,7 +515,8 @@
             "rewardId": "GEMS",
             "quantity": 270
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-001-goal-28",
@@ -507,7 +534,8 @@
             "rewardId": "GEMS",
             "quantity": 280
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-001-goal-29",
@@ -525,7 +553,8 @@
             "rewardId": "GEMS",
             "quantity": 290
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-001-goal-30",
@@ -543,7 +572,8 @@
             "rewardId": "GEMS",
             "quantity": 1500
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-001-goal-31",
@@ -561,7 +591,8 @@
             "rewardId": "GEMS",
             "quantity": 310
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-001-goal-32",
@@ -579,7 +610,8 @@
             "rewardId": "GEMS",
             "quantity": 320
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-001-goal-33",
@@ -597,7 +629,8 @@
             "rewardId": "GEMS",
             "quantity": 330
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-001-goal-34",
@@ -615,7 +648,8 @@
             "rewardId": "GEMS",
             "quantity": 340
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-001-goal-35",
@@ -633,7 +667,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-001-goal-36",
@@ -651,7 +686,8 @@
             "rewardId": "GEMS",
             "quantity": 360
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-001-goal-37",
@@ -669,7 +705,8 @@
             "rewardId": "GEMS",
             "quantity": 370
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-001-goal-38",
@@ -687,7 +724,8 @@
             "rewardId": "GEMS",
             "quantity": 380
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-001-goal-39",
@@ -705,7 +743,8 @@
             "rewardId": "GEMS",
             "quantity": 390
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-001-goal-40",
@@ -723,7 +762,8 @@
             "rewardId": "GEMS",
             "quantity": 2000
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-001-goal-41",
@@ -741,7 +781,8 @@
             "rewardId": "GEMS",
             "quantity": 410
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-001-goal-42",
@@ -759,7 +800,8 @@
             "rewardId": "GEMS",
             "quantity": 420
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-001-goal-43",
@@ -777,7 +819,8 @@
             "rewardId": "GEMS",
             "quantity": 430
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-001-goal-44",
@@ -795,7 +838,8 @@
             "rewardId": "GEMS",
             "quantity": 440
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-001-goal-45",
@@ -813,7 +857,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-001-goal-46",
@@ -831,7 +876,8 @@
             "rewardId": "GEMS",
             "quantity": 460
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-001-goal-47",
@@ -849,7 +895,8 @@
             "rewardId": "GEMS",
             "quantity": 470
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-001-goal-48",
@@ -867,7 +914,8 @@
             "rewardId": "GEMS",
             "quantity": 480
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-001-goal-49",
@@ -885,7 +933,8 @@
             "rewardId": "GEMS",
             "quantity": 490
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-001-goal-50",
@@ -903,7 +952,8 @@
             "rewardId": "GEMS",
             "quantity": 2500
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         }
       ]
     },
@@ -928,7 +978,8 @@
             "rewardId": "GEMS",
             "quantity": 10
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-02",
@@ -946,7 +997,8 @@
             "rewardId": "GEMS",
             "quantity": 20
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-03",
@@ -964,7 +1016,8 @@
             "rewardId": "GEMS",
             "quantity": 30
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-04",
@@ -982,7 +1035,8 @@
             "rewardId": "GEMS",
             "quantity": 40
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-05",
@@ -1000,7 +1054,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-06",
@@ -1018,7 +1073,8 @@
             "rewardId": "GEMS",
             "quantity": 60
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-07",
@@ -1036,7 +1092,8 @@
             "rewardId": "GEMS",
             "quantity": 70
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-08",
@@ -1054,7 +1111,8 @@
             "rewardId": "GEMS",
             "quantity": 80
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-09",
@@ -1072,7 +1130,8 @@
             "rewardId": "GEMS",
             "quantity": 90
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-10",
@@ -1090,7 +1149,8 @@
             "rewardId": "GEMS",
             "quantity": 500
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-11",
@@ -1108,7 +1168,8 @@
             "rewardId": "GEMS",
             "quantity": 110
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-002-goal-12",
@@ -1126,7 +1187,8 @@
             "rewardId": "GEMS",
             "quantity": 120
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-002-goal-13",
@@ -1144,7 +1206,8 @@
             "rewardId": "GEMS",
             "quantity": 130
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-002-goal-14",
@@ -1162,7 +1225,8 @@
             "rewardId": "GEMS",
             "quantity": 140
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-002-goal-15",
@@ -1180,7 +1244,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-002-goal-16",
@@ -1198,7 +1263,8 @@
             "rewardId": "GEMS",
             "quantity": 160
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-002-goal-17",
@@ -1216,7 +1282,8 @@
             "rewardId": "GEMS",
             "quantity": 170
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-002-goal-18",
@@ -1234,7 +1301,8 @@
             "rewardId": "GEMS",
             "quantity": 180
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-002-goal-19",
@@ -1252,7 +1320,8 @@
             "rewardId": "GEMS",
             "quantity": 190
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-002-goal-20",
@@ -1270,7 +1339,8 @@
             "rewardId": "GEMS",
             "quantity": 1000
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-002-goal-21",
@@ -1288,7 +1358,8 @@
             "rewardId": "GEMS",
             "quantity": 210
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-002-goal-22",
@@ -1306,7 +1377,8 @@
             "rewardId": "GEMS",
             "quantity": 220
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-002-goal-23",
@@ -1324,7 +1396,8 @@
             "rewardId": "GEMS",
             "quantity": 230
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-002-goal-24",
@@ -1342,7 +1415,8 @@
             "rewardId": "GEMS",
             "quantity": 240
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-002-goal-25",
@@ -1360,7 +1434,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-002-goal-26",
@@ -1378,7 +1453,8 @@
             "rewardId": "GEMS",
             "quantity": 260
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-002-goal-27",
@@ -1396,7 +1472,8 @@
             "rewardId": "GEMS",
             "quantity": 270
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-002-goal-28",
@@ -1414,7 +1491,8 @@
             "rewardId": "GEMS",
             "quantity": 280
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-002-goal-29",
@@ -1432,7 +1510,8 @@
             "rewardId": "GEMS",
             "quantity": 290
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-002-goal-30",
@@ -1450,7 +1529,8 @@
             "rewardId": "GEMS",
             "quantity": 1500
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-002-goal-31",
@@ -1468,7 +1548,8 @@
             "rewardId": "GEMS",
             "quantity": 310
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-002-goal-32",
@@ -1486,7 +1567,8 @@
             "rewardId": "GEMS",
             "quantity": 320
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-002-goal-33",
@@ -1504,7 +1586,8 @@
             "rewardId": "GEMS",
             "quantity": 330
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-002-goal-34",
@@ -1522,7 +1605,8 @@
             "rewardId": "GEMS",
             "quantity": 340
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-002-goal-35",
@@ -1540,7 +1624,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-002-goal-36",
@@ -1558,7 +1643,8 @@
             "rewardId": "GEMS",
             "quantity": 360
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-002-goal-37",
@@ -1576,7 +1662,8 @@
             "rewardId": "GEMS",
             "quantity": 370
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-002-goal-38",
@@ -1594,7 +1681,8 @@
             "rewardId": "GEMS",
             "quantity": 380
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-002-goal-39",
@@ -1612,7 +1700,8 @@
             "rewardId": "GEMS",
             "quantity": 390
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-002-goal-40",
@@ -1630,7 +1719,8 @@
             "rewardId": "GEMS",
             "quantity": 2000
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-002-goal-41",
@@ -1648,7 +1738,8 @@
             "rewardId": "GEMS",
             "quantity": 410
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-002-goal-42",
@@ -1666,7 +1757,8 @@
             "rewardId": "GEMS",
             "quantity": 420
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-002-goal-43",
@@ -1684,7 +1776,8 @@
             "rewardId": "GEMS",
             "quantity": 430
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-002-goal-44",
@@ -1702,7 +1795,8 @@
             "rewardId": "GEMS",
             "quantity": 440
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-002-goal-45",
@@ -1720,7 +1814,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-002-goal-46",
@@ -1738,7 +1833,8 @@
             "rewardId": "GEMS",
             "quantity": 460
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-002-goal-47",
@@ -1756,7 +1852,8 @@
             "rewardId": "GEMS",
             "quantity": 470
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-002-goal-48",
@@ -1774,7 +1871,8 @@
             "rewardId": "GEMS",
             "quantity": 480
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-002-goal-49",
@@ -1792,7 +1890,8 @@
             "rewardId": "GEMS",
             "quantity": 490
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-002-goal-50",
@@ -1810,7 +1909,8 @@
             "rewardId": "GEMS",
             "quantity": 2500
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         }
       ]
     },
@@ -1835,7 +1935,8 @@
             "rewardId": "GEMS",
             "quantity": 10
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-02",
@@ -1853,7 +1954,8 @@
             "rewardId": "GEMS",
             "quantity": 20
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-03",
@@ -1871,7 +1973,8 @@
             "rewardId": "GEMS",
             "quantity": 30
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-04",
@@ -1889,7 +1992,8 @@
             "rewardId": "GEMS",
             "quantity": 40
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-05",
@@ -1907,7 +2011,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-06",
@@ -1925,7 +2030,8 @@
             "rewardId": "GEMS",
             "quantity": 60
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-07",
@@ -1943,7 +2049,8 @@
             "rewardId": "GEMS",
             "quantity": 70
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-08",
@@ -1961,7 +2068,8 @@
             "rewardId": "GEMS",
             "quantity": 80
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-09",
@@ -1979,7 +2087,8 @@
             "rewardId": "GEMS",
             "quantity": 90
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-10",
@@ -1997,7 +2106,8 @@
             "rewardId": "GEMS",
             "quantity": 500
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-11",
@@ -2015,7 +2125,8 @@
             "rewardId": "GEMS",
             "quantity": 110
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-003-goal-12",
@@ -2033,7 +2144,8 @@
             "rewardId": "GEMS",
             "quantity": 120
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-003-goal-13",
@@ -2051,7 +2163,8 @@
             "rewardId": "GEMS",
             "quantity": 130
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-003-goal-14",
@@ -2069,7 +2182,8 @@
             "rewardId": "GEMS",
             "quantity": 140
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-003-goal-15",
@@ -2087,7 +2201,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-003-goal-16",
@@ -2105,7 +2220,8 @@
             "rewardId": "GEMS",
             "quantity": 160
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-003-goal-17",
@@ -2123,7 +2239,8 @@
             "rewardId": "GEMS",
             "quantity": 170
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-003-goal-18",
@@ -2141,7 +2258,8 @@
             "rewardId": "GEMS",
             "quantity": 180
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-003-goal-19",
@@ -2159,7 +2277,8 @@
             "rewardId": "GEMS",
             "quantity": 190
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-003-goal-20",
@@ -2177,7 +2296,8 @@
             "rewardId": "GEMS",
             "quantity": 1000
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-003-goal-21",
@@ -2195,7 +2315,8 @@
             "rewardId": "GEMS",
             "quantity": 210
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-003-goal-22",
@@ -2213,7 +2334,8 @@
             "rewardId": "GEMS",
             "quantity": 220
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-003-goal-23",
@@ -2231,7 +2353,8 @@
             "rewardId": "GEMS",
             "quantity": 230
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-003-goal-24",
@@ -2249,7 +2372,8 @@
             "rewardId": "GEMS",
             "quantity": 240
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-003-goal-25",
@@ -2267,7 +2391,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-003-goal-26",
@@ -2285,7 +2410,8 @@
             "rewardId": "GEMS",
             "quantity": 260
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-003-goal-27",
@@ -2303,7 +2429,8 @@
             "rewardId": "GEMS",
             "quantity": 270
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-003-goal-28",
@@ -2321,7 +2448,8 @@
             "rewardId": "GEMS",
             "quantity": 280
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-003-goal-29",
@@ -2339,7 +2467,8 @@
             "rewardId": "GEMS",
             "quantity": 290
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-003-goal-30",
@@ -2357,7 +2486,8 @@
             "rewardId": "GEMS",
             "quantity": 1500
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-003-goal-31",
@@ -2375,7 +2505,8 @@
             "rewardId": "GEMS",
             "quantity": 310
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-003-goal-32",
@@ -2393,7 +2524,8 @@
             "rewardId": "GEMS",
             "quantity": 320
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-003-goal-33",
@@ -2411,7 +2543,8 @@
             "rewardId": "GEMS",
             "quantity": 330
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-003-goal-34",
@@ -2429,7 +2562,8 @@
             "rewardId": "GEMS",
             "quantity": 340
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-003-goal-35",
@@ -2447,7 +2581,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-003-goal-36",
@@ -2465,7 +2600,8 @@
             "rewardId": "GEMS",
             "quantity": 360
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-003-goal-37",
@@ -2483,7 +2619,8 @@
             "rewardId": "GEMS",
             "quantity": 370
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-003-goal-38",
@@ -2501,7 +2638,8 @@
             "rewardId": "GEMS",
             "quantity": 380
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-003-goal-39",
@@ -2519,7 +2657,8 @@
             "rewardId": "GEMS",
             "quantity": 390
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-003-goal-40",
@@ -2537,7 +2676,8 @@
             "rewardId": "GEMS",
             "quantity": 2000
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-003-goal-41",
@@ -2555,7 +2695,8 @@
             "rewardId": "GEMS",
             "quantity": 410
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-003-goal-42",
@@ -2573,7 +2714,8 @@
             "rewardId": "GEMS",
             "quantity": 420
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-003-goal-43",
@@ -2591,7 +2733,8 @@
             "rewardId": "GEMS",
             "quantity": 430
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-003-goal-44",
@@ -2609,7 +2752,8 @@
             "rewardId": "GEMS",
             "quantity": 440
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-003-goal-45",
@@ -2627,7 +2771,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-003-goal-46",
@@ -2645,7 +2790,8 @@
             "rewardId": "GEMS",
             "quantity": 460
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-003-goal-47",
@@ -2663,7 +2809,8 @@
             "rewardId": "GEMS",
             "quantity": 470
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-003-goal-48",
@@ -2681,7 +2828,8 @@
             "rewardId": "GEMS",
             "quantity": 480
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-003-goal-49",
@@ -2699,7 +2847,8 @@
             "rewardId": "GEMS",
             "quantity": 490
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-003-goal-50",
@@ -2717,7 +2866,8 @@
             "rewardId": "GEMS",
             "quantity": 2500
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         }
       ]
     },
@@ -2742,7 +2892,8 @@
             "rewardId": "GEMS",
             "quantity": 10
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-02",
@@ -2760,7 +2911,8 @@
             "rewardId": "GEMS",
             "quantity": 20
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-03",
@@ -2778,7 +2930,8 @@
             "rewardId": "GEMS",
             "quantity": 30
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-04",
@@ -2796,7 +2949,8 @@
             "rewardId": "GEMS",
             "quantity": 40
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-05",
@@ -2814,7 +2968,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-06",
@@ -2832,7 +2987,8 @@
             "rewardId": "GEMS",
             "quantity": 60
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-07",
@@ -2850,7 +3006,8 @@
             "rewardId": "GEMS",
             "quantity": 70
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-08",
@@ -2868,7 +3025,8 @@
             "rewardId": "GEMS",
             "quantity": 80
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-09",
@@ -2886,7 +3044,8 @@
             "rewardId": "GEMS",
             "quantity": 90
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-10",
@@ -2904,7 +3063,8 @@
             "rewardId": "GEMS",
             "quantity": 500
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-11",
@@ -2922,7 +3082,8 @@
             "rewardId": "GEMS",
             "quantity": 110
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-004-goal-12",
@@ -2940,7 +3101,8 @@
             "rewardId": "GEMS",
             "quantity": 120
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-004-goal-13",
@@ -2958,7 +3120,8 @@
             "rewardId": "GEMS",
             "quantity": 130
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-004-goal-14",
@@ -2976,7 +3139,8 @@
             "rewardId": "GEMS",
             "quantity": 140
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-004-goal-15",
@@ -2994,7 +3158,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-004-goal-16",
@@ -3012,7 +3177,8 @@
             "rewardId": "GEMS",
             "quantity": 160
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-004-goal-17",
@@ -3030,7 +3196,8 @@
             "rewardId": "GEMS",
             "quantity": 170
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-004-goal-18",
@@ -3048,7 +3215,8 @@
             "rewardId": "GEMS",
             "quantity": 180
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-004-goal-19",
@@ -3066,7 +3234,8 @@
             "rewardId": "GEMS",
             "quantity": 190
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-004-goal-20",
@@ -3084,7 +3253,8 @@
             "rewardId": "GEMS",
             "quantity": 1000
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-004-goal-21",
@@ -3102,7 +3272,8 @@
             "rewardId": "GEMS",
             "quantity": 210
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-004-goal-22",
@@ -3120,7 +3291,8 @@
             "rewardId": "GEMS",
             "quantity": 220
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-004-goal-23",
@@ -3138,7 +3310,8 @@
             "rewardId": "GEMS",
             "quantity": 230
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-004-goal-24",
@@ -3156,7 +3329,8 @@
             "rewardId": "GEMS",
             "quantity": 240
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-004-goal-25",
@@ -3174,7 +3348,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-004-goal-26",
@@ -3192,7 +3367,8 @@
             "rewardId": "GEMS",
             "quantity": 260
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-004-goal-27",
@@ -3210,7 +3386,8 @@
             "rewardId": "GEMS",
             "quantity": 270
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-004-goal-28",
@@ -3228,7 +3405,8 @@
             "rewardId": "GEMS",
             "quantity": 280
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-004-goal-29",
@@ -3246,7 +3424,8 @@
             "rewardId": "GEMS",
             "quantity": 290
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-004-goal-30",
@@ -3264,7 +3443,8 @@
             "rewardId": "GEMS",
             "quantity": 1500
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-004-goal-31",
@@ -3282,7 +3462,8 @@
             "rewardId": "GEMS",
             "quantity": 310
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-004-goal-32",
@@ -3300,7 +3481,8 @@
             "rewardId": "GEMS",
             "quantity": 320
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-004-goal-33",
@@ -3318,7 +3500,8 @@
             "rewardId": "GEMS",
             "quantity": 330
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-004-goal-34",
@@ -3336,7 +3519,8 @@
             "rewardId": "GEMS",
             "quantity": 340
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-004-goal-35",
@@ -3354,7 +3538,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-004-goal-36",
@@ -3372,7 +3557,8 @@
             "rewardId": "GEMS",
             "quantity": 360
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-004-goal-37",
@@ -3390,7 +3576,8 @@
             "rewardId": "GEMS",
             "quantity": 370
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-004-goal-38",
@@ -3408,7 +3595,8 @@
             "rewardId": "GEMS",
             "quantity": 380
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-004-goal-39",
@@ -3426,7 +3614,8 @@
             "rewardId": "GEMS",
             "quantity": 390
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-004-goal-40",
@@ -3444,7 +3633,8 @@
             "rewardId": "GEMS",
             "quantity": 2000
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-004-goal-41",
@@ -3462,7 +3652,8 @@
             "rewardId": "GEMS",
             "quantity": 410
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-004-goal-42",
@@ -3480,7 +3671,8 @@
             "rewardId": "GEMS",
             "quantity": 420
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-004-goal-43",
@@ -3498,7 +3690,8 @@
             "rewardId": "GEMS",
             "quantity": 430
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-004-goal-44",
@@ -3516,7 +3709,8 @@
             "rewardId": "GEMS",
             "quantity": 440
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-004-goal-45",
@@ -3534,7 +3728,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-004-goal-46",
@@ -3552,7 +3747,8 @@
             "rewardId": "GEMS",
             "quantity": 460
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-004-goal-47",
@@ -3570,7 +3766,8 @@
             "rewardId": "GEMS",
             "quantity": 470
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-004-goal-48",
@@ -3588,7 +3785,8 @@
             "rewardId": "GEMS",
             "quantity": 480
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-004-goal-49",
@@ -3606,7 +3804,8 @@
             "rewardId": "GEMS",
             "quantity": 490
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-004-goal-50",
@@ -3624,7 +3823,8 @@
             "rewardId": "GEMS",
             "quantity": 2500
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         }
       ]
     },
@@ -3649,7 +3849,8 @@
             "rewardId": "GEMS",
             "quantity": 10
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-02",
@@ -3667,7 +3868,8 @@
             "rewardId": "GEMS",
             "quantity": 20
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-03",
@@ -3685,7 +3887,8 @@
             "rewardId": "GEMS",
             "quantity": 30
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-04",
@@ -3703,7 +3906,8 @@
             "rewardId": "GEMS",
             "quantity": 40
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-05",
@@ -3721,7 +3925,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-06",
@@ -3739,7 +3944,8 @@
             "rewardId": "GEMS",
             "quantity": 60
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-07",
@@ -3757,7 +3963,8 @@
             "rewardId": "GEMS",
             "quantity": 70
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-08",
@@ -3775,7 +3982,8 @@
             "rewardId": "GEMS",
             "quantity": 80
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-09",
@@ -3793,7 +4001,8 @@
             "rewardId": "GEMS",
             "quantity": 90
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-10",
@@ -3811,7 +4020,8 @@
             "rewardId": "GEMS",
             "quantity": 500
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-11",
@@ -3829,7 +4039,8 @@
             "rewardId": "GEMS",
             "quantity": 110
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-005-goal-12",
@@ -3847,7 +4058,8 @@
             "rewardId": "GEMS",
             "quantity": 120
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-005-goal-13",
@@ -3865,7 +4077,8 @@
             "rewardId": "GEMS",
             "quantity": 130
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-005-goal-14",
@@ -3883,7 +4096,8 @@
             "rewardId": "GEMS",
             "quantity": 140
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-005-goal-15",
@@ -3901,7 +4115,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-005-goal-16",
@@ -3919,7 +4134,8 @@
             "rewardId": "GEMS",
             "quantity": 160
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-005-goal-17",
@@ -3937,7 +4153,8 @@
             "rewardId": "GEMS",
             "quantity": 170
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-005-goal-18",
@@ -3955,7 +4172,8 @@
             "rewardId": "GEMS",
             "quantity": 180
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-005-goal-19",
@@ -3973,7 +4191,8 @@
             "rewardId": "GEMS",
             "quantity": 190
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-005-goal-20",
@@ -3991,7 +4210,8 @@
             "rewardId": "GEMS",
             "quantity": 1000
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-005-goal-21",
@@ -4009,7 +4229,8 @@
             "rewardId": "GEMS",
             "quantity": 210
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-005-goal-22",
@@ -4027,7 +4248,8 @@
             "rewardId": "GEMS",
             "quantity": 220
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-005-goal-23",
@@ -4045,7 +4267,8 @@
             "rewardId": "GEMS",
             "quantity": 230
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-005-goal-24",
@@ -4063,7 +4286,8 @@
             "rewardId": "GEMS",
             "quantity": 240
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-005-goal-25",
@@ -4081,7 +4305,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-005-goal-26",
@@ -4099,7 +4324,8 @@
             "rewardId": "GEMS",
             "quantity": 260
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-005-goal-27",
@@ -4117,7 +4343,8 @@
             "rewardId": "GEMS",
             "quantity": 270
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-005-goal-28",
@@ -4135,7 +4362,8 @@
             "rewardId": "GEMS",
             "quantity": 280
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-005-goal-29",
@@ -4153,7 +4381,8 @@
             "rewardId": "GEMS",
             "quantity": 290
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-005-goal-30",
@@ -4171,7 +4400,8 @@
             "rewardId": "GEMS",
             "quantity": 1500
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-005-goal-31",
@@ -4189,7 +4419,8 @@
             "rewardId": "GEMS",
             "quantity": 310
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-005-goal-32",
@@ -4207,7 +4438,8 @@
             "rewardId": "GEMS",
             "quantity": 320
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-005-goal-33",
@@ -4225,7 +4457,8 @@
             "rewardId": "GEMS",
             "quantity": 330
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-005-goal-34",
@@ -4243,7 +4476,8 @@
             "rewardId": "GEMS",
             "quantity": 340
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-005-goal-35",
@@ -4261,7 +4495,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-005-goal-36",
@@ -4279,7 +4514,8 @@
             "rewardId": "GEMS",
             "quantity": 360
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-005-goal-37",
@@ -4297,7 +4533,8 @@
             "rewardId": "GEMS",
             "quantity": 370
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-005-goal-38",
@@ -4315,7 +4552,8 @@
             "rewardId": "GEMS",
             "quantity": 380
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-005-goal-39",
@@ -4333,7 +4571,8 @@
             "rewardId": "GEMS",
             "quantity": 390
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-005-goal-40",
@@ -4351,7 +4590,8 @@
             "rewardId": "GEMS",
             "quantity": 2000
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-005-goal-41",
@@ -4369,7 +4609,8 @@
             "rewardId": "GEMS",
             "quantity": 410
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-005-goal-42",
@@ -4387,7 +4628,8 @@
             "rewardId": "GEMS",
             "quantity": 420
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-005-goal-43",
@@ -4405,7 +4647,8 @@
             "rewardId": "GEMS",
             "quantity": 430
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-005-goal-44",
@@ -4423,7 +4666,8 @@
             "rewardId": "GEMS",
             "quantity": 440
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-005-goal-45",
@@ -4441,7 +4685,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-005-goal-46",
@@ -4459,7 +4704,8 @@
             "rewardId": "GEMS",
             "quantity": 460
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-005-goal-47",
@@ -4477,7 +4723,8 @@
             "rewardId": "GEMS",
             "quantity": 470
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-005-goal-48",
@@ -4495,7 +4742,8 @@
             "rewardId": "GEMS",
             "quantity": 480
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-005-goal-49",
@@ -4513,7 +4761,8 @@
             "rewardId": "GEMS",
             "quantity": 490
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-005-goal-50",
@@ -4531,7 +4780,8 @@
             "rewardId": "GEMS",
             "quantity": 2500
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         }
       ]
     },
@@ -4556,7 +4806,8 @@
             "rewardId": "GEMS",
             "quantity": 10
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-02",
@@ -4574,7 +4825,8 @@
             "rewardId": "GEMS",
             "quantity": 20
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-03",
@@ -4592,7 +4844,8 @@
             "rewardId": "GEMS",
             "quantity": 30
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-04",
@@ -4610,7 +4863,8 @@
             "rewardId": "GEMS",
             "quantity": 40
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-05",
@@ -4628,7 +4882,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-06",
@@ -4646,7 +4901,8 @@
             "rewardId": "GEMS",
             "quantity": 60
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-07",
@@ -4664,7 +4920,8 @@
             "rewardId": "GEMS",
             "quantity": 70
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-08",
@@ -4682,7 +4939,8 @@
             "rewardId": "GEMS",
             "quantity": 80
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-09",
@@ -4700,7 +4958,8 @@
             "rewardId": "GEMS",
             "quantity": 90
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-10",
@@ -4718,7 +4977,8 @@
             "rewardId": "GEMS",
             "quantity": 500
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-11",
@@ -4736,7 +4996,8 @@
             "rewardId": "GEMS",
             "quantity": 110
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-006-goal-12",
@@ -4754,7 +5015,8 @@
             "rewardId": "GEMS",
             "quantity": 120
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-006-goal-13",
@@ -4772,7 +5034,8 @@
             "rewardId": "GEMS",
             "quantity": 130
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-006-goal-14",
@@ -4790,7 +5053,8 @@
             "rewardId": "GEMS",
             "quantity": 140
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-006-goal-15",
@@ -4808,7 +5072,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-006-goal-16",
@@ -4826,7 +5091,8 @@
             "rewardId": "GEMS",
             "quantity": 160
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-006-goal-17",
@@ -4844,7 +5110,8 @@
             "rewardId": "GEMS",
             "quantity": 170
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-006-goal-18",
@@ -4862,7 +5129,8 @@
             "rewardId": "GEMS",
             "quantity": 180
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-006-goal-19",
@@ -4880,7 +5148,8 @@
             "rewardId": "GEMS",
             "quantity": 190
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-006-goal-20",
@@ -4898,7 +5167,8 @@
             "rewardId": "GEMS",
             "quantity": 1000
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-006-goal-21",
@@ -4916,7 +5186,8 @@
             "rewardId": "GEMS",
             "quantity": 210
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-006-goal-22",
@@ -4934,7 +5205,8 @@
             "rewardId": "GEMS",
             "quantity": 220
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-006-goal-23",
@@ -4952,7 +5224,8 @@
             "rewardId": "GEMS",
             "quantity": 230
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-006-goal-24",
@@ -4970,7 +5243,8 @@
             "rewardId": "GEMS",
             "quantity": 240
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-006-goal-25",
@@ -4988,7 +5262,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-006-goal-26",
@@ -5006,7 +5281,8 @@
             "rewardId": "GEMS",
             "quantity": 260
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-006-goal-27",
@@ -5024,7 +5300,8 @@
             "rewardId": "GEMS",
             "quantity": 270
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-006-goal-28",
@@ -5042,7 +5319,8 @@
             "rewardId": "GEMS",
             "quantity": 280
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-006-goal-29",
@@ -5060,7 +5338,8 @@
             "rewardId": "GEMS",
             "quantity": 290
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-006-goal-30",
@@ -5078,7 +5357,8 @@
             "rewardId": "GEMS",
             "quantity": 1500
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-006-goal-31",
@@ -5096,7 +5376,8 @@
             "rewardId": "GEMS",
             "quantity": 310
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-006-goal-32",
@@ -5114,7 +5395,8 @@
             "rewardId": "GEMS",
             "quantity": 320
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-006-goal-33",
@@ -5132,7 +5414,8 @@
             "rewardId": "GEMS",
             "quantity": 330
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-006-goal-34",
@@ -5150,7 +5433,8 @@
             "rewardId": "GEMS",
             "quantity": 340
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-006-goal-35",
@@ -5168,7 +5452,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-006-goal-36",
@@ -5186,7 +5471,8 @@
             "rewardId": "GEMS",
             "quantity": 360
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-006-goal-37",
@@ -5204,7 +5490,8 @@
             "rewardId": "GEMS",
             "quantity": 370
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-006-goal-38",
@@ -5222,7 +5509,8 @@
             "rewardId": "GEMS",
             "quantity": 380
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-006-goal-39",
@@ -5240,7 +5528,8 @@
             "rewardId": "GEMS",
             "quantity": 390
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-006-goal-40",
@@ -5258,7 +5547,8 @@
             "rewardId": "GEMS",
             "quantity": 2000
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-006-goal-41",
@@ -5276,7 +5566,8 @@
             "rewardId": "GEMS",
             "quantity": 410
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-006-goal-42",
@@ -5294,7 +5585,8 @@
             "rewardId": "GEMS",
             "quantity": 420
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-006-goal-43",
@@ -5312,7 +5604,8 @@
             "rewardId": "GEMS",
             "quantity": 430
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-006-goal-44",
@@ -5330,7 +5623,8 @@
             "rewardId": "GEMS",
             "quantity": 440
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-006-goal-45",
@@ -5348,7 +5642,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-006-goal-46",
@@ -5366,7 +5661,8 @@
             "rewardId": "GEMS",
             "quantity": 460
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-006-goal-47",
@@ -5384,7 +5680,8 @@
             "rewardId": "GEMS",
             "quantity": 470
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-006-goal-48",
@@ -5402,7 +5699,8 @@
             "rewardId": "GEMS",
             "quantity": 480
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-006-goal-49",
@@ -5420,7 +5718,8 @@
             "rewardId": "GEMS",
             "quantity": 490
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-006-goal-50",
@@ -5438,7 +5737,8 @@
             "rewardId": "GEMS",
             "quantity": 2500
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         }
       ]
     },
@@ -5463,7 +5763,8 @@
             "rewardId": "GEMS",
             "quantity": 10
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-02",
@@ -5481,7 +5782,8 @@
             "rewardId": "GEMS",
             "quantity": 20
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-03",
@@ -5499,7 +5801,8 @@
             "rewardId": "GEMS",
             "quantity": 30
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-04",
@@ -5517,7 +5820,8 @@
             "rewardId": "GEMS",
             "quantity": 40
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-05",
@@ -5535,7 +5839,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-06",
@@ -5553,7 +5858,8 @@
             "rewardId": "GEMS",
             "quantity": 60
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-07",
@@ -5571,7 +5877,8 @@
             "rewardId": "GEMS",
             "quantity": 70
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-08",
@@ -5589,7 +5896,8 @@
             "rewardId": "GEMS",
             "quantity": 80
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-09",
@@ -5607,7 +5915,8 @@
             "rewardId": "GEMS",
             "quantity": 90
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-10",
@@ -5625,7 +5934,8 @@
             "rewardId": "GEMS",
             "quantity": 500
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-11",
@@ -5643,7 +5953,8 @@
             "rewardId": "GEMS",
             "quantity": 110
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-007-goal-12",
@@ -5661,7 +5972,8 @@
             "rewardId": "GEMS",
             "quantity": 120
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-007-goal-13",
@@ -5679,7 +5991,8 @@
             "rewardId": "GEMS",
             "quantity": 130
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-007-goal-14",
@@ -5697,7 +6010,8 @@
             "rewardId": "GEMS",
             "quantity": 140
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-007-goal-15",
@@ -5715,7 +6029,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-007-goal-16",
@@ -5733,7 +6048,8 @@
             "rewardId": "GEMS",
             "quantity": 160
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-007-goal-17",
@@ -5751,7 +6067,8 @@
             "rewardId": "GEMS",
             "quantity": 170
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-007-goal-18",
@@ -5769,7 +6086,8 @@
             "rewardId": "GEMS",
             "quantity": 180
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-007-goal-19",
@@ -5787,7 +6105,8 @@
             "rewardId": "GEMS",
             "quantity": 190
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-007-goal-20",
@@ -5805,7 +6124,8 @@
             "rewardId": "GEMS",
             "quantity": 1000
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-007-goal-21",
@@ -5823,7 +6143,8 @@
             "rewardId": "GEMS",
             "quantity": 210
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-007-goal-22",
@@ -5841,7 +6162,8 @@
             "rewardId": "GEMS",
             "quantity": 220
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-007-goal-23",
@@ -5859,7 +6181,8 @@
             "rewardId": "GEMS",
             "quantity": 230
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-007-goal-24",
@@ -5877,7 +6200,8 @@
             "rewardId": "GEMS",
             "quantity": 240
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-007-goal-25",
@@ -5895,7 +6219,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-007-goal-26",
@@ -5913,7 +6238,8 @@
             "rewardId": "GEMS",
             "quantity": 260
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-007-goal-27",
@@ -5931,7 +6257,8 @@
             "rewardId": "GEMS",
             "quantity": 270
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-007-goal-28",
@@ -5949,7 +6276,8 @@
             "rewardId": "GEMS",
             "quantity": 280
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-007-goal-29",
@@ -5967,7 +6295,8 @@
             "rewardId": "GEMS",
             "quantity": 290
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-007-goal-30",
@@ -5985,7 +6314,8 @@
             "rewardId": "GEMS",
             "quantity": 1500
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-007-goal-31",
@@ -6003,7 +6333,8 @@
             "rewardId": "GEMS",
             "quantity": 310
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-007-goal-32",
@@ -6021,7 +6352,8 @@
             "rewardId": "GEMS",
             "quantity": 320
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-007-goal-33",
@@ -6039,7 +6371,8 @@
             "rewardId": "GEMS",
             "quantity": 330
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-007-goal-34",
@@ -6057,7 +6390,8 @@
             "rewardId": "GEMS",
             "quantity": 340
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-007-goal-35",
@@ -6075,7 +6409,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-007-goal-36",
@@ -6093,7 +6428,8 @@
             "rewardId": "GEMS",
             "quantity": 360
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-007-goal-37",
@@ -6111,7 +6447,8 @@
             "rewardId": "GEMS",
             "quantity": 370
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-007-goal-38",
@@ -6129,7 +6466,8 @@
             "rewardId": "GEMS",
             "quantity": 380
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-007-goal-39",
@@ -6147,7 +6485,8 @@
             "rewardId": "GEMS",
             "quantity": 390
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-007-goal-40",
@@ -6165,7 +6504,8 @@
             "rewardId": "GEMS",
             "quantity": 2000
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-007-goal-41",
@@ -6183,7 +6523,8 @@
             "rewardId": "GEMS",
             "quantity": 410
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-007-goal-42",
@@ -6201,7 +6542,8 @@
             "rewardId": "GEMS",
             "quantity": 420
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-007-goal-43",
@@ -6219,7 +6561,8 @@
             "rewardId": "GEMS",
             "quantity": 430
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-007-goal-44",
@@ -6237,7 +6580,8 @@
             "rewardId": "GEMS",
             "quantity": 440
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-007-goal-45",
@@ -6255,7 +6599,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-007-goal-46",
@@ -6273,7 +6618,8 @@
             "rewardId": "GEMS",
             "quantity": 460
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-007-goal-47",
@@ -6291,7 +6637,8 @@
             "rewardId": "GEMS",
             "quantity": 470
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-007-goal-48",
@@ -6309,7 +6656,8 @@
             "rewardId": "GEMS",
             "quantity": 480
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-007-goal-49",
@@ -6327,7 +6675,8 @@
             "rewardId": "GEMS",
             "quantity": 490
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-007-goal-50",
@@ -6345,7 +6694,8 @@
             "rewardId": "GEMS",
             "quantity": 2500
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         }
       ]
     },
@@ -6370,7 +6720,8 @@
             "rewardId": "GEMS",
             "quantity": 10
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-02",
@@ -6388,7 +6739,8 @@
             "rewardId": "GEMS",
             "quantity": 20
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-03",
@@ -6406,7 +6758,8 @@
             "rewardId": "GEMS",
             "quantity": 30
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-04",
@@ -6424,7 +6777,8 @@
             "rewardId": "GEMS",
             "quantity": 40
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-05",
@@ -6442,7 +6796,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-06",
@@ -6460,7 +6815,8 @@
             "rewardId": "GEMS",
             "quantity": 60
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-07",
@@ -6478,7 +6834,8 @@
             "rewardId": "GEMS",
             "quantity": 70
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-08",
@@ -6496,7 +6853,8 @@
             "rewardId": "GEMS",
             "quantity": 80
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-09",
@@ -6514,7 +6872,8 @@
             "rewardId": "GEMS",
             "quantity": 90
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-10",
@@ -6532,7 +6891,8 @@
             "rewardId": "GEMS",
             "quantity": 500
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-11",
@@ -6550,7 +6910,8 @@
             "rewardId": "GEMS",
             "quantity": 110
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-008-goal-12",
@@ -6568,7 +6929,8 @@
             "rewardId": "GEMS",
             "quantity": 120
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-008-goal-13",
@@ -6586,7 +6948,8 @@
             "rewardId": "GEMS",
             "quantity": 130
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-008-goal-14",
@@ -6604,7 +6967,8 @@
             "rewardId": "GEMS",
             "quantity": 140
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-008-goal-15",
@@ -6622,7 +6986,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-008-goal-16",
@@ -6640,7 +7005,8 @@
             "rewardId": "GEMS",
             "quantity": 160
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-008-goal-17",
@@ -6658,7 +7024,8 @@
             "rewardId": "GEMS",
             "quantity": 170
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-008-goal-18",
@@ -6676,7 +7043,8 @@
             "rewardId": "GEMS",
             "quantity": 180
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-008-goal-19",
@@ -6694,7 +7062,8 @@
             "rewardId": "GEMS",
             "quantity": 190
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-008-goal-20",
@@ -6712,7 +7081,8 @@
             "rewardId": "GEMS",
             "quantity": 1000
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-008-goal-21",
@@ -6730,7 +7100,8 @@
             "rewardId": "GEMS",
             "quantity": 210
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-008-goal-22",
@@ -6748,7 +7119,8 @@
             "rewardId": "GEMS",
             "quantity": 220
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-008-goal-23",
@@ -6766,7 +7138,8 @@
             "rewardId": "GEMS",
             "quantity": 230
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-008-goal-24",
@@ -6784,7 +7157,8 @@
             "rewardId": "GEMS",
             "quantity": 240
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-008-goal-25",
@@ -6802,7 +7176,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-008-goal-26",
@@ -6820,7 +7195,8 @@
             "rewardId": "GEMS",
             "quantity": 260
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-008-goal-27",
@@ -6838,7 +7214,8 @@
             "rewardId": "GEMS",
             "quantity": 270
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-008-goal-28",
@@ -6856,7 +7233,8 @@
             "rewardId": "GEMS",
             "quantity": 280
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-008-goal-29",
@@ -6874,7 +7252,8 @@
             "rewardId": "GEMS",
             "quantity": 290
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-008-goal-30",
@@ -6892,7 +7271,8 @@
             "rewardId": "GEMS",
             "quantity": 1500
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-008-goal-31",
@@ -6910,7 +7290,8 @@
             "rewardId": "GEMS",
             "quantity": 310
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-008-goal-32",
@@ -6928,7 +7309,8 @@
             "rewardId": "GEMS",
             "quantity": 320
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-008-goal-33",
@@ -6946,7 +7328,8 @@
             "rewardId": "GEMS",
             "quantity": 330
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-008-goal-34",
@@ -6964,7 +7347,8 @@
             "rewardId": "GEMS",
             "quantity": 340
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-008-goal-35",
@@ -6982,7 +7366,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-008-goal-36",
@@ -7000,7 +7385,8 @@
             "rewardId": "GEMS",
             "quantity": 360
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-008-goal-37",
@@ -7018,7 +7404,8 @@
             "rewardId": "GEMS",
             "quantity": 370
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-008-goal-38",
@@ -7036,7 +7423,8 @@
             "rewardId": "GEMS",
             "quantity": 380
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-008-goal-39",
@@ -7054,7 +7442,8 @@
             "rewardId": "GEMS",
             "quantity": 390
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-008-goal-40",
@@ -7072,7 +7461,8 @@
             "rewardId": "GEMS",
             "quantity": 2000
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-008-goal-41",
@@ -7090,7 +7480,8 @@
             "rewardId": "GEMS",
             "quantity": 410
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-008-goal-42",
@@ -7108,7 +7499,8 @@
             "rewardId": "GEMS",
             "quantity": 420
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-008-goal-43",
@@ -7126,7 +7518,8 @@
             "rewardId": "GEMS",
             "quantity": 430
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-008-goal-44",
@@ -7144,7 +7537,8 @@
             "rewardId": "GEMS",
             "quantity": 440
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-008-goal-45",
@@ -7162,7 +7556,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-008-goal-46",
@@ -7180,7 +7575,8 @@
             "rewardId": "GEMS",
             "quantity": 460
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-008-goal-47",
@@ -7198,7 +7594,8 @@
             "rewardId": "GEMS",
             "quantity": 470
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-008-goal-48",
@@ -7216,7 +7613,8 @@
             "rewardId": "GEMS",
             "quantity": 480
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-008-goal-49",
@@ -7234,7 +7632,8 @@
             "rewardId": "GEMS",
             "quantity": 490
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-008-goal-50",
@@ -7252,7 +7651,8 @@
             "rewardId": "GEMS",
             "quantity": 2500
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         }
       ]
     },
@@ -7277,7 +7677,8 @@
             "rewardId": "GEMS",
             "quantity": 10
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-02",
@@ -7295,7 +7696,8 @@
             "rewardId": "GEMS",
             "quantity": 20
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-03",
@@ -7313,7 +7715,8 @@
             "rewardId": "GEMS",
             "quantity": 30
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-04",
@@ -7331,7 +7734,8 @@
             "rewardId": "GEMS",
             "quantity": 40
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-05",
@@ -7349,7 +7753,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-06",
@@ -7367,7 +7772,8 @@
             "rewardId": "GEMS",
             "quantity": 60
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-07",
@@ -7385,7 +7791,8 @@
             "rewardId": "GEMS",
             "quantity": 70
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-08",
@@ -7403,7 +7810,8 @@
             "rewardId": "GEMS",
             "quantity": 80
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-09",
@@ -7421,7 +7829,8 @@
             "rewardId": "GEMS",
             "quantity": 90
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-10",
@@ -7439,7 +7848,8 @@
             "rewardId": "GEMS",
             "quantity": 500
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-11",
@@ -7457,7 +7867,8 @@
             "rewardId": "GEMS",
             "quantity": 110
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-009-goal-12",
@@ -7475,7 +7886,8 @@
             "rewardId": "GEMS",
             "quantity": 120
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-009-goal-13",
@@ -7493,7 +7905,8 @@
             "rewardId": "GEMS",
             "quantity": 130
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-009-goal-14",
@@ -7511,7 +7924,8 @@
             "rewardId": "GEMS",
             "quantity": 140
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-009-goal-15",
@@ -7529,7 +7943,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-009-goal-16",
@@ -7547,7 +7962,8 @@
             "rewardId": "GEMS",
             "quantity": 160
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-009-goal-17",
@@ -7565,7 +7981,8 @@
             "rewardId": "GEMS",
             "quantity": 170
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-009-goal-18",
@@ -7583,7 +8000,8 @@
             "rewardId": "GEMS",
             "quantity": 180
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-009-goal-19",
@@ -7601,7 +8019,8 @@
             "rewardId": "GEMS",
             "quantity": 190
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-009-goal-20",
@@ -7619,7 +8038,8 @@
             "rewardId": "GEMS",
             "quantity": 1000
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-009-goal-21",
@@ -7637,7 +8057,8 @@
             "rewardId": "GEMS",
             "quantity": 210
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-009-goal-22",
@@ -7655,7 +8076,8 @@
             "rewardId": "GEMS",
             "quantity": 220
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-009-goal-23",
@@ -7673,7 +8095,8 @@
             "rewardId": "GEMS",
             "quantity": 230
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-009-goal-24",
@@ -7691,7 +8114,8 @@
             "rewardId": "GEMS",
             "quantity": 240
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-009-goal-25",
@@ -7709,7 +8133,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-009-goal-26",
@@ -7727,7 +8152,8 @@
             "rewardId": "GEMS",
             "quantity": 260
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-009-goal-27",
@@ -7745,7 +8171,8 @@
             "rewardId": "GEMS",
             "quantity": 270
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-009-goal-28",
@@ -7763,7 +8190,8 @@
             "rewardId": "GEMS",
             "quantity": 280
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-009-goal-29",
@@ -7781,7 +8209,8 @@
             "rewardId": "GEMS",
             "quantity": 290
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-009-goal-30",
@@ -7799,7 +8228,8 @@
             "rewardId": "GEMS",
             "quantity": 1500
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-009-goal-31",
@@ -7817,7 +8247,8 @@
             "rewardId": "GEMS",
             "quantity": 310
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-009-goal-32",
@@ -7835,7 +8266,8 @@
             "rewardId": "GEMS",
             "quantity": 320
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-009-goal-33",
@@ -7853,7 +8285,8 @@
             "rewardId": "GEMS",
             "quantity": 330
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-009-goal-34",
@@ -7871,7 +8304,8 @@
             "rewardId": "GEMS",
             "quantity": 340
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-009-goal-35",
@@ -7889,7 +8323,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-009-goal-36",
@@ -7907,7 +8342,8 @@
             "rewardId": "GEMS",
             "quantity": 360
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-009-goal-37",
@@ -7925,7 +8361,8 @@
             "rewardId": "GEMS",
             "quantity": 370
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-009-goal-38",
@@ -7943,7 +8380,8 @@
             "rewardId": "GEMS",
             "quantity": 380
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-009-goal-39",
@@ -7961,7 +8399,8 @@
             "rewardId": "GEMS",
             "quantity": 390
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-009-goal-40",
@@ -7979,7 +8418,8 @@
             "rewardId": "GEMS",
             "quantity": 2000
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-009-goal-41",
@@ -7997,7 +8437,8 @@
             "rewardId": "GEMS",
             "quantity": 410
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-009-goal-42",
@@ -8015,7 +8456,8 @@
             "rewardId": "GEMS",
             "quantity": 420
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-009-goal-43",
@@ -8033,7 +8475,8 @@
             "rewardId": "GEMS",
             "quantity": 430
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-009-goal-44",
@@ -8051,7 +8494,8 @@
             "rewardId": "GEMS",
             "quantity": 440
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-009-goal-45",
@@ -8069,7 +8513,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-009-goal-46",
@@ -8087,7 +8532,8 @@
             "rewardId": "GEMS",
             "quantity": 460
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-009-goal-47",
@@ -8105,7 +8551,8 @@
             "rewardId": "GEMS",
             "quantity": 470
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-009-goal-48",
@@ -8123,7 +8570,8 @@
             "rewardId": "GEMS",
             "quantity": 480
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-009-goal-49",
@@ -8141,7 +8589,8 @@
             "rewardId": "GEMS",
             "quantity": 490
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-009-goal-50",
@@ -8159,7 +8608,8 @@
             "rewardId": "GEMS",
             "quantity": 2500
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         }
       ]
     },
@@ -8184,7 +8634,8 @@
             "rewardId": "GEMS",
             "quantity": 10
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-02",
@@ -8202,7 +8653,8 @@
             "rewardId": "GEMS",
             "quantity": 20
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-03",
@@ -8220,7 +8672,8 @@
             "rewardId": "GEMS",
             "quantity": 30
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-04",
@@ -8238,7 +8691,8 @@
             "rewardId": "GEMS",
             "quantity": 40
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-05",
@@ -8256,7 +8710,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-06",
@@ -8274,7 +8729,8 @@
             "rewardId": "GEMS",
             "quantity": 60
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-07",
@@ -8292,7 +8748,8 @@
             "rewardId": "GEMS",
             "quantity": 70
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-08",
@@ -8310,7 +8767,8 @@
             "rewardId": "GEMS",
             "quantity": 80
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-09",
@@ -8328,7 +8786,8 @@
             "rewardId": "GEMS",
             "quantity": 90
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-10",
@@ -8346,7 +8805,8 @@
             "rewardId": "GEMS",
             "quantity": 500
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-11",
@@ -8364,7 +8824,8 @@
             "rewardId": "GEMS",
             "quantity": 110
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-010-goal-12",
@@ -8382,7 +8843,8 @@
             "rewardId": "GEMS",
             "quantity": 120
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-010-goal-13",
@@ -8400,7 +8862,8 @@
             "rewardId": "GEMS",
             "quantity": 130
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-010-goal-14",
@@ -8418,7 +8881,8 @@
             "rewardId": "GEMS",
             "quantity": 140
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-010-goal-15",
@@ -8436,7 +8900,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-010-goal-16",
@@ -8454,7 +8919,8 @@
             "rewardId": "GEMS",
             "quantity": 160
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-010-goal-17",
@@ -8472,7 +8938,8 @@
             "rewardId": "GEMS",
             "quantity": 170
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-010-goal-18",
@@ -8490,7 +8957,8 @@
             "rewardId": "GEMS",
             "quantity": 180
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-010-goal-19",
@@ -8508,7 +8976,8 @@
             "rewardId": "GEMS",
             "quantity": 190
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-010-goal-20",
@@ -8526,7 +8995,8 @@
             "rewardId": "GEMS",
             "quantity": 1000
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-010-goal-21",
@@ -8544,7 +9014,8 @@
             "rewardId": "GEMS",
             "quantity": 210
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-010-goal-22",
@@ -8562,7 +9033,8 @@
             "rewardId": "GEMS",
             "quantity": 220
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-010-goal-23",
@@ -8580,7 +9052,8 @@
             "rewardId": "GEMS",
             "quantity": 230
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-010-goal-24",
@@ -8598,7 +9071,8 @@
             "rewardId": "GEMS",
             "quantity": 240
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-010-goal-25",
@@ -8616,7 +9090,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-010-goal-26",
@@ -8634,7 +9109,8 @@
             "rewardId": "GEMS",
             "quantity": 260
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-010-goal-27",
@@ -8652,7 +9128,8 @@
             "rewardId": "GEMS",
             "quantity": 270
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-010-goal-28",
@@ -8670,7 +9147,8 @@
             "rewardId": "GEMS",
             "quantity": 280
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-010-goal-29",
@@ -8688,7 +9166,8 @@
             "rewardId": "GEMS",
             "quantity": 290
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-010-goal-30",
@@ -8706,7 +9185,8 @@
             "rewardId": "GEMS",
             "quantity": 1500
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-010-goal-31",
@@ -8724,7 +9204,8 @@
             "rewardId": "GEMS",
             "quantity": 310
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-010-goal-32",
@@ -8742,7 +9223,8 @@
             "rewardId": "GEMS",
             "quantity": 320
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-010-goal-33",
@@ -8760,7 +9242,8 @@
             "rewardId": "GEMS",
             "quantity": 330
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-010-goal-34",
@@ -8778,7 +9261,8 @@
             "rewardId": "GEMS",
             "quantity": 340
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-010-goal-35",
@@ -8796,7 +9280,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-010-goal-36",
@@ -8814,7 +9299,8 @@
             "rewardId": "GEMS",
             "quantity": 360
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-010-goal-37",
@@ -8832,7 +9318,8 @@
             "rewardId": "GEMS",
             "quantity": 370
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-010-goal-38",
@@ -8850,7 +9337,8 @@
             "rewardId": "GEMS",
             "quantity": 380
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-010-goal-39",
@@ -8868,7 +9356,8 @@
             "rewardId": "GEMS",
             "quantity": 390
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-010-goal-40",
@@ -8886,7 +9375,8 @@
             "rewardId": "GEMS",
             "quantity": 2000
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-010-goal-41",
@@ -8904,7 +9394,8 @@
             "rewardId": "GEMS",
             "quantity": 410
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-010-goal-42",
@@ -8922,7 +9413,8 @@
             "rewardId": "GEMS",
             "quantity": 420
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-010-goal-43",
@@ -8940,7 +9432,8 @@
             "rewardId": "GEMS",
             "quantity": 430
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-010-goal-44",
@@ -8958,7 +9451,8 @@
             "rewardId": "GEMS",
             "quantity": 440
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-010-goal-45",
@@ -8976,7 +9470,8 @@
             "rewardId": "LOOTBOX_SILVER",
             "quantity": 1
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-010-goal-46",
@@ -8994,7 +9489,8 @@
             "rewardId": "GEMS",
             "quantity": 460
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-010-goal-47",
@@ -9012,7 +9508,8 @@
             "rewardId": "GEMS",
             "quantity": 470
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-010-goal-48",
@@ -9030,7 +9527,8 @@
             "rewardId": "GEMS",
             "quantity": 480
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-010-goal-49",
@@ -9048,7 +9546,8 @@
             "rewardId": "GEMS",
             "quantity": 490
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
           "goalId": "challenge-010-goal-50",
@@ -9066,7 +9565,8 @@
             "rewardId": "GEMS",
             "quantity": 2500
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         }
       ]
     }
