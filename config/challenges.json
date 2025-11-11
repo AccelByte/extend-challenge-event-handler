@@ -75,6 +75,7 @@
           "description": "Log in to the game",
           "type": "daily",
           "eventSource": "login",
+          "defaultAssigned": false,
           "requirement": {
             "statCode": "daily_login",
             "operator": ">=",
@@ -93,6 +94,7 @@
           "description": "Complete 3 game matches",
           "type": "daily",
           "eventSource": "statistic",
+          "defaultAssigned": false,
           "requirement": {
             "statCode": "matches_played",
             "operator": ">=",
