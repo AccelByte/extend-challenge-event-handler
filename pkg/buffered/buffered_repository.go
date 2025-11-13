@@ -339,7 +339,7 @@ func (r *BufferedRepository) IncrementProgress(ctx context.Context, userID, goal
 // shouldSkipDailyIncrement checks if a daily increment should be skipped (same day).
 // Returns true if the last event was today, false otherwise.
 func (r *BufferedRepository) shouldSkipDailyIncrement(key, userID, goalID string) bool {
-	now := time.Now()
+	now := time.Now().UTC() // Always use UTC for consistency across timezones
 	today := common.TruncateToDateUTC(now)
 
 	lastEventTime, exists := r.bufferIncrementDaily[key]
@@ -376,7 +376,7 @@ func (r *BufferedRepository) storeDailyTimestamp(key, userID, goalID string) {
 		return
 	}
 
-	r.bufferIncrementDaily[key] = time.Now()
+	r.bufferIncrementDaily[key] = time.Now().UTC() // Always use UTC for consistency across timezones
 }
 
 // Flush writes all buffered updates to database using swap pattern and separate transactions.
@@ -623,7 +623,7 @@ func (r *BufferedRepository) cleanupOldDailyEntries() {
 	r.mu.Lock()
 	defer r.mu.Unlock()
 
-	now := time.Now()
+	now := time.Now().UTC() // Always use UTC for consistency across timezones
 	cutoff := now.Add(-48 * time.Hour) // Keep last 2 days
 	cleaned := 0
 

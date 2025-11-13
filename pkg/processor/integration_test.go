@@ -213,6 +213,21 @@ func TestE2E_LoginEvent_Increment_Flush_DB(t *testing.T) {
 		assert.NoError(t, err)
 		assert.Nil(t, progress, "Should have no initial progress")
 
+		// Initialize the goal (simulates goal assignment)
+		// This creates the row that increments will update
+		err = repo.BulkInsert(ctx, []*domain.UserGoalProgress{
+			{
+				UserID:      userID,
+				GoalID:      goalID,
+				ChallengeID: "challenge1",
+				Namespace:   "test-namespace",
+				Progress:    0,
+				Status:      domain.GoalStatusNotStarted,
+				IsActive:    true,
+			},
+		})
+		assert.NoError(t, err)
+
 		// Simulate 3 login events
 		for i := 1; i <= 3; i++ {
 			statUpdates := map[string]int{"login_count": 1}
@@ -254,9 +269,22 @@ func TestE2E_LoginEvent_Increment_Flush_DB(t *testing.T) {
 		userID := "test-user-2"
 		goalID := "login_goal_daily"
 
+		// Initialize the goal (simulates goal assignment)
+		// Set updated_at to 3 days ago so first event will increment
+		oldTime := time.Now().UTC().Add(-72 * time.Hour)
+		_, err := db.ExecContext(ctx, `
+			INSERT INTO user_goal_progress (
+				user_id, goal_id, challenge_id, namespace,
+				progress, status, is_active,
+				created_at, updated_at
+			) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+		`, userID, goalID, "challenge1", "test-namespace",
+		   0, domain.GoalStatusNotStarted, true, oldTime, oldTime)
+		assert.NoError(t, err)
+
 		// Simulate first day login
 		statUpdates := map[string]int{"login_count": 1}
-		err := processor.ProcessEvent(ctx, userID, "test-namespace", statUpdates)
+		err = processor.ProcessEvent(ctx, userID, "test-namespace", statUpdates)
 		assert.NoError(t, err)
 
 		// Flush
@@ -286,8 +314,24 @@ func TestE2E_LoginEvent_Increment_Flush_DB(t *testing.T) {
 	t.Run("multiple users concurrent logins", func(t *testing.T) {
 		goalID := "login_goal_increment"
 
-		// Simulate 3 different users logging in
+		// Initialize goals for all users
 		users := []string{"user-a", "user-b", "user-c"}
+		var progresses []*domain.UserGoalProgress
+		for _, userID := range users {
+			progresses = append(progresses, &domain.UserGoalProgress{
+				UserID:      userID,
+				GoalID:      goalID,
+				ChallengeID: "challenge1",
+				Namespace:   "test-namespace",
+				Progress:    0,
+				Status:      domain.GoalStatusNotStarted,
+				IsActive:    true,
+			})
+		}
+		err := repo.BulkInsert(ctx, progresses)
+		assert.NoError(t, err)
+
+		// Simulate 3 different users logging in
 		for _, userID := range users {
 			statUpdates := map[string]int{"login_count": 1}
 			err := processor.ProcessEvent(ctx, userID, "test-namespace", statUpdates)
@@ -295,7 +339,7 @@ func TestE2E_LoginEvent_Increment_Flush_DB(t *testing.T) {
 		}
 
 		// Flush all at once
-		err := bufRepo.Flush(ctx)
+		err = bufRepo.Flush(ctx)
 		assert.NoError(t, err)
 
 		// Verify each user has progress
@@ -327,6 +371,20 @@ func TestE2E_StatEvent_Absolute_Flush_DB(t *testing.T) {
 		progress, err := repo.GetProgress(ctx, userID, goalID)
 		assert.NoError(t, err)
 		assert.Nil(t, progress, "Should have no initial progress")
+
+		// Initialize the goal (simulates goal assignment)
+		err = repo.BulkInsert(ctx, []*domain.UserGoalProgress{
+			{
+				UserID:      userID,
+				GoalID:      goalID,
+				ChallengeID: "challenge1",
+				Namespace:   "test-namespace",
+				Progress:    0,
+				Status:      domain.GoalStatusNotStarted,
+				IsActive:    true,
+			},
+		})
+		assert.NoError(t, err)
 
 		// Simulate stat update: 50 kills
 		statUpdates := map[string]int{"kills": 50}
@@ -380,9 +438,23 @@ func TestE2E_StatEvent_Absolute_Flush_DB(t *testing.T) {
 		userID := "test-user-4"
 		goalID := "kills_goal_absolute"
 
+		// Initialize the goal (simulates goal assignment)
+		err := repo.BulkInsert(ctx, []*domain.UserGoalProgress{
+			{
+				UserID:      userID,
+				GoalID:      goalID,
+				ChallengeID: "challenge1",
+				Namespace:   "test-namespace",
+				Progress:    0,
+				Status:      domain.GoalStatusNotStarted,
+				IsActive:    true,
+			},
+		})
+		assert.NoError(t, err)
+
 		// Simulate stat update: 150 kills (exceeds target of 100)
 		statUpdates := map[string]int{"kills": 150}
-		err := processor.ProcessEvent(ctx, userID, "test-namespace", statUpdates)
+		err = processor.ProcessEvent(ctx, userID, "test-namespace", statUpdates)
 		assert.NoError(t, err)
 
 		// Flush
@@ -431,9 +503,23 @@ func TestE2E_DailyGoalType(t *testing.T) {
 		userID := "test-user-6"
 		goalID := "daily_quest"
 
+		// Initialize the goal (simulates goal assignment)
+		err := repo.BulkInsert(ctx, []*domain.UserGoalProgress{
+			{
+				UserID:      userID,
+				GoalID:      goalID,
+				ChallengeID: "challenge1",
+				Namespace:   "test-namespace",
+				Progress:    0,
+				Status:      domain.GoalStatusNotStarted,
+				IsActive:    true,
+			},
+		})
+		assert.NoError(t, err)
+
 		// Simulate daily quest completion
 		statUpdates := map[string]int{"daily_quest_completed": 1}
-		err := processor.ProcessEvent(ctx, userID, "test-namespace", statUpdates)
+		err = processor.ProcessEvent(ctx, userID, "test-namespace", statUpdates)
 		assert.NoError(t, err)
 
 		// Flush
@@ -463,9 +549,35 @@ func TestE2E_MixedGoalTypes(t *testing.T) {
 	t.Run("single event triggers multiple goal types", func(t *testing.T) {
 		userID := "test-user-7"
 
+		// Initialize both goals (simulates goal assignment)
+		oldTime := time.Now().UTC().Add(-72 * time.Hour)
+		err := repo.BulkInsert(ctx, []*domain.UserGoalProgress{
+			{
+				UserID:      userID,
+				GoalID:      "login_goal_increment",
+				ChallengeID: "challenge1",
+				Namespace:   "test-namespace",
+				Progress:    0,
+				Status:      domain.GoalStatusNotStarted,
+				IsActive:    true,
+			},
+		})
+		assert.NoError(t, err)
+
+		// For daily goal, use old timestamp so first event increments
+		_, err = db.ExecContext(ctx, `
+			INSERT INTO user_goal_progress (
+				user_id, goal_id, challenge_id, namespace,
+				progress, status, is_active,
+				created_at, updated_at
+			) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+		`, userID, "login_goal_daily", "challenge1", "test-namespace",
+		   0, domain.GoalStatusNotStarted, true, oldTime, oldTime)
+		assert.NoError(t, err)
+
 		// Single login event triggers both increment goals and daily increment goals
 		statUpdates := map[string]int{"login_count": 1}
-		err := processor.ProcessEvent(ctx, userID, "test-namespace", statUpdates)
+		err = processor.ProcessEvent(ctx, userID, "test-namespace", statUpdates)
 		assert.NoError(t, err)
 
 		// Flush
@@ -501,9 +613,23 @@ func TestE2E_AutomaticTimeBasedFlush(t *testing.T) {
 		userID := "test-user-8"
 		goalID := "login_goal_increment"
 
+		// Initialize the goal (simulates goal assignment)
+		err := repo.BulkInsert(ctx, []*domain.UserGoalProgress{
+			{
+				UserID:      userID,
+				GoalID:      goalID,
+				ChallengeID: "challenge1",
+				Namespace:   "test-namespace",
+				Progress:    0,
+				Status:      domain.GoalStatusNotStarted,
+				IsActive:    true,
+			},
+		})
+		assert.NoError(t, err)
+
 		// Process event (buffered, not flushed yet)
 		statUpdates := map[string]int{"login_count": 1}
-		err := processor.ProcessEvent(ctx, userID, "test-namespace", statUpdates)
+		err = processor.ProcessEvent(ctx, userID, "test-namespace", statUpdates)
 		assert.NoError(t, err)
 
 		// Wait for automatic flush (100ms interval configured in setup)

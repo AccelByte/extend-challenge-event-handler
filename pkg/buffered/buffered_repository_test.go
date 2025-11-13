@@ -109,6 +109,20 @@ func (m *MockGoalRepository) UpsertGoalActive(ctx context.Context, progress *dom
 	return args.Error(0)
 }
 
+// M3 Phase 9: Fast path optimization methods
+func (m *MockGoalRepository) GetUserGoalCount(ctx context.Context, userID string) (int, error) {
+	args := m.Called(ctx, userID)
+	return args.Int(0), args.Error(1)
+}
+
+func (m *MockGoalRepository) GetActiveGoals(ctx context.Context, userID string) ([]*domain.UserGoalProgress, error) {
+	args := m.Called(ctx, userID)
+	if args.Get(0) == nil {
+		return nil, args.Error(1)
+	}
+	return args.Get(0).([]*domain.UserGoalProgress), args.Error(1)
+}
+
 // MockGoalCache is a mock implementation of cache.GoalCache
 type MockGoalCache struct {
 	mock.Mock

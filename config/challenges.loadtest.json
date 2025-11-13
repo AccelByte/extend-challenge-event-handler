@@ -212,7 +212,7 @@
             "quantity": 110
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-12",
@@ -231,7 +231,7 @@
             "quantity": 120
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-13",
@@ -250,7 +250,7 @@
             "quantity": 130
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-14",
@@ -269,7 +269,7 @@
             "quantity": 140
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-15",
@@ -288,7 +288,7 @@
             "quantity": 1
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-16",
@@ -307,7 +307,7 @@
             "quantity": 160
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-17",
@@ -326,7 +326,7 @@
             "quantity": 170
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-18",
@@ -345,7 +345,7 @@
             "quantity": 180
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-19",
@@ -364,7 +364,7 @@
             "quantity": 190
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-20",
@@ -383,7 +383,7 @@
             "quantity": 1000
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-21",
@@ -402,7 +402,7 @@
             "quantity": 210
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-22",
@@ -421,7 +421,7 @@
             "quantity": 220
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-23",
@@ -440,7 +440,7 @@
             "quantity": 230
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-24",
@@ -459,7 +459,7 @@
             "quantity": 240
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-25",
@@ -478,7 +478,7 @@
             "quantity": 1
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-26",
@@ -497,7 +497,7 @@
             "quantity": 260
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-27",
@@ -516,7 +516,7 @@
             "quantity": 270
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-28",
@@ -535,7 +535,7 @@
             "quantity": 280
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-29",
@@ -554,7 +554,7 @@
             "quantity": 290
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-30",
@@ -573,7 +573,7 @@
             "quantity": 1500
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-31",
@@ -592,7 +592,7 @@
             "quantity": 310
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-32",
@@ -611,7 +611,7 @@
             "quantity": 320
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-33",
@@ -630,7 +630,7 @@
             "quantity": 330
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-34",
@@ -649,7 +649,7 @@
             "quantity": 340
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-35",
@@ -668,7 +668,7 @@
             "quantity": 1
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-36",
@@ -687,7 +687,7 @@
             "quantity": 360
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-37",
@@ -706,7 +706,7 @@
             "quantity": 370
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-38",
@@ -725,7 +725,7 @@
             "quantity": 380
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-39",
@@ -744,7 +744,7 @@
             "quantity": 390
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-40",
@@ -763,7 +763,7 @@
             "quantity": 2000
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-41",
@@ -782,7 +782,7 @@
             "quantity": 410
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-42",
@@ -801,7 +801,7 @@
             "quantity": 420
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-43",
@@ -820,7 +820,7 @@
             "quantity": 430
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-44",
@@ -839,7 +839,7 @@
             "quantity": 440
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-45",
@@ -858,7 +858,7 @@
             "quantity": 1
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-46",
@@ -877,7 +877,7 @@
             "quantity": 460
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-47",
@@ -896,7 +896,7 @@
             "quantity": 470
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-48",
@@ -915,7 +915,7 @@
             "quantity": 480
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-49",
@@ -934,7 +934,7 @@
             "quantity": 490
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-001-goal-50",
@@ -953,7 +953,7 @@
             "quantity": 2500
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         }
       ]
     },
@@ -1169,7 +1169,7 @@
             "quantity": 110
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-12",
@@ -1188,7 +1188,7 @@
             "quantity": 120
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-13",
@@ -1207,7 +1207,7 @@
             "quantity": 130
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-14",
@@ -1226,7 +1226,7 @@
             "quantity": 140
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-15",
@@ -1245,7 +1245,7 @@
             "quantity": 1
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-16",
@@ -1264,7 +1264,7 @@
             "quantity": 160
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-17",
@@ -1283,7 +1283,7 @@
             "quantity": 170
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-18",
@@ -1302,7 +1302,7 @@
             "quantity": 180
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-19",
@@ -1321,7 +1321,7 @@
             "quantity": 190
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-20",
@@ -1340,7 +1340,7 @@
             "quantity": 1000
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-21",
@@ -1359,7 +1359,7 @@
             "quantity": 210
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-22",
@@ -1378,7 +1378,7 @@
             "quantity": 220
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-23",
@@ -1397,7 +1397,7 @@
             "quantity": 230
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-24",
@@ -1416,7 +1416,7 @@
             "quantity": 240
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-25",
@@ -1435,7 +1435,7 @@
             "quantity": 1
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-26",
@@ -1454,7 +1454,7 @@
             "quantity": 260
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-27",
@@ -1473,7 +1473,7 @@
             "quantity": 270
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-28",
@@ -1492,7 +1492,7 @@
             "quantity": 280
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-29",
@@ -1511,7 +1511,7 @@
             "quantity": 290
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-30",
@@ -1530,7 +1530,7 @@
             "quantity": 1500
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-31",
@@ -1549,7 +1549,7 @@
             "quantity": 310
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-32",
@@ -1568,7 +1568,7 @@
             "quantity": 320
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-33",
@@ -1587,7 +1587,7 @@
             "quantity": 330
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-34",
@@ -1606,7 +1606,7 @@
             "quantity": 340
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-35",
@@ -1625,7 +1625,7 @@
             "quantity": 1
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-36",
@@ -1644,7 +1644,7 @@
             "quantity": 360
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-37",
@@ -1663,7 +1663,7 @@
             "quantity": 370
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-38",
@@ -1682,7 +1682,7 @@
             "quantity": 380
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-39",
@@ -1701,7 +1701,7 @@
             "quantity": 390
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-40",
@@ -1720,7 +1720,7 @@
             "quantity": 2000
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-41",
@@ -1739,7 +1739,7 @@
             "quantity": 410
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-42",
@@ -1758,7 +1758,7 @@
             "quantity": 420
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-43",
@@ -1777,7 +1777,7 @@
             "quantity": 430
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-44",
@@ -1796,7 +1796,7 @@
             "quantity": 440
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-45",
@@ -1815,7 +1815,7 @@
             "quantity": 1
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-46",
@@ -1834,7 +1834,7 @@
             "quantity": 460
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-47",
@@ -1853,7 +1853,7 @@
             "quantity": 470
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-48",
@@ -1872,7 +1872,7 @@
             "quantity": 480
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-49",
@@ -1891,7 +1891,7 @@
             "quantity": 490
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-002-goal-50",
@@ -1910,7 +1910,7 @@
             "quantity": 2500
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         }
       ]
     },
@@ -2126,7 +2126,7 @@
             "quantity": 110
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-12",
@@ -2145,7 +2145,7 @@
             "quantity": 120
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-13",
@@ -2164,7 +2164,7 @@
             "quantity": 130
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-14",
@@ -2183,7 +2183,7 @@
             "quantity": 140
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-15",
@@ -2202,7 +2202,7 @@
             "quantity": 1
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-16",
@@ -2221,7 +2221,7 @@
             "quantity": 160
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-17",
@@ -2240,7 +2240,7 @@
             "quantity": 170
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-18",
@@ -2259,7 +2259,7 @@
             "quantity": 180
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-19",
@@ -2278,7 +2278,7 @@
             "quantity": 190
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-20",
@@ -2297,7 +2297,7 @@
             "quantity": 1000
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-21",
@@ -2316,7 +2316,7 @@
             "quantity": 210
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-22",
@@ -2335,7 +2335,7 @@
             "quantity": 220
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-23",
@@ -2354,7 +2354,7 @@
             "quantity": 230
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-24",
@@ -2373,7 +2373,7 @@
             "quantity": 240
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-25",
@@ -2392,7 +2392,7 @@
             "quantity": 1
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-26",
@@ -2411,7 +2411,7 @@
             "quantity": 260
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-27",
@@ -2430,7 +2430,7 @@
             "quantity": 270
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-28",
@@ -2449,7 +2449,7 @@
             "quantity": 280
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-29",
@@ -2468,7 +2468,7 @@
             "quantity": 290
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-30",
@@ -2487,7 +2487,7 @@
             "quantity": 1500
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-31",
@@ -2506,7 +2506,7 @@
             "quantity": 310
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-32",
@@ -2525,7 +2525,7 @@
             "quantity": 320
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-33",
@@ -2544,7 +2544,7 @@
             "quantity": 330
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-34",
@@ -2563,7 +2563,7 @@
             "quantity": 340
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-35",
@@ -2582,7 +2582,7 @@
             "quantity": 1
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-36",
@@ -2601,7 +2601,7 @@
             "quantity": 360
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-37",
@@ -2620,7 +2620,7 @@
             "quantity": 370
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-38",
@@ -2639,7 +2639,7 @@
             "quantity": 380
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-39",
@@ -2658,7 +2658,7 @@
             "quantity": 390
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-40",
@@ -2677,7 +2677,7 @@
             "quantity": 2000
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-41",
@@ -2696,7 +2696,7 @@
             "quantity": 410
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-42",
@@ -2715,7 +2715,7 @@
             "quantity": 420
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-43",
@@ -2734,7 +2734,7 @@
             "quantity": 430
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-44",
@@ -2753,7 +2753,7 @@
             "quantity": 440
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-45",
@@ -2772,7 +2772,7 @@
             "quantity": 1
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-46",
@@ -2791,7 +2791,7 @@
             "quantity": 460
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-47",
@@ -2810,7 +2810,7 @@
             "quantity": 470
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-48",
@@ -2829,7 +2829,7 @@
             "quantity": 480
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-49",
@@ -2848,7 +2848,7 @@
             "quantity": 490
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-003-goal-50",
@@ -2867,7 +2867,7 @@
             "quantity": 2500
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         }
       ]
     },
@@ -3083,7 +3083,7 @@
             "quantity": 110
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-12",
@@ -3102,7 +3102,7 @@
             "quantity": 120
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-13",
@@ -3121,7 +3121,7 @@
             "quantity": 130
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-14",
@@ -3140,7 +3140,7 @@
             "quantity": 140
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-15",
@@ -3159,7 +3159,7 @@
             "quantity": 1
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-16",
@@ -3178,7 +3178,7 @@
             "quantity": 160
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-17",
@@ -3197,7 +3197,7 @@
             "quantity": 170
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-18",
@@ -3216,7 +3216,7 @@
             "quantity": 180
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-19",
@@ -3235,7 +3235,7 @@
             "quantity": 190
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-20",
@@ -3254,7 +3254,7 @@
             "quantity": 1000
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-21",
@@ -3273,7 +3273,7 @@
             "quantity": 210
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-22",
@@ -3292,7 +3292,7 @@
             "quantity": 220
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-23",
@@ -3311,7 +3311,7 @@
             "quantity": 230
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-24",
@@ -3330,7 +3330,7 @@
             "quantity": 240
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-25",
@@ -3349,7 +3349,7 @@
             "quantity": 1
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-26",
@@ -3368,7 +3368,7 @@
             "quantity": 260
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-27",
@@ -3387,7 +3387,7 @@
             "quantity": 270
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-28",
@@ -3406,7 +3406,7 @@
             "quantity": 280
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-29",
@@ -3425,7 +3425,7 @@
             "quantity": 290
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-30",
@@ -3444,7 +3444,7 @@
             "quantity": 1500
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-31",
@@ -3463,7 +3463,7 @@
             "quantity": 310
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-32",
@@ -3482,7 +3482,7 @@
             "quantity": 320
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-33",
@@ -3501,7 +3501,7 @@
             "quantity": 330
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-34",
@@ -3520,7 +3520,7 @@
             "quantity": 340
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-35",
@@ -3539,7 +3539,7 @@
             "quantity": 1
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-36",
@@ -3558,7 +3558,7 @@
             "quantity": 360
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-37",
@@ -3577,7 +3577,7 @@
             "quantity": 370
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-38",
@@ -3596,7 +3596,7 @@
             "quantity": 380
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-39",
@@ -3615,7 +3615,7 @@
             "quantity": 390
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-40",
@@ -3634,7 +3634,7 @@
             "quantity": 2000
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-41",
@@ -3653,7 +3653,7 @@
             "quantity": 410
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-42",
@@ -3672,7 +3672,7 @@
             "quantity": 420
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-43",
@@ -3691,7 +3691,7 @@
             "quantity": 430
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-44",
@@ -3710,7 +3710,7 @@
             "quantity": 440
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-45",
@@ -3729,7 +3729,7 @@
             "quantity": 1
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-46",
@@ -3748,7 +3748,7 @@
             "quantity": 460
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-47",
@@ -3767,7 +3767,7 @@
             "quantity": 470
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-48",
@@ -3786,7 +3786,7 @@
             "quantity": 480
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-49",
@@ -3805,7 +3805,7 @@
             "quantity": 490
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-004-goal-50",
@@ -3824,7 +3824,7 @@
             "quantity": 2500
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         }
       ]
     },
@@ -4040,7 +4040,7 @@
             "quantity": 110
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-12",
@@ -4059,7 +4059,7 @@
             "quantity": 120
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-13",
@@ -4078,7 +4078,7 @@
             "quantity": 130
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-14",
@@ -4097,7 +4097,7 @@
             "quantity": 140
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-15",
@@ -4116,7 +4116,7 @@
             "quantity": 1
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-16",
@@ -4135,7 +4135,7 @@
             "quantity": 160
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-17",
@@ -4154,7 +4154,7 @@
             "quantity": 170
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-18",
@@ -4173,7 +4173,7 @@
             "quantity": 180
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-19",
@@ -4192,7 +4192,7 @@
             "quantity": 190
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-20",
@@ -4211,7 +4211,7 @@
             "quantity": 1000
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-21",
@@ -4230,7 +4230,7 @@
             "quantity": 210
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-22",
@@ -4249,7 +4249,7 @@
             "quantity": 220
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-23",
@@ -4268,7 +4268,7 @@
             "quantity": 230
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-24",
@@ -4287,7 +4287,7 @@
             "quantity": 240
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-25",
@@ -4306,7 +4306,7 @@
             "quantity": 1
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-26",
@@ -4325,7 +4325,7 @@
             "quantity": 260
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-27",
@@ -4344,7 +4344,7 @@
             "quantity": 270
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-28",
@@ -4363,7 +4363,7 @@
             "quantity": 280
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-29",
@@ -4382,7 +4382,7 @@
             "quantity": 290
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-30",
@@ -4401,7 +4401,7 @@
             "quantity": 1500
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-31",
@@ -4420,7 +4420,7 @@
             "quantity": 310
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-32",
@@ -4439,7 +4439,7 @@
             "quantity": 320
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-33",
@@ -4458,7 +4458,7 @@
             "quantity": 330
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-34",
@@ -4477,7 +4477,7 @@
             "quantity": 340
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-35",
@@ -4496,7 +4496,7 @@
             "quantity": 1
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-36",
@@ -4515,7 +4515,7 @@
             "quantity": 360
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-37",
@@ -4534,7 +4534,7 @@
             "quantity": 370
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-38",
@@ -4553,7 +4553,7 @@
             "quantity": 380
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-39",
@@ -4572,7 +4572,7 @@
             "quantity": 390
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-40",
@@ -4591,7 +4591,7 @@
             "quantity": 2000
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-41",
@@ -4610,7 +4610,7 @@
             "quantity": 410
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-42",
@@ -4629,7 +4629,7 @@
             "quantity": 420
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-43",
@@ -4648,7 +4648,7 @@
             "quantity": 430
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-44",
@@ -4667,7 +4667,7 @@
             "quantity": 440
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-45",
@@ -4686,7 +4686,7 @@
             "quantity": 1
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-46",
@@ -4705,7 +4705,7 @@
             "quantity": 460
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-47",
@@ -4724,7 +4724,7 @@
             "quantity": 470
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-48",
@@ -4743,7 +4743,7 @@
             "quantity": 480
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-49",
@@ -4762,7 +4762,7 @@
             "quantity": 490
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-005-goal-50",
@@ -4781,7 +4781,7 @@
             "quantity": 2500
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         }
       ]
     },
@@ -4997,7 +4997,7 @@
             "quantity": 110
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-12",
@@ -5016,7 +5016,7 @@
             "quantity": 120
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-13",
@@ -5035,7 +5035,7 @@
             "quantity": 130
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-14",
@@ -5054,7 +5054,7 @@
             "quantity": 140
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-15",
@@ -5073,7 +5073,7 @@
             "quantity": 1
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-16",
@@ -5092,7 +5092,7 @@
             "quantity": 160
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-17",
@@ -5111,7 +5111,7 @@
             "quantity": 170
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-18",
@@ -5130,7 +5130,7 @@
             "quantity": 180
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-19",
@@ -5149,7 +5149,7 @@
             "quantity": 190
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-20",
@@ -5168,7 +5168,7 @@
             "quantity": 1000
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-21",
@@ -5187,7 +5187,7 @@
             "quantity": 210
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-22",
@@ -5206,7 +5206,7 @@
             "quantity": 220
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-23",
@@ -5225,7 +5225,7 @@
             "quantity": 230
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-24",
@@ -5244,7 +5244,7 @@
             "quantity": 240
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-25",
@@ -5263,7 +5263,7 @@
             "quantity": 1
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-26",
@@ -5282,7 +5282,7 @@
             "quantity": 260
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-27",
@@ -5301,7 +5301,7 @@
             "quantity": 270
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-28",
@@ -5320,7 +5320,7 @@
             "quantity": 280
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-29",
@@ -5339,7 +5339,7 @@
             "quantity": 290
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-30",
@@ -5358,7 +5358,7 @@
             "quantity": 1500
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-31",
@@ -5377,7 +5377,7 @@
             "quantity": 310
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-32",
@@ -5396,7 +5396,7 @@
             "quantity": 320
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-33",
@@ -5415,7 +5415,7 @@
             "quantity": 330
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-34",
@@ -5434,7 +5434,7 @@
             "quantity": 340
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-35",
@@ -5453,7 +5453,7 @@
             "quantity": 1
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-36",
@@ -5472,7 +5472,7 @@
             "quantity": 360
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-37",
@@ -5491,7 +5491,7 @@
             "quantity": 370
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-38",
@@ -5510,7 +5510,7 @@
             "quantity": 380
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-39",
@@ -5529,7 +5529,7 @@
             "quantity": 390
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-40",
@@ -5548,7 +5548,7 @@
             "quantity": 2000
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-41",
@@ -5567,7 +5567,7 @@
             "quantity": 410
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-42",
@@ -5586,7 +5586,7 @@
             "quantity": 420
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-43",
@@ -5605,7 +5605,7 @@
             "quantity": 430
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-44",
@@ -5624,7 +5624,7 @@
             "quantity": 440
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-45",
@@ -5643,7 +5643,7 @@
             "quantity": 1
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-46",
@@ -5662,7 +5662,7 @@
             "quantity": 460
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-47",
@@ -5681,7 +5681,7 @@
             "quantity": 470
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-48",
@@ -5700,7 +5700,7 @@
             "quantity": 480
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-49",
@@ -5719,7 +5719,7 @@
             "quantity": 490
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-006-goal-50",
@@ -5738,7 +5738,7 @@
             "quantity": 2500
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         }
       ]
     },
@@ -5954,7 +5954,7 @@
             "quantity": 110
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-12",
@@ -5973,7 +5973,7 @@
             "quantity": 120
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-13",
@@ -5992,7 +5992,7 @@
             "quantity": 130
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-14",
@@ -6011,7 +6011,7 @@
             "quantity": 140
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-15",
@@ -6030,7 +6030,7 @@
             "quantity": 1
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-16",
@@ -6049,7 +6049,7 @@
             "quantity": 160
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-17",
@@ -6068,7 +6068,7 @@
             "quantity": 170
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-18",
@@ -6087,7 +6087,7 @@
             "quantity": 180
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-19",
@@ -6106,7 +6106,7 @@
             "quantity": 190
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-20",
@@ -6125,7 +6125,7 @@
             "quantity": 1000
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-21",
@@ -6144,7 +6144,7 @@
             "quantity": 210
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-22",
@@ -6163,7 +6163,7 @@
             "quantity": 220
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-23",
@@ -6182,7 +6182,7 @@
             "quantity": 230
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-24",
@@ -6201,7 +6201,7 @@
             "quantity": 240
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-25",
@@ -6220,7 +6220,7 @@
             "quantity": 1
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-26",
@@ -6239,7 +6239,7 @@
             "quantity": 260
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-27",
@@ -6258,7 +6258,7 @@
             "quantity": 270
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-28",
@@ -6277,7 +6277,7 @@
             "quantity": 280
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-29",
@@ -6296,7 +6296,7 @@
             "quantity": 290
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-30",
@@ -6315,7 +6315,7 @@
             "quantity": 1500
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-31",
@@ -6334,7 +6334,7 @@
             "quantity": 310
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-32",
@@ -6353,7 +6353,7 @@
             "quantity": 320
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-33",
@@ -6372,7 +6372,7 @@
             "quantity": 330
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-34",
@@ -6391,7 +6391,7 @@
             "quantity": 340
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-35",
@@ -6410,7 +6410,7 @@
             "quantity": 1
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-36",
@@ -6429,7 +6429,7 @@
             "quantity": 360
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-37",
@@ -6448,7 +6448,7 @@
             "quantity": 370
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-38",
@@ -6467,7 +6467,7 @@
             "quantity": 380
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-39",
@@ -6486,7 +6486,7 @@
             "quantity": 390
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-40",
@@ -6505,7 +6505,7 @@
             "quantity": 2000
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-41",
@@ -6524,7 +6524,7 @@
             "quantity": 410
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-42",
@@ -6543,7 +6543,7 @@
             "quantity": 420
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-43",
@@ -6562,7 +6562,7 @@
             "quantity": 430
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-44",
@@ -6581,7 +6581,7 @@
             "quantity": 440
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-45",
@@ -6600,7 +6600,7 @@
             "quantity": 1
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-46",
@@ -6619,7 +6619,7 @@
             "quantity": 460
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-47",
@@ -6638,7 +6638,7 @@
             "quantity": 470
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-48",
@@ -6657,7 +6657,7 @@
             "quantity": 480
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-49",
@@ -6676,7 +6676,7 @@
             "quantity": 490
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-007-goal-50",
@@ -6695,7 +6695,7 @@
             "quantity": 2500
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         }
       ]
     },
@@ -6911,7 +6911,7 @@
             "quantity": 110
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-12",
@@ -6930,7 +6930,7 @@
             "quantity": 120
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-13",
@@ -6949,7 +6949,7 @@
             "quantity": 130
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-14",
@@ -6968,7 +6968,7 @@
             "quantity": 140
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-15",
@@ -6987,7 +6987,7 @@
             "quantity": 1
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-16",
@@ -7006,7 +7006,7 @@
             "quantity": 160
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-17",
@@ -7025,7 +7025,7 @@
             "quantity": 170
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-18",
@@ -7044,7 +7044,7 @@
             "quantity": 180
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-19",
@@ -7063,7 +7063,7 @@
             "quantity": 190
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-20",
@@ -7082,7 +7082,7 @@
             "quantity": 1000
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-21",
@@ -7101,7 +7101,7 @@
             "quantity": 210
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-22",
@@ -7120,7 +7120,7 @@
             "quantity": 220
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-23",
@@ -7139,7 +7139,7 @@
             "quantity": 230
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-24",
@@ -7158,7 +7158,7 @@
             "quantity": 240
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-25",
@@ -7177,7 +7177,7 @@
             "quantity": 1
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-26",
@@ -7196,7 +7196,7 @@
             "quantity": 260
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-27",
@@ -7215,7 +7215,7 @@
             "quantity": 270
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-28",
@@ -7234,7 +7234,7 @@
             "quantity": 280
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-29",
@@ -7253,7 +7253,7 @@
             "quantity": 290
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-30",
@@ -7272,7 +7272,7 @@
             "quantity": 1500
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-31",
@@ -7291,7 +7291,7 @@
             "quantity": 310
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-32",
@@ -7310,7 +7310,7 @@
             "quantity": 320
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-33",
@@ -7329,7 +7329,7 @@
             "quantity": 330
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-34",
@@ -7348,7 +7348,7 @@
             "quantity": 340
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-35",
@@ -7367,7 +7367,7 @@
             "quantity": 1
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-36",
@@ -7386,7 +7386,7 @@
             "quantity": 360
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-37",
@@ -7405,7 +7405,7 @@
             "quantity": 370
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-38",
@@ -7424,7 +7424,7 @@
             "quantity": 380
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-39",
@@ -7443,7 +7443,7 @@
             "quantity": 390
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-40",
@@ -7462,7 +7462,7 @@
             "quantity": 2000
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-41",
@@ -7481,7 +7481,7 @@
             "quantity": 410
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-42",
@@ -7500,7 +7500,7 @@
             "quantity": 420
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-43",
@@ -7519,7 +7519,7 @@
             "quantity": 430
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-44",
@@ -7538,7 +7538,7 @@
             "quantity": 440
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-45",
@@ -7557,7 +7557,7 @@
             "quantity": 1
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-46",
@@ -7576,7 +7576,7 @@
             "quantity": 460
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-47",
@@ -7595,7 +7595,7 @@
             "quantity": 470
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-48",
@@ -7614,7 +7614,7 @@
             "quantity": 480
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-49",
@@ -7633,7 +7633,7 @@
             "quantity": 490
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-008-goal-50",
@@ -7652,7 +7652,7 @@
             "quantity": 2500
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         }
       ]
     },
@@ -7868,7 +7868,7 @@
             "quantity": 110
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-12",
@@ -7887,7 +7887,7 @@
             "quantity": 120
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-13",
@@ -7906,7 +7906,7 @@
             "quantity": 130
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-14",
@@ -7925,7 +7925,7 @@
             "quantity": 140
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-15",
@@ -7944,7 +7944,7 @@
             "quantity": 1
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-16",
@@ -7963,7 +7963,7 @@
             "quantity": 160
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-17",
@@ -7982,7 +7982,7 @@
             "quantity": 170
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-18",
@@ -8001,7 +8001,7 @@
             "quantity": 180
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-19",
@@ -8020,7 +8020,7 @@
             "quantity": 190
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-20",
@@ -8039,7 +8039,7 @@
             "quantity": 1000
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-21",
@@ -8058,7 +8058,7 @@
             "quantity": 210
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-22",
@@ -8077,7 +8077,7 @@
             "quantity": 220
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-23",
@@ -8096,7 +8096,7 @@
             "quantity": 230
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-24",
@@ -8115,7 +8115,7 @@
             "quantity": 240
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-25",
@@ -8134,7 +8134,7 @@
             "quantity": 1
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-26",
@@ -8153,7 +8153,7 @@
             "quantity": 260
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-27",
@@ -8172,7 +8172,7 @@
             "quantity": 270
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-28",
@@ -8191,7 +8191,7 @@
             "quantity": 280
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-29",
@@ -8210,7 +8210,7 @@
             "quantity": 290
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-30",
@@ -8229,7 +8229,7 @@
             "quantity": 1500
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-31",
@@ -8248,7 +8248,7 @@
             "quantity": 310
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-32",
@@ -8267,7 +8267,7 @@
             "quantity": 320
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-33",
@@ -8286,7 +8286,7 @@
             "quantity": 330
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-34",
@@ -8305,7 +8305,7 @@
             "quantity": 340
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-35",
@@ -8324,7 +8324,7 @@
             "quantity": 1
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-36",
@@ -8343,7 +8343,7 @@
             "quantity": 360
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-37",
@@ -8362,7 +8362,7 @@
             "quantity": 370
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-38",
@@ -8381,7 +8381,7 @@
             "quantity": 380
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-39",
@@ -8400,7 +8400,7 @@
             "quantity": 390
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-40",
@@ -8419,7 +8419,7 @@
             "quantity": 2000
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-41",
@@ -8438,7 +8438,7 @@
             "quantity": 410
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-42",
@@ -8457,7 +8457,7 @@
             "quantity": 420
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-43",
@@ -8476,7 +8476,7 @@
             "quantity": 430
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-44",
@@ -8495,7 +8495,7 @@
             "quantity": 440
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-45",
@@ -8514,7 +8514,7 @@
             "quantity": 1
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-46",
@@ -8533,7 +8533,7 @@
             "quantity": 460
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-47",
@@ -8552,7 +8552,7 @@
             "quantity": 470
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-48",
@@ -8571,7 +8571,7 @@
             "quantity": 480
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-49",
@@ -8590,7 +8590,7 @@
             "quantity": 490
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-009-goal-50",
@@ -8609,7 +8609,7 @@
             "quantity": 2500
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         }
       ]
     },
@@ -8825,7 +8825,7 @@
             "quantity": 110
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-12",
@@ -8844,7 +8844,7 @@
             "quantity": 120
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-13",
@@ -8863,7 +8863,7 @@
             "quantity": 130
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-14",
@@ -8882,7 +8882,7 @@
             "quantity": 140
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-15",
@@ -8901,7 +8901,7 @@
             "quantity": 1
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-16",
@@ -8920,7 +8920,7 @@
             "quantity": 160
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-17",
@@ -8939,7 +8939,7 @@
             "quantity": 170
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-18",
@@ -8958,7 +8958,7 @@
             "quantity": 180
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-19",
@@ -8977,7 +8977,7 @@
             "quantity": 190
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-20",
@@ -8996,7 +8996,7 @@
             "quantity": 1000
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-21",
@@ -9015,7 +9015,7 @@
             "quantity": 210
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-22",
@@ -9034,7 +9034,7 @@
             "quantity": 220
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-23",
@@ -9053,7 +9053,7 @@
             "quantity": 230
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-24",
@@ -9072,7 +9072,7 @@
             "quantity": 240
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-25",
@@ -9091,7 +9091,7 @@
             "quantity": 1
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-26",
@@ -9110,7 +9110,7 @@
             "quantity": 260
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-27",
@@ -9129,7 +9129,7 @@
             "quantity": 270
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-28",
@@ -9148,7 +9148,7 @@
             "quantity": 280
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-29",
@@ -9167,7 +9167,7 @@
             "quantity": 290
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-30",
@@ -9186,7 +9186,7 @@
             "quantity": 1500
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-31",
@@ -9205,7 +9205,7 @@
             "quantity": 310
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-32",
@@ -9224,7 +9224,7 @@
             "quantity": 320
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-33",
@@ -9243,7 +9243,7 @@
             "quantity": 330
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-34",
@@ -9262,7 +9262,7 @@
             "quantity": 340
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-35",
@@ -9281,7 +9281,7 @@
             "quantity": 1
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-36",
@@ -9300,7 +9300,7 @@
             "quantity": 360
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-37",
@@ -9319,7 +9319,7 @@
             "quantity": 370
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-38",
@@ -9338,7 +9338,7 @@
             "quantity": 380
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-39",
@@ -9357,7 +9357,7 @@
             "quantity": 390
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-40",
@@ -9376,7 +9376,7 @@
             "quantity": 2000
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-41",
@@ -9395,7 +9395,7 @@
             "quantity": 410
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-42",
@@ -9414,7 +9414,7 @@
             "quantity": 420
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-43",
@@ -9433,7 +9433,7 @@
             "quantity": 430
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-44",
@@ -9452,7 +9452,7 @@
             "quantity": 440
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-45",
@@ -9471,7 +9471,7 @@
             "quantity": 1
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-46",
@@ -9490,7 +9490,7 @@
             "quantity": 460
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-47",
@@ -9509,7 +9509,7 @@
             "quantity": 470
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-48",
@@ -9528,7 +9528,7 @@
             "quantity": 480
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-49",
@@ -9547,7 +9547,7 @@
             "quantity": 490
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         },
         {
           "goalId": "challenge-010-goal-50",
@@ -9566,7 +9566,7 @@
             "quantity": 2500
           },
           "prerequisites": [],
-          "defaultAssigned": false
+          "defaultAssigned": true
         }
       ]
     }

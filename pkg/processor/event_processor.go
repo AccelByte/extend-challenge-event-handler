@@ -178,7 +178,7 @@ func (p *EventProcessor) processAbsoluteGoal(ctx context.Context, userID, namesp
 	var completedAt *time.Time
 	if value >= goal.Requirement.TargetValue {
 		status = domain.GoalStatusCompleted
-		now := time.Now()
+		now := time.Now().UTC() // Always use UTC for consistency across timezones
 		completedAt = &now
 	}
 
@@ -232,7 +232,7 @@ func (p *EventProcessor) processIncrementGoal(ctx context.Context, userID, names
 // processDailyGoal handles binary daily check goals.
 // Decision Q18: Daily type is different from Increment with daily flag
 func (p *EventProcessor) processDailyGoal(ctx context.Context, userID, namespace string, goal *domain.Goal) {
-	now := time.Now()
+	now := time.Now().UTC() // Always use UTC for consistency across timezones
 
 	// Daily goals always set progress=1 and completed_at=NOW()
 	// Claim validation checks if completed_at is today (repeatable reward)
