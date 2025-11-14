@@ -104,6 +104,11 @@ func (m *MockGoalRepository) BulkInsert(ctx context.Context, progresses []*domai
 	return args.Error(0)
 }
 
+func (m *MockGoalRepository) BulkInsertWithCOPY(ctx context.Context, progresses []*domain.UserGoalProgress) error {
+	args := m.Called(ctx, progresses)
+	return args.Error(0)
+}
+
 func (m *MockGoalRepository) UpsertGoalActive(ctx context.Context, progress *domain.UserGoalProgress) error {
 	args := m.Called(ctx, progress)
 	return args.Error(0)
