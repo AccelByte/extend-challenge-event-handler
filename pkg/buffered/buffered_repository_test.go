@@ -114,6 +114,12 @@ func (m *MockGoalRepository) UpsertGoalActive(ctx context.Context, progress *dom
 	return args.Error(0)
 }
 
+// M4: Batch goal activation for random/batch selection
+func (m *MockGoalRepository) BatchUpsertGoalActive(ctx context.Context, progresses []*domain.UserGoalProgress) error {
+	args := m.Called(ctx, progresses)
+	return args.Error(0)
+}
+
 // M3 Phase 9: Fast path optimization methods
 func (m *MockGoalRepository) GetUserGoalCount(ctx context.Context, userID string) (int, error) {
 	args := m.Called(ctx, userID)

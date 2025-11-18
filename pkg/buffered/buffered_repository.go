@@ -623,7 +623,7 @@ func (r *BufferedRepository) cleanupOldDailyEntries() {
 	r.mu.Lock()
 	defer r.mu.Unlock()
 
-	now := time.Now().UTC() // Always use UTC for consistency across timezones
+	now := time.Now().UTC()            // Always use UTC for consistency across timezones
 	cutoff := now.Add(-48 * time.Hour) // Keep last 2 days
 	cleaned := 0
 

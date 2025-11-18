@@ -46,7 +46,7 @@ func setupIntegrationTest(t *testing.T) (*sql.DB, repository.GoalRepository, *bu
 		return nil, nil, nil, nil, nil
 	}
 
-	// Create table
+	// Create table with M3+ schema (matches migrations)
 	_, err = db.Exec(`
 		CREATE TABLE IF NOT EXISTS user_goal_progress (
 			user_id VARCHAR(100) NOT NULL,
@@ -59,6 +59,14 @@ func setupIntegrationTest(t *testing.T) (*sql.DB, repository.GoalRepository, *bu
 			claimed_at TIMESTAMP NULL,
 			created_at TIMESTAMP NOT NULL DEFAULT NOW(),
 			updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
+			
+			-- M3: User assignment control
+			is_active BOOLEAN NOT NULL DEFAULT true,
+			assigned_at TIMESTAMP NULL,
+			
+			-- M5: System rotation control (added now for forward compatibility)
+			expires_at TIMESTAMP NULL,
+			
 			PRIMARY KEY (user_id, goal_id),
 			CONSTRAINT check_status CHECK (status IN ('not_started', 'in_progress', 'completed', 'claimed')),
 			CONSTRAINT check_progress_non_negative CHECK (progress >= 0),
@@ -279,7 +287,7 @@ func TestE2E_LoginEvent_Increment_Flush_DB(t *testing.T) {
 				created_at, updated_at
 			) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
 		`, userID, goalID, "challenge1", "test-namespace",
-		   0, domain.GoalStatusNotStarted, true, oldTime, oldTime)
+			0, domain.GoalStatusNotStarted, true, oldTime, oldTime)
 		assert.NoError(t, err)
 
 		// Simulate first day login
@@ -572,7 +580,7 @@ func TestE2E_MixedGoalTypes(t *testing.T) {
 				created_at, updated_at
 			) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
 		`, userID, "login_goal_daily", "challenge1", "test-namespace",
-		   0, domain.GoalStatusNotStarted, true, oldTime, oldTime)
+			0, domain.GoalStatusNotStarted, true, oldTime, oldTime)
 		assert.NoError(t, err)
 
 		// Single login event triggers both increment goals and daily increment goals
