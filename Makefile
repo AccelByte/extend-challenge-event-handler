@@ -52,7 +52,13 @@ test-integration-run:
 	@echo "Running integration tests..."
 	@go test ./pkg/processor -v -run TestE2E
 
-test-integration: test-integration-setup test-integration-run test-integration-teardown
+test-integration:
+	@$(MAKE) test-integration-setup
+	@if ! $(MAKE) test-integration-run; then \
+		$(MAKE) test-integration-teardown; \
+		exit 1; \
+	fi
+	@$(MAKE) test-integration-teardown
 	@echo "✅ Integration tests complete!"
 
 # Run all checks (lint + unit tests + integration tests)
