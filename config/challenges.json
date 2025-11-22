@@ -108,6 +108,165 @@
           "prerequisites": []
         }
       ]
+    },
+    {
+      "challengeId": "daily-challenges",
+      "name": "Daily Challenges",
+      "description": "Complete daily challenge goals - M4 testing",
+      "goals": [
+        {
+          "goalId": "daily-goal-1",
+          "name": "Complete 5 Battles",
+          "description": "Win or lose 5 battles",
+          "type": "daily",
+          "eventSource": "statistic",
+          "defaultAssigned": false,
+          "requirement": {
+            "statCode": "battles_completed",
+            "operator": ">=",
+            "targetValue": 5
+          },
+          "reward": {
+            "type": "WALLET",
+            "rewardId": "GOLD",
+            "quantity": 50
+          },
+          "prerequisites": []
+        },
+        {
+          "goalId": "daily-goal-2",
+          "name": "Collect 100 Coins",
+          "description": "Collect a total of 100 coins",
+          "type": "daily",
+          "eventSource": "statistic",
+          "defaultAssigned": false,
+          "requirement": {
+            "statCode": "coins_collected",
+            "operator": ">=",
+            "targetValue": 100
+          },
+          "reward": {
+            "type": "WALLET",
+            "rewardId": "GEMS",
+            "quantity": 10
+          },
+          "prerequisites": []
+        },
+        {
+          "goalId": "daily-goal-3",
+          "name": "Defeat 20 Enemies",
+          "description": "Defeat any 20 enemies",
+          "type": "daily",
+          "eventSource": "statistic",
+          "defaultAssigned": false,
+          "requirement": {
+            "statCode": "enemies_defeated",
+            "operator": ">=",
+            "targetValue": 20
+          },
+          "reward": {
+            "type": "ITEM",
+            "rewardId": "767d2217abe241aab2245794761e9dc4",
+            "quantity": 1
+          },
+          "prerequisites": []
+        },
+        {
+          "goalId": "daily-goal-4",
+          "name": "Complete 3 Quests",
+          "description": "Complete any 3 quests",
+          "type": "daily",
+          "eventSource": "statistic",
+          "defaultAssigned": false,
+          "requirement": {
+            "statCode": "quests_completed",
+            "operator": ">=",
+            "targetValue": 3
+          },
+          "reward": {
+            "type": "WALLET",
+            "rewardId": "GOLD",
+            "quantity": 75
+          },
+          "prerequisites": []
+        },
+        {
+          "goalId": "daily-goal-5",
+          "name": "Earn 1000 XP",
+          "description": "Earn a total of 1000 experience points",
+          "type": "daily",
+          "eventSource": "statistic",
+          "defaultAssigned": false,
+          "requirement": {
+            "statCode": "xp_earned",
+            "operator": ">=",
+            "targetValue": 1000
+          },
+          "reward": {
+            "type": "WALLET",
+            "rewardId": "GEMS",
+            "quantity": 25
+          },
+          "prerequisites": []
+        },
+        {
+          "goalId": "daily-goal-6",
+          "name": "Use 10 Power-Ups",
+          "description": "Use any 10 power-ups",
+          "type": "daily",
+          "eventSource": "statistic",
+          "defaultAssigned": false,
+          "requirement": {
+            "statCode": "powerups_used",
+            "operator": ">=",
+            "targetValue": 10
+          },
+          "reward": {
+            "type": "ITEM",
+            "rewardId": "689cac44689c452290b12922c4d135fd",
+            "quantity": 2
+          },
+          "prerequisites": []
+        },
+        {
+          "goalId": "daily-goal-7",
+          "name": "Play for 30 Minutes",
+          "description": "Play for a total of 30 minutes",
+          "type": "daily",
+          "eventSource": "statistic",
+          "defaultAssigned": false,
+          "requirement": {
+            "statCode": "play_time_minutes",
+            "operator": ">=",
+            "targetValue": 30
+          },
+          "reward": {
+            "type": "WALLET",
+            "rewardId": "GOLD",
+            "quantity": 100
+          },
+          "prerequisites": []
+        },
+        {
+          "goalId": "daily-goal-8",
+          "name": "Open 5 Chests",
+          "description": "Open any 5 treasure chests",
+          "type": "daily",
+          "eventSource": "statistic",
+          "defaultAssigned": false,
+          "requirement": {
+            "statCode": "chests_opened",
+            "operator": ">=",
+            "targetValue": 5
+          },
+          "reward": {
+            "type": "WALLET",
+            "rewardId": "GEMS",
+            "quantity": 15
+          },
+          "prerequisites": []
+        }
+      ]
     }
   ]
 }
