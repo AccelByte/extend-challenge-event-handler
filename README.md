@@ -503,7 +503,7 @@ curl http://localhost:8081/metrics | grep challenge_event_handler
 
 **Reduction factor**: **1,000,000×** (measured with realistic workload)
 
-See [Platform docs - PERFORMANCE_BASELINE.md](https://github.com/AccelByte/extend-challenge-platform/blob/master/docs/PERFORMANCE_BASELINE.md) for detailed benchmarks.
+See [Suite docs - PERFORMANCE_BASELINE.md](https://github.com/AccelByte/extend-challenge-suite/blob/master/docs/PERFORMANCE_BASELINE.md) for detailed benchmarks.
 
 ---
 
@@ -545,7 +545,7 @@ docker run -p 6566:6566 \
    - Use ConfigMap or shared volume
    - Ensure identical to Backend Service config
 
-See [Platform docs - TECH_SPEC_DEPLOYMENT.md](https://github.com/AccelByte/extend-challenge-platform/blob/master/docs/TECH_SPEC_DEPLOYMENT.md) for detailed deployment guide.
+See [Suite docs - TECH_SPEC_DEPLOYMENT.md](https://github.com/AccelByte/extend-challenge-suite/blob/master/docs/TECH_SPEC_DEPLOYMENT.md) for detailed deployment guide.
 
 ---
 
@@ -646,7 +646,7 @@ go mod tidy
 
 ## Contributing
 
-See [Platform repo - CONTRIBUTING.md](https://github.com/AccelByte/extend-challenge-platform/blob/master/CONTRIBUTING.md)
+See [Suite repo - CONTRIBUTING.md](https://github.com/AccelByte/extend-challenge-suite/blob/master/CONTRIBUTING.md)
 
 ---
 
@@ -658,7 +658,7 @@ See [Platform repo - CONTRIBUTING.md](https://github.com/AccelByte/extend-challe
 
 ## Links
 
-- **Platform Repo**: https://github.com/AccelByte/extend-challenge-platform
+- **Suite Repo**: https://github.com/AccelByte/extend-challenge-suite
 - **Common Library**: https://github.com/AccelByte/extend-challenge-common
 - **Backend Service**: https://github.com/AccelByte/extend-challenge-service
 - **Demo App**: https://github.com/AccelByte/extend-challenge-demo-app
