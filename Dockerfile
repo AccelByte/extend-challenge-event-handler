@@ -23,7 +23,7 @@ RUN chmod +x proto.sh && \
 # ----------------------------------------
 # Stage 2: Builder
 # ----------------------------------------
-FROM --platform=$BUILDPLATFORM golang:alpine AS builder
+FROM --platform=$BUILDPLATFORM golang:1.25-alpine AS builder
 
 # Set the value for the target OS and architecture.
 ARG TARGETOS
