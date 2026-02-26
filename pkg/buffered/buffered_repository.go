@@ -278,6 +278,7 @@ func (r *BufferedRepository) Flush(ctx context.Context) error {
 	startTime := time.Now()
 
 	// Enrich events with goal cache metadata and build CopyRows
+	now := time.Now().UTC()
 	copyRows := make([]repository.CopyRow, 0, len(toFlush))
 	for key, event := range toFlush {
 		parts := strings.Split(key, ":")
@@ -296,16 +297,7 @@ func (r *BufferedRepository) Flush(ctx context.Context) error {
 			continue
 		}
 
-		copyRows = append(copyRows, repository.CopyRow{
-			UserID:       event.UserID,
-			GoalID:       event.GoalID,
-			ChallengeID:  event.ChallengeID,
-			Namespace:    event.Namespace,
-			Progress:     event.Progress,
-			ProgressMode: string(event.ProgressMode),
-			IncValue:     event.IncValue,
-			TargetValue:  goal.Requirement.TargetValue,
-		})
+		copyRows = append(copyRows, EnrichCopyRow(event, goal, now))
 	}
 
 	if len(copyRows) == 0 {

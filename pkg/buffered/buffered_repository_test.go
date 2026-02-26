@@ -1617,3 +1617,118 @@ func TestBackpressure_NoImpactBelowThreshold(t *testing.T) {
 	assert.Less(t, duration, 100*time.Millisecond, "Should complete quickly without backpressure")
 	assert.Equal(t, 100, repo.GetBufferSize())
 }
+
+// testGoalWithRotation returns a *domain.Goal with rotation config for testing.
+func testGoalWithRotation(goalID, challengeID string, targetValue int, schedule domain.RotationSchedule, resetProgress, allowReselection bool) *domain.Goal {
+	return &domain.Goal{
+		ID:          goalID,
+		ChallengeID: challengeID,
+		Requirement: domain.Requirement{
+			TargetValue:  targetValue,
+			ProgressMode: domain.ProgressModeRelative,
+		},
+		Rotation: &domain.RotationConfig{
+			Enabled:  true,
+			Type:     domain.RotationTypeGlobal,
+			Schedule: schedule,
+			OnExpiry: domain.OnExpiryConfig{
+				ResetProgress:    resetProgress,
+				AllowReselection: allowReselection,
+			},
+		},
+	}
+}
+
+func TestFlush_EnrichesRotationMetadata(t *testing.T) {
+	mockRepo := new(MockGoalRepository)
+	mockCache := new(MockGoalCache)
+	logger := newTestLogger()
+
+	repo := newTestBufferedRepository(mockRepo, mockCache, 10*time.Second, 1000, logger)
+	defer func() {
+		_ = repo.Close()
+	}()
+
+	// Relative goal with daily rotation
+	event := &domain.BufferedEvent{
+		UserID:       "user1",
+		GoalID:       "goal-rot",
+		ChallengeID:  "ch1",
+		Namespace:    "test",
+		Progress:     intPtr(108),
+		IncValue:     3,
+		ProgressMode: domain.ProgressModeRelative,
+	}
+	err := repo.UpdateProgress(context.Background(), event)
+	assert.NoError(t, err)
+
+	mockCache.On("GetGoalByID", "goal-rot").Return(
+		testGoalWithRotation("goal-rot", "ch1", 10, domain.RotationScheduleDaily, true, false),
+	)
+
+	// Verify CopyRow has rotation fields populated
+	mockRepo.On("BatchUpsertProgressWithCOPY", mock.Anything, mock.MatchedBy(func(rows []repository.CopyRow) bool {
+		if len(rows) != 1 {
+			return false
+		}
+		row := rows[0]
+		return row.UserID == "user1" &&
+			row.GoalID == "goal-rot" &&
+			row.RotationBoundary != nil &&
+			row.NewExpiresAt != nil &&
+			row.ResetProgress == true &&
+			row.AllowReselection == false
+	})).Return(nil)
+
+	err = repo.Flush(context.Background())
+	assert.NoError(t, err)
+
+	mockRepo.AssertExpectations(t)
+	mockCache.AssertExpectations(t)
+}
+
+func TestFlush_NonRotatingGoal_NoRotationMetadata(t *testing.T) {
+	mockRepo := new(MockGoalRepository)
+	mockCache := new(MockGoalCache)
+	logger := newTestLogger()
+
+	repo := newTestBufferedRepository(mockRepo, mockCache, 10*time.Second, 1000, logger)
+	defer func() {
+		_ = repo.Close()
+	}()
+
+	// Absolute goal, no rotation
+	event := &domain.BufferedEvent{
+		UserID:       "user1",
+		GoalID:       "goal-abs",
+		ChallengeID:  "ch1",
+		Namespace:    "test",
+		Progress:     intPtr(50),
+		IncValue:     0,
+		ProgressMode: domain.ProgressModeAbsolute,
+	}
+	err := repo.UpdateProgress(context.Background(), event)
+	assert.NoError(t, err)
+
+	mockCache.On("GetGoalByID", "goal-abs").Return(testGoal("goal-abs", "ch1", 100))
+
+	// Verify CopyRow has nil rotation fields
+	mockRepo.On("BatchUpsertProgressWithCOPY", mock.Anything, mock.MatchedBy(func(rows []repository.CopyRow) bool {
+		if len(rows) != 1 {
+			return false
+		}
+		row := rows[0]
+		return row.UserID == "user1" &&
+			row.GoalID == "goal-abs" &&
+			row.RotationBoundary == nil &&
+			row.NewExpiresAt == nil &&
+			row.ResetProgress == false &&
+			row.AllowReselection == false
+	})).Return(nil)
+
+	err = repo.Flush(context.Background())
+	assert.NoError(t, err)
+
+	mockRepo.AssertExpectations(t)
+	mockCache.AssertExpectations(t)
+}
