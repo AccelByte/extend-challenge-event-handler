@@ -22,28 +22,22 @@ import (
 type MockBufferedRepository struct {
 	mock.Mock
 	mu     sync.Mutex
-	buffer map[string]*domain.UserGoalProgress
+	buffer map[string]*domain.BufferedEvent
 }
 
-func (m *MockBufferedRepository) UpdateProgress(ctx context.Context, progress *domain.UserGoalProgress) error {
-	args := m.Called(ctx, progress)
+func (m *MockBufferedRepository) UpdateProgress(ctx context.Context, event *domain.BufferedEvent) error {
+	args := m.Called(ctx, event)
 
 	// Store in local buffer for GetFromBuffer
 	m.mu.Lock()
-	key := fmt.Sprintf("%s:%s", progress.UserID, progress.GoalID)
-	m.buffer[key] = progress
+	key := fmt.Sprintf("%s:%s", event.UserID, event.GoalID)
+	m.buffer[key] = event
 	m.mu.Unlock()
 
 	return args.Error(0)
 }
 
-func (m *MockBufferedRepository) IncrementProgress(ctx context.Context, userID, goalID, challengeID, namespace string,
-	delta, targetValue int, isDailyIncrement bool) error {
-	args := m.Called(ctx, userID, goalID, challengeID, namespace, delta, targetValue, isDailyIncrement)
-	return args.Error(0)
-}
-
-func (m *MockBufferedRepository) GetFromBuffer(userID, goalID string) *domain.UserGoalProgress {
+func (m *MockBufferedRepository) GetFromBuffer(userID, goalID string) *domain.BufferedEvent {
 	m.mu.Lock()
 	defer m.mu.Unlock()
 
@@ -136,7 +130,7 @@ func loginStatUpdate() domain.StatUpdate {
 
 func TestNewEventProcessor(t *testing.T) {
 	mockRepo := new(MockBufferedRepository)
-	mockRepo.buffer = make(map[string]*domain.UserGoalProgress)
+	mockRepo.buffer = make(map[string]*domain.BufferedEvent)
 	mockCache := new(MockGoalCache)
 	logger := zerolog.New(os.Stdout).With().Timestamp().Logger()
 
@@ -150,7 +144,7 @@ func TestNewEventProcessor(t *testing.T) {
 
 func TestNewEventProcessor_NilLogger(t *testing.T) {
 	mockRepo := new(MockBufferedRepository)
-	mockRepo.buffer = make(map[string]*domain.UserGoalProgress)
+	mockRepo.buffer = make(map[string]*domain.BufferedEvent)
 	mockCache := new(MockGoalCache)
 
 	processor := NewEventProcessor(mockRepo, mockCache, "test-namespace", zerolog.Logger{})
@@ -160,7 +154,7 @@ func TestNewEventProcessor_NilLogger(t *testing.T) {
 
 func TestProcessEvent_AbsoluteGoal_WithValue(t *testing.T) {
 	mockRepo := new(MockBufferedRepository)
-	mockRepo.buffer = make(map[string]*domain.UserGoalProgress)
+	mockRepo.buffer = make(map[string]*domain.BufferedEvent)
 	mockCache := new(MockGoalCache)
 	logger := zerolog.New(os.Stdout).With().Timestamp().Logger()
 
@@ -177,11 +171,10 @@ func TestProcessEvent_AbsoluteGoal_WithValue(t *testing.T) {
 	}
 	mockCache.On("GetGoalsByStatCode", "kills").Return([]*domain.Goal{goal})
 
-	mockRepo.On("UpdateProgress", mock.Anything, mock.MatchedBy(func(p *domain.UserGoalProgress) bool {
-		return p.UserID == "user1" &&
-			p.GoalID == "goal1" &&
-			p.Progress == 50 &&
-			p.Status == domain.GoalStatusInProgress
+	mockRepo.On("UpdateProgress", mock.Anything, mock.MatchedBy(func(e *domain.BufferedEvent) bool {
+		return e.UserID == "user1" &&
+			e.GoalID == "goal1" &&
+			e.Progress != nil && *e.Progress == 50
 	})).Return(nil)
 
 	statUpdates := map[string]domain.StatUpdate{"kills": statUpdate(50)}
@@ -194,7 +187,7 @@ func TestProcessEvent_AbsoluteGoal_WithValue(t *testing.T) {
 
 func TestProcessEvent_AbsoluteGoal_Completed(t *testing.T) {
 	mockRepo := new(MockBufferedRepository)
-	mockRepo.buffer = make(map[string]*domain.UserGoalProgress)
+	mockRepo.buffer = make(map[string]*domain.BufferedEvent)
 	mockCache := new(MockGoalCache)
 	logger := zerolog.New(os.Stdout).With().Timestamp().Logger()
 
@@ -211,10 +204,8 @@ func TestProcessEvent_AbsoluteGoal_Completed(t *testing.T) {
 	}
 	mockCache.On("GetGoalsByStatCode", "kills").Return([]*domain.Goal{goal})
 
-	mockRepo.On("UpdateProgress", mock.Anything, mock.MatchedBy(func(p *domain.UserGoalProgress) bool {
-		return p.Progress == 100 &&
-			p.Status == domain.GoalStatusCompleted &&
-			p.CompletedAt != nil
+	mockRepo.On("UpdateProgress", mock.Anything, mock.MatchedBy(func(e *domain.BufferedEvent) bool {
+		return e.Progress != nil && *e.Progress == 100
 	})).Return(nil)
 
 	statUpdates := map[string]domain.StatUpdate{"kills": statUpdate(100)}
@@ -227,7 +218,7 @@ func TestProcessEvent_AbsoluteGoal_Completed(t *testing.T) {
 
 func TestProcessEvent_AbsoluteGoal_NegativeValue(t *testing.T) {
 	mockRepo := new(MockBufferedRepository)
-	mockRepo.buffer = make(map[string]*domain.UserGoalProgress)
+	mockRepo.buffer = make(map[string]*domain.BufferedEvent)
 	mockCache := new(MockGoalCache)
 	logger := zerolog.New(os.Stdout).With().Timestamp().Logger()
 
@@ -254,13 +245,13 @@ func TestProcessEvent_AbsoluteGoal_NegativeValue(t *testing.T) {
 
 func TestProcessEvent_RelativeGoal_UsesAbsoluteHandler(t *testing.T) {
 	mockRepo := new(MockBufferedRepository)
-	mockRepo.buffer = make(map[string]*domain.UserGoalProgress)
+	mockRepo.buffer = make(map[string]*domain.BufferedEvent)
 	mockCache := new(MockGoalCache)
 	logger := zerolog.New(os.Stdout).With().Timestamp().Logger()
 
 	processor := NewEventProcessor(mockRepo, mockCache, "test-namespace", logger)
 
-	// Relative mode should route to same handler as absolute in Phase 0.5
+	// Relative mode routes to the same processGoal handler
 	goal := &domain.Goal{
 		ID:          "goal1",
 		ChallengeID: "challenge1",
@@ -272,10 +263,10 @@ func TestProcessEvent_RelativeGoal_UsesAbsoluteHandler(t *testing.T) {
 	}
 	mockCache.On("GetGoalsByStatCode", "login_count").Return([]*domain.Goal{goal})
 
-	mockRepo.On("UpdateProgress", mock.Anything, mock.MatchedBy(func(p *domain.UserGoalProgress) bool {
-		return p.UserID == "user1" &&
-			p.GoalID == "goal1" &&
-			p.Progress == 1 // Falls back to Inc since Value is nil
+	mockRepo.On("UpdateProgress", mock.Anything, mock.MatchedBy(func(e *domain.BufferedEvent) bool {
+		return e.UserID == "user1" &&
+			e.GoalID == "goal1" &&
+			e.Progress == nil && e.IncValue == 1
 	})).Return(nil)
 
 	statUpdates := map[string]domain.StatUpdate{"login_count": loginStatUpdate()}
@@ -288,7 +279,7 @@ func TestProcessEvent_RelativeGoal_UsesAbsoluteHandler(t *testing.T) {
 
 func TestProcessEvent_NilValueFallsBackToInc(t *testing.T) {
 	mockRepo := new(MockBufferedRepository)
-	mockRepo.buffer = make(map[string]*domain.UserGoalProgress)
+	mockRepo.buffer = make(map[string]*domain.BufferedEvent)
 	mockCache := new(MockGoalCache)
 	logger := zerolog.New(os.Stdout).With().Timestamp().Logger()
 
@@ -305,9 +296,9 @@ func TestProcessEvent_NilValueFallsBackToInc(t *testing.T) {
 	}
 	mockCache.On("GetGoalsByStatCode", "login_count").Return([]*domain.Goal{goal})
 
-	// When Value is nil, should fall back to Inc
-	mockRepo.On("UpdateProgress", mock.Anything, mock.MatchedBy(func(p *domain.UserGoalProgress) bool {
-		return p.Progress == 1 // Uses Inc=1 since Value is nil
+	// When Value is nil, Progress should be nil and IncValue carries the delta
+	mockRepo.On("UpdateProgress", mock.Anything, mock.MatchedBy(func(e *domain.BufferedEvent) bool {
+		return e.Progress == nil && e.IncValue == 1
 	})).Return(nil)
 
 	statUpdates := map[string]domain.StatUpdate{
@@ -322,7 +313,7 @@ func TestProcessEvent_NilValueFallsBackToInc(t *testing.T) {
 
 func TestProcessEvent_UnknownProgressMode(t *testing.T) {
 	mockRepo := new(MockBufferedRepository)
-	mockRepo.buffer = make(map[string]*domain.UserGoalProgress)
+	mockRepo.buffer = make(map[string]*domain.BufferedEvent)
 	mockCache := new(MockGoalCache)
 	logger := zerolog.New(os.Stdout).With().Timestamp().Logger()
 
@@ -349,7 +340,7 @@ func TestProcessEvent_UnknownProgressMode(t *testing.T) {
 
 func TestProcessEvent_NoGoalsForStat(t *testing.T) {
 	mockRepo := new(MockBufferedRepository)
-	mockRepo.buffer = make(map[string]*domain.UserGoalProgress)
+	mockRepo.buffer = make(map[string]*domain.BufferedEvent)
 	mockCache := new(MockGoalCache)
 	logger := zerolog.New(os.Stdout).With().Timestamp().Logger()
 
@@ -367,7 +358,7 @@ func TestProcessEvent_NoGoalsForStat(t *testing.T) {
 
 func TestProcessEvent_EmptyStatUpdates(t *testing.T) {
 	mockRepo := new(MockBufferedRepository)
-	mockRepo.buffer = make(map[string]*domain.UserGoalProgress)
+	mockRepo.buffer = make(map[string]*domain.BufferedEvent)
 	mockCache := new(MockGoalCache)
 	logger := zerolog.New(os.Stdout).With().Timestamp().Logger()
 
@@ -383,7 +374,7 @@ func TestProcessEvent_EmptyStatUpdates(t *testing.T) {
 
 func TestProcessEvent_MultipleStatUpdates(t *testing.T) {
 	mockRepo := new(MockBufferedRepository)
-	mockRepo.buffer = make(map[string]*domain.UserGoalProgress)
+	mockRepo.buffer = make(map[string]*domain.BufferedEvent)
 	mockCache := new(MockGoalCache)
 	logger := zerolog.New(os.Stdout).With().Timestamp().Logger()
 
@@ -411,12 +402,12 @@ func TestProcessEvent_MultipleStatUpdates(t *testing.T) {
 	mockCache.On("GetGoalsByStatCode", "kills").Return([]*domain.Goal{killsGoal})
 	mockCache.On("GetGoalsByStatCode", "deaths").Return([]*domain.Goal{deathsGoal})
 
-	mockRepo.On("UpdateProgress", mock.Anything, mock.MatchedBy(func(p *domain.UserGoalProgress) bool {
-		return p.GoalID == "goal_kills" && p.Progress == 75
+	mockRepo.On("UpdateProgress", mock.Anything, mock.MatchedBy(func(e *domain.BufferedEvent) bool {
+		return e.GoalID == "goal_kills" && e.Progress != nil && *e.Progress == 75
 	})).Return(nil).Once()
 
-	mockRepo.On("UpdateProgress", mock.Anything, mock.MatchedBy(func(p *domain.UserGoalProgress) bool {
-		return p.GoalID == "goal_deaths" && p.Progress == 10
+	mockRepo.On("UpdateProgress", mock.Anything, mock.MatchedBy(func(e *domain.BufferedEvent) bool {
+		return e.GoalID == "goal_deaths" && e.Progress != nil && *e.Progress == 10
 	})).Return(nil).Once()
 
 	statUpdates := map[string]domain.StatUpdate{
@@ -432,7 +423,7 @@ func TestProcessEvent_MultipleStatUpdates(t *testing.T) {
 
 func TestProcessEvent_MultipleGoalsSameStatCode(t *testing.T) {
 	mockRepo := new(MockBufferedRepository)
-	mockRepo.buffer = make(map[string]*domain.UserGoalProgress)
+	mockRepo.buffer = make(map[string]*domain.BufferedEvent)
 	mockCache := new(MockGoalCache)
 	logger := zerolog.New(os.Stdout).With().Timestamp().Logger()
 
@@ -460,12 +451,12 @@ func TestProcessEvent_MultipleGoalsSameStatCode(t *testing.T) {
 	}
 	mockCache.On("GetGoalsByStatCode", "login_count").Return(goals)
 
-	mockRepo.On("UpdateProgress", mock.Anything, mock.MatchedBy(func(p *domain.UserGoalProgress) bool {
-		return p.GoalID == "goal1" && p.Progress == 3
+	mockRepo.On("UpdateProgress", mock.Anything, mock.MatchedBy(func(e *domain.BufferedEvent) bool {
+		return e.GoalID == "goal1" && e.Progress != nil && *e.Progress == 3
 	})).Return(nil).Once()
 
-	mockRepo.On("UpdateProgress", mock.Anything, mock.MatchedBy(func(p *domain.UserGoalProgress) bool {
-		return p.GoalID == "goal2" && p.Progress == 3
+	mockRepo.On("UpdateProgress", mock.Anything, mock.MatchedBy(func(e *domain.BufferedEvent) bool {
+		return e.GoalID == "goal2" && e.Progress != nil && *e.Progress == 3
 	})).Return(nil).Once()
 
 	statUpdates := map[string]domain.StatUpdate{"login_count": statUpdate(3)}
@@ -478,7 +469,7 @@ func TestProcessEvent_MultipleGoalsSameStatCode(t *testing.T) {
 
 func TestProcessEvent_UpdateError(t *testing.T) {
 	mockRepo := new(MockBufferedRepository)
-	mockRepo.buffer = make(map[string]*domain.UserGoalProgress)
+	mockRepo.buffer = make(map[string]*domain.BufferedEvent)
 	mockCache := new(MockGoalCache)
 	logger := zerolog.New(os.Stdout).With().Timestamp().Logger()
 
@@ -506,7 +497,7 @@ func TestProcessEvent_UpdateError(t *testing.T) {
 
 func TestGetUserMutex_CreateNew(t *testing.T) {
 	mockRepo := new(MockBufferedRepository)
-	mockRepo.buffer = make(map[string]*domain.UserGoalProgress)
+	mockRepo.buffer = make(map[string]*domain.BufferedEvent)
 	mockCache := new(MockGoalCache)
 	logger := zerolog.New(os.Stdout).With().Timestamp().Logger()
 
@@ -528,7 +519,7 @@ func TestGetUserMutex_CreateNew(t *testing.T) {
 
 func TestConcurrentEventProcessing_DifferentUsers(t *testing.T) {
 	mockRepo := new(MockBufferedRepository)
-	mockRepo.buffer = make(map[string]*domain.UserGoalProgress)
+	mockRepo.buffer = make(map[string]*domain.BufferedEvent)
 	mockCache := new(MockGoalCache)
 	logger := zerolog.New(os.Stdout).With().Timestamp().Logger()
 
@@ -567,7 +558,7 @@ func TestConcurrentEventProcessing_DifferentUsers(t *testing.T) {
 
 func TestConcurrentEventProcessing_SameUser(t *testing.T) {
 	mockRepo := new(MockBufferedRepository)
-	mockRepo.buffer = make(map[string]*domain.UserGoalProgress)
+	mockRepo.buffer = make(map[string]*domain.BufferedEvent)
 	mockCache := new(MockGoalCache)
 	logger := zerolog.New(os.Stdout).With().Timestamp().Logger()
 
