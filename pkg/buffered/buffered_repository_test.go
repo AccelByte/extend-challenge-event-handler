@@ -1160,9 +1160,7 @@ func TestFlush_MixedAbsoluteAndIncrement(t *testing.T) {
 	mockCache.On("GetGoalByID", "goal2").Return(&domain.Goal{
 		ID:          "goal2",
 		ChallengeID: "challenge1",
-		Type:        domain.GoalTypeIncrement,
-		Daily:       false,
-		Requirement: domain.Requirement{TargetValue: 100},
+		Requirement: domain.Requirement{TargetValue: 100, ProgressMode: domain.ProgressModeRelative},
 	})
 
 	// Expect both BatchUpsertProgress and BatchIncrementProgress to be called
@@ -1208,16 +1206,12 @@ func TestFlush_IncrementOnly(t *testing.T) {
 	mockCache.On("GetGoalByID", "goal1").Return(&domain.Goal{
 		ID:          "goal1",
 		ChallengeID: "challenge1",
-		Type:        domain.GoalTypeIncrement,
-		Daily:       false,
-		Requirement: domain.Requirement{TargetValue: 100},
+		Requirement: domain.Requirement{TargetValue: 100, ProgressMode: domain.ProgressModeRelative},
 	})
 	mockCache.On("GetGoalByID", "goal2").Return(&domain.Goal{
 		ID:          "goal2",
 		ChallengeID: "challenge1",
-		Type:        domain.GoalTypeIncrement,
-		Daily:       false,
-		Requirement: domain.Requirement{TargetValue: 50},
+		Requirement: domain.Requirement{TargetValue: 50, ProgressMode: domain.ProgressModeRelative},
 	})
 
 	// Expect only BatchIncrementProgress to be called (no BatchUpsertProgress)
@@ -1260,16 +1254,12 @@ func TestFlush_IncrementFailureRestoration(t *testing.T) {
 	mockCache.On("GetGoalByID", "goal1").Return(&domain.Goal{
 		ID:          "goal1",
 		ChallengeID: "challenge1",
-		Type:        domain.GoalTypeIncrement,
-		Daily:       false,
-		Requirement: domain.Requirement{TargetValue: 100},
+		Requirement: domain.Requirement{TargetValue: 100, ProgressMode: domain.ProgressModeRelative},
 	})
 	mockCache.On("GetGoalByID", "goal2").Return(&domain.Goal{
 		ID:          "goal2",
 		ChallengeID: "challenge1",
-		Type:        domain.GoalTypeIncrement,
-		Daily:       true,
-		Requirement: domain.Requirement{TargetValue: 7},
+		Requirement: domain.Requirement{TargetValue: 7, ProgressMode: domain.ProgressModeRelative},
 	})
 
 	// Simulate database error for BatchIncrementProgress
@@ -1389,18 +1379,16 @@ func TestFlush_DailyIncrementWithCorrectFlag(t *testing.T) {
 	mockCache.On("GetGoalByID", "goal1").Return(&domain.Goal{
 		ID:          "goal1",
 		ChallengeID: "challenge1",
-		Type:        domain.GoalTypeIncrement,
-		Daily:       true, // ← Daily flag
-		Requirement: domain.Requirement{TargetValue: 7},
+		Requirement: domain.Requirement{TargetValue: 7, ProgressMode: domain.ProgressModeRelative},
 	})
 
-	// Expect BatchIncrementProgress with isDailyIncrement=true
+	// Expect BatchIncrementProgress with isDailyIncrement=false (daily path removed in Phase 0.5)
 	mockRepo.On("BatchIncrementProgress", mock.Anything, mock.MatchedBy(func(increments []repository.ProgressIncrement) bool {
 		if len(increments) != 1 {
 			return false
 		}
 		inc := increments[0]
-		return inc.IsDailyIncrement == true && inc.Delta == 1
+		return inc.IsDailyIncrement == false && inc.Delta == 1
 	})).Return(nil)
 
 	// Flush

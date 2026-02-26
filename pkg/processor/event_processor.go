@@ -71,24 +71,22 @@ func NewEventProcessor(
 	}
 }
 
-// ProcessEvent processes events and routes to appropriate goal type handlers.
-//
-// Decision Q13: Single ProcessEvent() method with switch statement routing.
+// ProcessEvent processes events and routes to appropriate progress mode handlers.
 //
 // This method:
 // 1. Acquires per-user mutex (prevents race conditions)
 // 2. Looks up goals tracking the specified stat code(s)
-// 3. Routes each goal to appropriate handler based on goal type
+// 3. Routes each goal to handler based on ProgressMode
 // 4. Buffers updates via BufferedRepository
 //
 // Parameters:
 // - ctx: Context for request cancellation
 // - userID: User identifier
 // - namespace: AccelByte namespace
-// - statUpdates: Map of stat code to value (e.g., {"login_count": 1, "kills": 50})
+// - statUpdates: Map of stat code to StatUpdate (contains absolute Value and incremental Inc)
 //
 // The method is non-blocking for the event handler (buffering is async).
-func (p *EventProcessor) ProcessEvent(ctx context.Context, userID, namespace string, statUpdates map[string]int) error {
+func (p *EventProcessor) ProcessEvent(ctx context.Context, userID, namespace string, statUpdates map[string]domain.StatUpdate) error {
 	// Get per-user mutex
 	mu := p.getUserMutex(userID)
 	mu.Lock()
@@ -104,7 +102,7 @@ func (p *EventProcessor) ProcessEvent(ctx context.Context, userID, namespace str
 		Msg("Processing event")
 
 	// For each stat update
-	for statCode, value := range statUpdates {
+	for statCode, update := range statUpdates {
 		// Look up goals tracking this stat code (O(1) cache lookup)
 		goals := p.cache.GetGoalsByStatCode(statCode)
 
@@ -113,36 +111,26 @@ func (p *EventProcessor) ProcessEvent(ctx context.Context, userID, namespace str
 			continue
 		}
 
+		// Resolve effective value: use absolute Value if available, fall back to Inc
+		value := update.Inc
+		if update.Value != nil {
+			value = *update.Value
+		}
+
 		for _, goal := range goals {
-			// Route based on goal type (Decision Q13: switch statement)
-			switch goal.Type {
-			case domain.GoalTypeAbsolute:
-				// Absolute stat value (e.g., kills=100)
-				// Decision Q17: Always replace with new stat value
+			// Route based on progress mode (Phase 0.5: both modes use absolute handler)
+			switch goal.Requirement.ProgressMode {
+			case domain.ProgressModeAbsolute, domain.ProgressModeRelative:
 				p.processAbsoluteGoal(ctx, userID, namespace, goal, value)
 				goalsProcessed++
 
-			case domain.GoalTypeIncrement:
-				// Increment counter (e.g., login count, daily login days)
-				// Decision Q14: Login events use IncrementProgress
-				// Decision Q18: Daily flag affects BufferedRepository behavior
-				p.processIncrementGoal(ctx, userID, namespace, goal)
-				goalsProcessed++
-
-			case domain.GoalTypeDaily:
-				// Daily occurrence check (e.g., daily login bonus)
-				// Decision Q18: Daily type is different from Increment with daily flag
-				p.processDailyGoal(ctx, userID, namespace, goal)
-				goalsProcessed++
-
 			default:
-				// Decision Q16: Graceful degradation for unknown types
 				p.logger.Warn().
 					Str("goal_id", goal.ID).
-					Str("goal_type", string(goal.Type)).
+					Str("progress_mode", string(goal.Requirement.ProgressMode)).
 					Str("user_id", userID).
 					Str("stat_code", statCode).
-					Msg("Unknown goal type, skipping goal update")
+					Msg("Unknown progress mode, skipping goal update")
 			}
 		}
 	}
@@ -200,58 +188,6 @@ func (p *EventProcessor) processAbsoluteGoal(ctx context.Context, userID, namesp
 			Str("goal_id", goal.ID).
 			Str("stat_code", goal.Requirement.StatCode).
 			Msg("Failed to buffer absolute goal update")
-	}
-}
-
-// processIncrementGoal handles counter-based goals (both regular and daily).
-// Decision Q14: Login events use IncrementProgress (not UpdateProgress)
-// Decision Q18: Daily flag affects BufferedRepository behavior (date checking)
-func (p *EventProcessor) processIncrementGoal(ctx context.Context, userID, namespace string, goal *domain.Goal) {
-	// BufferedRepository accumulates deltas before flush
-	// For daily increments: BufferedRepository checks date before buffering
-	// Multiple events: delta=1, delta=1, delta=1 → flush with delta=3 (regular)
-	//                  delta=1, delta=SKIP, delta=SKIP → flush with delta=1 (daily)
-	if err := p.bufferedRepo.IncrementProgress(
-		ctx,
-		userID,
-		goal.ID,
-		goal.ChallengeID,
-		namespace,
-		1, // Always 1 for login events
-		goal.Requirement.TargetValue,
-		goal.Daily, // Decision Q18: Pass daily flag to BufferedRepository
-	); err != nil {
-		p.logger.Error().
-			Err(err).
-			Str("user_id", userID).
-			Str("goal_id", goal.ID).
-			Msg("Failed to buffer increment goal update")
-	}
-}
-
-// processDailyGoal handles binary daily check goals.
-// Decision Q18: Daily type is different from Increment with daily flag
-func (p *EventProcessor) processDailyGoal(ctx context.Context, userID, namespace string, goal *domain.Goal) {
-	now := time.Now().UTC() // Always use UTC for consistency across timezones
-
-	// Daily goals always set progress=1 and completed_at=NOW()
-	// Claim validation checks if completed_at is today (repeatable reward)
-	update := &domain.UserGoalProgress{
-		UserID:      userID,
-		GoalID:      goal.ID,
-		ChallengeID: goal.ChallengeID,
-		Namespace:   namespace,
-		Progress:    1, // Always 1 for daily (binary check)
-		Status:      domain.GoalStatusCompleted,
-		CompletedAt: &now, // Key: timestamp for daily check
-	}
-
-	if err := p.bufferedRepo.UpdateProgress(ctx, update); err != nil {
-		p.logger.Error().
-			Err(err).
-			Str("user_id", userID).
-			Str("goal_id", goal.ID).
-			Msg("Failed to buffer daily goal update")
 	}
 }
 

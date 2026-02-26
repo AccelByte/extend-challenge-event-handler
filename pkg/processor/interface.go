@@ -4,7 +4,11 @@
 
 package processor
 
-import "context"
+import (
+	"context"
+
+	"github.com/AccelByte/extend-challenge-common/pkg/domain"
+)
 
 // Processor defines the interface for processing challenge events.
 // This interface allows for easy mocking in tests.
@@ -15,9 +19,9 @@ type Processor interface {
 	// - ctx: Context for request cancellation
 	// - userID: User identifier
 	// - namespace: AccelByte namespace
-	// - statUpdates: Map of stat code to value (e.g., {"login_count": 1, "kills": 50})
+	// - statUpdates: Map of stat code to StatUpdate (contains absolute Value and incremental Inc)
 	//
 	// Returns:
 	// - error: Non-nil if event processing failed
-	ProcessEvent(ctx context.Context, userID, namespace string, statUpdates map[string]int) error
+	ProcessEvent(ctx context.Context, userID, namespace string, statUpdates map[string]domain.StatUpdate) error
 }

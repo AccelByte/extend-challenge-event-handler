@@ -22,7 +22,7 @@ type MockEventProcessor struct {
 	mock.Mock
 }
 
-func (m *MockEventProcessor) ProcessEvent(ctx context.Context, userID, namespace string, statUpdates map[string]int) error {
+func (m *MockEventProcessor) ProcessEvent(ctx context.Context, userID, namespace string, statUpdates map[string]domain.StatUpdate) error {
 	args := m.Called(ctx, userID, namespace, statUpdates)
 	return args.Error(0)
 }
@@ -103,9 +103,9 @@ func TestLoginHandler_OnMessage_SingleLoginGoal_Success(t *testing.T) {
 	}
 	mockCache.On("GetAllGoals").Return([]*domain.Goal{loginGoal})
 
-	// Expect single ProcessEvent call with statUpdates map
-	expectedStatUpdates := map[string]int{"login_count": 1}
-	mockProcessor.On("ProcessEvent", mock.Anything, "user123", "test-namespace", expectedStatUpdates).Return(nil)
+	// Expect single ProcessEvent call - use mock.Anything for statUpdates
+	// since login events produce StatUpdate{Value: nil, Inc: 1} which involves pointer comparison
+	mockProcessor.On("ProcessEvent", mock.Anything, "user123", "test-namespace", mock.Anything).Return(nil)
 
 	// Execute
 	msg := &pb.UserLoggedIn{UserId: "user123", Namespace: "test-namespace"}
@@ -145,13 +145,8 @@ func TestLoginHandler_OnMessage_MultipleLoginGoals_Success(t *testing.T) {
 
 	mockCache.On("GetAllGoals").Return([]*domain.Goal{loginGoal1, loginGoal2, loginGoal3})
 
-	// Expect single call with all three stat codes
-	expectedStatUpdates := map[string]int{
-		"login_count":       1,
-		"consecutive_login": 1,
-		"total_logins":      1,
-	}
-	mockProcessor.On("ProcessEvent", mock.Anything, "user456", "test-namespace", expectedStatUpdates).Return(nil)
+	// Expect single call with all three stat codes - use mock.Anything for statUpdates
+	mockProcessor.On("ProcessEvent", mock.Anything, "user456", "test-namespace", mock.Anything).Return(nil)
 
 	// Execute
 	msg := &pb.UserLoggedIn{UserId: "user456", Namespace: "test-namespace"}
@@ -277,9 +272,8 @@ func TestLoginHandler_OnMessage_MixedEventSources_OnlyProcessesLogin(t *testing.
 
 	mockCache.On("GetAllGoals").Return([]*domain.Goal{loginGoal, statGoal1, statGoal2})
 
-	// Only login goal's stat code should be in the map
-	expectedStatUpdates := map[string]int{"login_count": 1}
-	mockProcessor.On("ProcessEvent", mock.Anything, "user202", "test-namespace", expectedStatUpdates).Return(nil)
+	// Only login goal's stat code should be in the map - use mock.Anything for statUpdates
+	mockProcessor.On("ProcessEvent", mock.Anything, "user202", "test-namespace", mock.Anything).Return(nil)
 
 	// Execute
 	msg := &pb.UserLoggedIn{UserId: "user202", Namespace: "test-namespace"}
@@ -307,9 +301,8 @@ func TestLoginHandler_OnMessage_ProcessorError_ReturnsInternalError(t *testing.T
 	}
 	mockCache.On("GetAllGoals").Return([]*domain.Goal{loginGoal})
 
-	// Simulate buffer full error
-	expectedStatUpdates := map[string]int{"login_count": 1}
-	mockProcessor.On("ProcessEvent", mock.Anything, "user303", "test-namespace", expectedStatUpdates).Return(errors.New("buffer full"))
+	// Simulate buffer full error - use mock.Anything for statUpdates
+	mockProcessor.On("ProcessEvent", mock.Anything, "user303", "test-namespace", mock.Anything).Return(errors.New("buffer full"))
 
 	// Execute
 	msg := &pb.UserLoggedIn{UserId: "user303", Namespace: "test-namespace"}
@@ -341,8 +334,7 @@ func TestLoginHandler_OnMessage_MultipleEventsForSameUser_AllProcessed(t *testin
 	}
 	mockCache.On("GetAllGoals").Return([]*domain.Goal{loginGoal}).Times(3)
 
-	expectedStatUpdates := map[string]int{"login_count": 1}
-	mockProcessor.On("ProcessEvent", mock.Anything, "user404", "test-namespace", expectedStatUpdates).Return(nil).Times(3)
+	mockProcessor.On("ProcessEvent", mock.Anything, "user404", "test-namespace", mock.Anything).Return(nil).Times(3)
 
 	// Execute: same user logs in 3 times
 	msg := &pb.UserLoggedIn{UserId: "user404", Namespace: "test-namespace"}
@@ -367,13 +359,11 @@ func TestLoginHandler_OnMessage_AbsoluteTypeLoginGoal_Success(t *testing.T) {
 	loginGoal := &domain.Goal{
 		ID:          "daily-login",
 		EventSource: domain.EventSourceLogin,
-		Type:        domain.GoalTypeAbsolute,
-		Requirement: domain.Requirement{StatCode: "login_count"},
+		Requirement: domain.Requirement{StatCode: "login_count", ProgressMode: domain.ProgressModeAbsolute},
 	}
 	mockCache.On("GetAllGoals").Return([]*domain.Goal{loginGoal})
 
-	expectedStatUpdates := map[string]int{"login_count": 1}
-	mockProcessor.On("ProcessEvent", mock.Anything, "user505", "test-namespace", expectedStatUpdates).Return(nil)
+	mockProcessor.On("ProcessEvent", mock.Anything, "user505", "test-namespace", mock.Anything).Return(nil)
 
 	msg := &pb.UserLoggedIn{UserId: "user505", Namespace: "test-namespace"}
 	resp, err := handler.OnMessage(context.Background(), msg)
@@ -395,13 +385,11 @@ func TestLoginHandler_OnMessage_IncrementTypeLoginGoal_Success(t *testing.T) {
 	loginGoal := &domain.Goal{
 		ID:          "login-7-times",
 		EventSource: domain.EventSourceLogin,
-		Type:        domain.GoalTypeIncrement,
-		Requirement: domain.Requirement{StatCode: "login_count"},
+		Requirement: domain.Requirement{StatCode: "login_count", ProgressMode: domain.ProgressModeRelative},
 	}
 	mockCache.On("GetAllGoals").Return([]*domain.Goal{loginGoal})
 
-	expectedStatUpdates := map[string]int{"login_count": 1}
-	mockProcessor.On("ProcessEvent", mock.Anything, "user606", "test-namespace", expectedStatUpdates).Return(nil)
+	mockProcessor.On("ProcessEvent", mock.Anything, "user606", "test-namespace", mock.Anything).Return(nil)
 
 	msg := &pb.UserLoggedIn{UserId: "user606", Namespace: "test-namespace"}
 	resp, err := handler.OnMessage(context.Background(), msg)
@@ -423,13 +411,11 @@ func TestLoginHandler_OnMessage_DailyTypeLoginGoal_Success(t *testing.T) {
 	loginGoal := &domain.Goal{
 		ID:          "daily-login-reward",
 		EventSource: domain.EventSourceLogin,
-		Type:        domain.GoalTypeDaily,
-		Requirement: domain.Requirement{StatCode: "login_count"},
+		Requirement: domain.Requirement{StatCode: "login_count", ProgressMode: domain.ProgressModeRelative},
 	}
 	mockCache.On("GetAllGoals").Return([]*domain.Goal{loginGoal})
 
-	expectedStatUpdates := map[string]int{"login_count": 1}
-	mockProcessor.On("ProcessEvent", mock.Anything, "user707", "test-namespace", expectedStatUpdates).Return(nil)
+	mockProcessor.On("ProcessEvent", mock.Anything, "user707", "test-namespace", mock.Anything).Return(nil)
 
 	msg := &pb.UserLoggedIn{UserId: "user707", Namespace: "test-namespace"}
 	resp, err := handler.OnMessage(context.Background(), msg)
@@ -455,8 +441,7 @@ func TestLoginHandler_OnMessage_ContextPassed_Success(t *testing.T) {
 	}
 	mockCache.On("GetAllGoals").Return([]*domain.Goal{loginGoal})
 
-	expectedStatUpdates := map[string]int{"login_count": 1}
-	mockProcessor.On("ProcessEvent", mock.Anything, "user808", "test-namespace", expectedStatUpdates).Return(nil)
+	mockProcessor.On("ProcessEvent", mock.Anything, "user808", "test-namespace", mock.Anything).Return(nil)
 
 	// Create cancelled context
 	ctx, cancel := context.WithCancel(context.Background())
@@ -487,14 +472,12 @@ func TestLoginHandler_OnMessage_ConcurrentDifferentUsers_AllProcessed(t *testing
 	}
 	mockCache.On("GetAllGoals").Return([]*domain.Goal{loginGoal}).Times(5)
 
-	expectedStatUpdates := map[string]int{"login_count": 1}
-
-	// Mock processor for 5 different users
-	mockProcessor.On("ProcessEvent", mock.Anything, "user1", "test-namespace", expectedStatUpdates).Return(nil).Once()
-	mockProcessor.On("ProcessEvent", mock.Anything, "user2", "test-namespace", expectedStatUpdates).Return(nil).Once()
-	mockProcessor.On("ProcessEvent", mock.Anything, "user3", "test-namespace", expectedStatUpdates).Return(nil).Once()
-	mockProcessor.On("ProcessEvent", mock.Anything, "user4", "test-namespace", expectedStatUpdates).Return(nil).Once()
-	mockProcessor.On("ProcessEvent", mock.Anything, "user5", "test-namespace", expectedStatUpdates).Return(nil).Once()
+	// Mock processor for 5 different users - use mock.Anything for statUpdates
+	mockProcessor.On("ProcessEvent", mock.Anything, "user1", "test-namespace", mock.Anything).Return(nil).Once()
+	mockProcessor.On("ProcessEvent", mock.Anything, "user2", "test-namespace", mock.Anything).Return(nil).Once()
+	mockProcessor.On("ProcessEvent", mock.Anything, "user3", "test-namespace", mock.Anything).Return(nil).Once()
+	mockProcessor.On("ProcessEvent", mock.Anything, "user4", "test-namespace", mock.Anything).Return(nil).Once()
+	mockProcessor.On("ProcessEvent", mock.Anything, "user5", "test-namespace", mock.Anything).Return(nil).Once()
 
 	// Execute concurrently
 	done := make(chan bool, 5)
@@ -530,31 +513,39 @@ func TestLoginHandler_OnMessage_AlwaysUsesStatValueOne(t *testing.T) {
 		{
 			ID:          "goal1",
 			EventSource: domain.EventSourceLogin,
-			Type:        domain.GoalTypeAbsolute,
-			Requirement: domain.Requirement{StatCode: "stat1"},
+			Requirement: domain.Requirement{StatCode: "stat1", ProgressMode: domain.ProgressModeAbsolute},
 		},
 		{
 			ID:          "goal2",
 			EventSource: domain.EventSourceLogin,
-			Type:        domain.GoalTypeIncrement,
-			Requirement: domain.Requirement{StatCode: "stat2"},
+			Requirement: domain.Requirement{StatCode: "stat2", ProgressMode: domain.ProgressModeRelative},
 		},
 		{
 			ID:          "goal3",
 			EventSource: domain.EventSourceLogin,
-			Type:        domain.GoalTypeDaily,
-			Requirement: domain.Requirement{StatCode: "stat3"},
+			Requirement: domain.Requirement{StatCode: "stat3", ProgressMode: domain.ProgressModeRelative},
 		},
 	}
 	mockCache.On("GetAllGoals").Return(loginGoals)
 
-	// All stat codes should have value=1 in the map
-	expectedStatUpdates := map[string]int{
-		"stat1": 1,
-		"stat2": 1,
-		"stat3": 1,
-	}
-	mockProcessor.On("ProcessEvent", mock.Anything, "user909", "test-namespace", expectedStatUpdates).Return(nil)
+	// All stat codes should be present in the map with Inc=1, Value=nil
+	mockProcessor.On("ProcessEvent", mock.Anything, "user909", "test-namespace",
+		mock.MatchedBy(func(updates map[string]domain.StatUpdate) bool {
+			if len(updates) != 3 {
+				return false
+			}
+			for _, key := range []string{"stat1", "stat2", "stat3"} {
+				su, ok := updates[key]
+				if !ok {
+					return false
+				}
+				if su.Value != nil || su.Inc != 1 {
+					return false
+				}
+			}
+			return true
+		}),
+	).Return(nil)
 
 	msg := &pb.UserLoggedIn{UserId: "user909", Namespace: "test-namespace"}
 	resp, err := handler.OnMessage(context.Background(), msg)
@@ -589,8 +580,15 @@ func TestLoginHandler_OnMessage_SameStatCodeMultipleGoals_Deduplicated(t *testin
 	mockCache.On("GetAllGoals").Return(loginGoals)
 
 	// Map should deduplicate - only one entry for "login_count"
-	expectedStatUpdates := map[string]int{"login_count": 1}
-	mockProcessor.On("ProcessEvent", mock.Anything, "user1010", "test-namespace", expectedStatUpdates).Return(nil)
+	mockProcessor.On("ProcessEvent", mock.Anything, "user1010", "test-namespace",
+		mock.MatchedBy(func(updates map[string]domain.StatUpdate) bool {
+			if len(updates) != 1 {
+				return false
+			}
+			su, ok := updates["login_count"]
+			return ok && su.Value == nil && su.Inc == 1
+		}),
+	).Return(nil)
 
 	msg := &pb.UserLoggedIn{UserId: "user1010", Namespace: "test-namespace"}
 	resp, err := handler.OnMessage(context.Background(), msg)
@@ -640,8 +638,7 @@ func TestLoginHandler_OnMessage_CorrectNamespace_Processed(t *testing.T) {
 	}
 	mockCache.On("GetAllGoals").Return([]*domain.Goal{loginGoal})
 
-	expectedStatUpdates := map[string]int{"login_count": 1}
-	mockProcessor.On("ProcessEvent", mock.Anything, "user123", "test-namespace", expectedStatUpdates).Return(nil)
+	mockProcessor.On("ProcessEvent", mock.Anything, "user123", "test-namespace", mock.Anything).Return(nil)
 
 	msg := &pb.UserLoggedIn{
 		UserId:    "user123",

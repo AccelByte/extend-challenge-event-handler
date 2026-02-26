@@ -500,8 +500,8 @@ func (r *BufferedRepository) flushIncrementBuffer(ctx context.Context, increment
 			continue
 		}
 
-		// Check if this is a daily increment goal
-		isDailyIncrement := goal.Type == domain.GoalTypeIncrement && goal.Daily
+		// Daily increment is a legacy concept; always false in Phase 0.5+
+		isDailyIncrement := false
 
 		// Add to batch
 		increments = append(increments, repository.ProgressIncrement{
