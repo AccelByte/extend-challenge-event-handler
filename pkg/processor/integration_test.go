@@ -66,6 +66,7 @@ func setupIntegrationTest(t *testing.T) (*sql.DB, repository.GoalRepository, *bu
 
 			-- M5: System rotation control (added now for forward compatibility)
 			expires_at TIMESTAMP NULL,
+			baseline_value INT NULL,
 
 			PRIMARY KEY (user_id, goal_id),
 			CONSTRAINT check_status CHECK (status IN ('not_started', 'in_progress', 'completed', 'claimed')),
@@ -143,6 +144,32 @@ func setupIntegrationTest(t *testing.T) (*sql.DB, repository.GoalRepository, *bu
 							Type:     "WALLET",
 							RewardID: "GEMS",
 							Quantity: 10,
+						},
+					},
+					{
+						ID:          "daily_kills_relative",
+						ChallengeID: "challenge1",
+						Name:        "Daily Kills (Relative)",
+						Description: "Get 10 kills today (relative progress with rotation)",
+						EventSource: domain.EventSourceStatistic,
+						Requirement: domain.Requirement{
+							StatCode:     "kills",
+							TargetValue:  10,
+							ProgressMode: domain.ProgressModeRelative,
+						},
+						Reward: domain.Reward{
+							Type:     "WALLET",
+							RewardID: "GOLD",
+							Quantity: 50,
+						},
+						Rotation: &domain.RotationConfig{
+							Enabled:  true,
+							Type:     domain.RotationTypeGlobal,
+							Schedule: domain.RotationScheduleDaily,
+							OnExpiry: domain.OnExpiryConfig{
+								ResetProgress:    true,
+								AllowReselection: false,
+							},
 						},
 					},
 				},
@@ -453,4 +480,195 @@ func TestE2E_AutomaticTimeBasedFlush(t *testing.T) {
 		assert.NotNil(t, progress, "Progress should be auto-flushed after interval")
 		assert.Equal(t, 1, progress.Progress)
 	})
+}
+
+// TestE2E_RotationFlow_RelativeGoal_BaselineInit tests that the first event for a
+// relative rotation goal correctly initializes the baseline value.
+func TestE2E_RotationFlow_RelativeGoal_BaselineInit(t *testing.T) {
+	db, repo, bufRepo, processor, _ := setupIntegrationTest(t)
+	if db == nil {
+		return
+	}
+	defer cleanupIntegrationTest(t, db, bufRepo)
+
+	ctx := context.Background()
+
+	userID := "test-user-rotation-1"
+	goalID := "daily_kills_relative"
+
+	// Initialize goal row (progress=0, not_started)
+	err := repo.BulkInsert(ctx, []*domain.UserGoalProgress{
+		{
+			UserID:      userID,
+			GoalID:      goalID,
+			ChallengeID: "challenge1",
+			Namespace:   "test-namespace",
+			Progress:    0,
+			Status:      domain.GoalStatusNotStarted,
+			IsActive:    true,
+		},
+	})
+	assert.NoError(t, err)
+
+	// Process event: kills stat with value=50, inc=1
+	statUpdates := map[string]domain.StatUpdate{"kills": statUpdate(50)}
+	err = processor.ProcessEvent(ctx, userID, "test-namespace", statUpdates)
+	assert.NoError(t, err)
+
+	// Flush
+	err = bufRepo.Flush(ctx)
+	assert.NoError(t, err)
+
+	// Verify baseline initialization
+	progress, err := repo.GetProgress(ctx, userID, goalID)
+	assert.NoError(t, err)
+	assert.NotNil(t, progress)
+	assert.Equal(t, 50, progress.Progress, "Progress should be set to absolute stat value")
+	assert.NotNil(t, progress.BaselineValue, "BaselineValue should be initialized")
+	assert.Equal(t, 49, *progress.BaselineValue, "Baseline should be value - inc = 50 - 1 = 49")
+	assert.Equal(t, domain.GoalStatusInProgress, progress.Status, "Displayed progress 50-49=1 < target 10")
+}
+
+// TestE2E_RotationFlow_RelativeGoal_RotationReset tests that when a rotation boundary
+// is crossed (stale updated_at), baseline is reset for relative goals.
+func TestE2E_RotationFlow_RelativeGoal_RotationReset(t *testing.T) {
+	db, repo, bufRepo, processor, _ := setupIntegrationTest(t)
+	if db == nil {
+		return
+	}
+	defer cleanupIntegrationTest(t, db, bufRepo)
+
+	ctx := context.Background()
+
+	userID := "test-user-rotation-2"
+	goalID := "daily_kills_relative"
+
+	// Seed row with stale updated_at (yesterday), simulating previous rotation period
+	yesterday := time.Now().UTC().Add(-25 * time.Hour)
+	baseline := 40
+	_, err := db.ExecContext(ctx, `
+		INSERT INTO user_goal_progress
+		(user_id, goal_id, challenge_id, namespace, progress, status, is_active, baseline_value, created_at, updated_at)
+		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+	`, userID, goalID, "challenge1", "test-namespace", 48, "in_progress", true, baseline, yesterday, yesterday)
+	assert.NoError(t, err)
+
+	// Process event: kills stat with value=55, inc=1 (rotation boundary crossed)
+	statUpdates := map[string]domain.StatUpdate{"kills": statUpdate(55)}
+	err = processor.ProcessEvent(ctx, userID, "test-namespace", statUpdates)
+	assert.NoError(t, err)
+
+	// Flush
+	err = bufRepo.Flush(ctx)
+	assert.NoError(t, err)
+
+	// Verify baseline was reset due to rotation
+	progress, err := repo.GetProgress(ctx, userID, goalID)
+	assert.NoError(t, err)
+	assert.NotNil(t, progress)
+	assert.Equal(t, 55, progress.Progress, "Progress should be set to new absolute stat value")
+	assert.NotNil(t, progress.BaselineValue, "BaselineValue should be reset")
+	assert.Equal(t, 54, *progress.BaselineValue, "Baseline should be reset to value - inc = 55 - 1 = 54")
+	assert.Equal(t, domain.GoalStatusInProgress, progress.Status, "Displayed progress 55-54=1 < target 10")
+}
+
+// TestE2E_DailyChallenge_CompletionAcrossRotation tests the full daily challenge lifecycle:
+// Day 1: start → complete. Day 2 (after rotation): reset → re-complete.
+func TestE2E_DailyChallenge_CompletionAcrossRotation(t *testing.T) {
+	db, repo, bufRepo, processor, _ := setupIntegrationTest(t)
+	if db == nil {
+		return
+	}
+	defer cleanupIntegrationTest(t, db, bufRepo)
+
+	ctx := context.Background()
+
+	userID := "test-user-rotation-3"
+	goalID := "daily_kills_relative"
+
+	// Phase 1: Initialize goal (progress=0, not_started)
+	err := repo.BulkInsert(ctx, []*domain.UserGoalProgress{
+		{
+			UserID:      userID,
+			GoalID:      goalID,
+			ChallengeID: "challenge1",
+			Namespace:   "test-namespace",
+			Progress:    0,
+			Status:      domain.GoalStatusNotStarted,
+			IsActive:    true,
+		},
+	})
+	assert.NoError(t, err)
+
+	// Phase 2: Day 1 — First event (kills=100, inc=1)
+	statUpdates := map[string]domain.StatUpdate{"kills": statUpdate(100)}
+	err = processor.ProcessEvent(ctx, userID, "test-namespace", statUpdates)
+	assert.NoError(t, err)
+	err = bufRepo.Flush(ctx)
+	assert.NoError(t, err)
+
+	progress, err := repo.GetProgress(ctx, userID, goalID)
+	assert.NoError(t, err)
+	assert.NotNil(t, progress)
+	assert.Equal(t, 100, progress.Progress)
+	assert.NotNil(t, progress.BaselineValue)
+	assert.Equal(t, 99, *progress.BaselineValue, "Baseline = 100 - 1 = 99")
+	// Displayed progress = 100 - 99 = 1, target = 10 → in_progress
+	assert.Equal(t, domain.GoalStatusInProgress, progress.Status)
+
+	// Phase 3: Day 1 — Complete (kills=110, inc=10 → displayed = 110-99 = 11 >= 10)
+	statUpdates = map[string]domain.StatUpdate{"kills": statUpdate(110)}
+	err = processor.ProcessEvent(ctx, userID, "test-namespace", statUpdates)
+	assert.NoError(t, err)
+	err = bufRepo.Flush(ctx)
+	assert.NoError(t, err)
+
+	progress, err = repo.GetProgress(ctx, userID, goalID)
+	assert.NoError(t, err)
+	assert.Equal(t, 110, progress.Progress)
+	assert.Equal(t, 99, *progress.BaselineValue, "Baseline preserved (no rotation)")
+	assert.Equal(t, domain.GoalStatusCompleted, progress.Status, "110-99=11 >= target 10")
+	assert.NotNil(t, progress.CompletedAt)
+
+	// Phase 4: Simulate rotation — set updated_at to yesterday via raw SQL
+	_, err = db.ExecContext(ctx, `
+		UPDATE user_goal_progress
+		SET updated_at = NOW() - INTERVAL '25 hours'
+		WHERE user_id = $1 AND goal_id = $2
+	`, userID, goalID)
+	assert.NoError(t, err)
+
+	// Phase 5: Day 2 — Post-rotation event (kills=113, inc=3)
+	// Row is stale → rotation resets baseline to 113-3=110, displayed = 113-110=3 < 10
+	statUpdates = map[string]domain.StatUpdate{"kills": {Value: intPtr(113), Inc: 3}}
+	err = processor.ProcessEvent(ctx, userID, "test-namespace", statUpdates)
+	assert.NoError(t, err)
+	err = bufRepo.Flush(ctx)
+	assert.NoError(t, err)
+
+	progress, err = repo.GetProgress(ctx, userID, goalID)
+	assert.NoError(t, err)
+	assert.Equal(t, 113, progress.Progress)
+	assert.NotNil(t, progress.BaselineValue)
+	assert.Equal(t, 110, *progress.BaselineValue, "Baseline reset to 113-3=110")
+	assert.Equal(t, domain.GoalStatusInProgress, progress.Status, "Reset from completed; 113-110=3 < 10")
+
+	// Phase 6: Day 2 — Re-complete (kills=123, inc=10 → displayed = 123-110=13 >= 10)
+	statUpdates = map[string]domain.StatUpdate{"kills": {Value: intPtr(123), Inc: 10}}
+	err = processor.ProcessEvent(ctx, userID, "test-namespace", statUpdates)
+	assert.NoError(t, err)
+	err = bufRepo.Flush(ctx)
+	assert.NoError(t, err)
+
+	progress, err = repo.GetProgress(ctx, userID, goalID)
+	assert.NoError(t, err)
+	assert.Equal(t, 123, progress.Progress)
+	assert.Equal(t, 110, *progress.BaselineValue, "Baseline preserved (not rotated)")
+	assert.Equal(t, domain.GoalStatusCompleted, progress.Status, "123-110=13 >= target 10")
+	assert.NotNil(t, progress.CompletedAt)
+}
+
+// intPtr returns a pointer to an int value.
+func intPtr(v int) *int {
+	return &v
 }
