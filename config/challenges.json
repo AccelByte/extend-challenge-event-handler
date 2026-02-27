@@ -19317,6 +19317,34 @@
               "allowReselection": false
             }
           }
+        },
+        {
+          "goalId": "daily-login-rotation",
+          "name": "Daily Login",
+          "description": "Log in today",
+          "eventSource": "login",
+          "requirement": {
+            "statCode": "login_count",
+            "operator": ">=",
+            "targetValue": 1,
+            "progressMode": "relative"
+          },
+          "reward": {
+            "type": "WALLET",
+            "rewardId": "GOLD",
+            "quantity": 10
+          },
+          "prerequisites": [],
+          "defaultAssigned": true,
+          "rotation": {
+            "enabled": true,
+            "type": "global",
+            "schedule": "daily",
+            "onExpiry": {
+              "resetProgress": true,
+              "allowReselection": true
+            }
+          }
         }
       ]
     },
