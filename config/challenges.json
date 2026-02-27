@@ -19231,8 +19231,8 @@
     }
     ,
     {
-      "challengeId": "daily-challenges",
-      "name": "Daily Challenges",
+      "challengeId": "rotation-daily",
+      "name": "Daily Rotation Challenges",
       "description": "Complete daily rotating goals for rewards",
       "goals": [
         {
@@ -19288,6 +19288,34 @@
             "onExpiry": {
               "resetProgress": true,
               "allowReselection": true
+            }
+          }
+        },
+        {
+          "goalId": "daily-wins-no-reselect",
+          "name": "Daily Wins (No Reselection)",
+          "description": "Win 3 matches today - permanently claimed once done",
+          "eventSource": "statistic",
+          "requirement": {
+            "statCode": "wins",
+            "operator": ">=",
+            "targetValue": 3,
+            "progressMode": "relative"
+          },
+          "reward": {
+            "type": "WALLET",
+            "rewardId": "GOLD",
+            "quantity": 100
+          },
+          "prerequisites": [],
+          "defaultAssigned": true,
+          "rotation": {
+            "enabled": true,
+            "type": "global",
+            "schedule": "daily",
+            "onExpiry": {
+              "resetProgress": true,
+              "allowReselection": false
             }
           }
         }
@@ -19351,6 +19379,34 @@
             "onExpiry": {
               "resetProgress": true,
               "allowReselection": true
+            }
+          }
+        },
+        {
+          "goalId": "weekly-wins-no-reset",
+          "name": "Weekly Wins (No Reset)",
+          "description": "Win 5 matches this week - progress preserved across rotations",
+          "eventSource": "statistic",
+          "requirement": {
+            "statCode": "wins",
+            "operator": ">=",
+            "targetValue": 5,
+            "progressMode": "relative"
+          },
+          "reward": {
+            "type": "WALLET",
+            "rewardId": "GOLD",
+            "quantity": 200
+          },
+          "prerequisites": [],
+          "defaultAssigned": true,
+          "rotation": {
+            "enabled": true,
+            "type": "global",
+            "schedule": "weekly",
+            "onExpiry": {
+              "resetProgress": false,
+              "allowReselection": false
             }
           }
         }
