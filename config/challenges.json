@@ -19440,6 +19440,41 @@
       ]
     },
     {
+      "challengeId": "monthly-challenges",
+      "name": "Monthly Challenges",
+      "description": "Complete monthly rotating goals for premium rewards",
+      "goals": [
+        {
+          "goalId": "monthly-kills-goal",
+          "name": "Monthly Kills",
+          "description": "Get 500 kills this month",
+          "eventSource": "statistic",
+          "requirement": {
+            "statCode": "kills",
+            "operator": ">=",
+            "targetValue": 500,
+            "progressMode": "relative"
+          },
+          "reward": {
+            "type": "WALLET",
+            "rewardId": "GOLD",
+            "quantity": 1000
+          },
+          "prerequisites": [],
+          "defaultAssigned": true,
+          "rotation": {
+            "enabled": true,
+            "type": "global",
+            "schedule": "monthly",
+            "onExpiry": {
+              "resetProgress": true,
+              "allowReselection": true
+            }
+          }
+        }
+      ]
+    },
+    {
       "challengeId": "winter-challenge-2025",
       "name": "Winter Challenge 2025",
       "description": "Complete winter-themed goals",
