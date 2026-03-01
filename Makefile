@@ -4,7 +4,7 @@
 
 SHELL := /bin/bash
 
-.PHONY: proto build lint lint-fix test test-unit test-coverage test-all test-integration test-integration-setup test-integration-teardown test-integration-run
+.PHONY: proto build lint lint-fix test test-unit test-coverage test-all test-integration test-integration-setup test-integration-teardown test-integration-run help
 
 proto:
 	docker run --tty --rm --user $$(id -u):$$(id -g) \
@@ -64,4 +64,30 @@ test-integration:
 # Run all checks (lint + unit tests + integration tests)
 test-all: lint test-coverage test-integration
 	@echo "✅ All checks passed!"
+
+# Help
+help:
+	@echo "extend-challenge-event-handler - Available Targets:"
+	@echo ""
+	@echo "Linting:"
+	@echo "  make lint              Run golangci-lint"
+	@echo "  make lint-fix          Run golangci-lint with auto-fix"
+	@echo ""
+	@echo "Unit Testing:"
+	@echo "  make test              Run unit tests (excludes integration)"
+	@echo "  make test-unit         Alias for 'make test'"
+	@echo "  make test-coverage     Run unit tests with coverage report"
+	@echo ""
+	@echo "Integration Testing (TestE2E in pkg/processor):"
+	@echo "  make test-integration-setup     Start test database container"
+	@echo "  make test-integration-run       Run integration tests"
+	@echo "  make test-integration-teardown  Stop and remove test database"
+	@echo "  make test-integration           All-in-one: setup, run, teardown"
+	@echo ""
+	@echo "All Checks:"
+	@echo "  make test-all          Run lint + unit coverage + integration tests"
+	@echo ""
+	@echo "Build:"
+	@echo "  make proto             Generate protobuf code"
+	@echo "  make build             Build (runs proto first)"
 
