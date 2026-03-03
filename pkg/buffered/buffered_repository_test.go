@@ -123,13 +123,13 @@ func (m *MockGoalRepository) GetActiveGoals(ctx context.Context, userID string) 
 	return args.Get(0).([]*domain.UserGoalProgress), args.Error(1)
 }
 
-func (m *MockGoalRepository) DeleteExpiredRows(ctx context.Context, cutoff time.Time, batchSize int) (int64, error) {
-	args := m.Called(ctx, cutoff, batchSize)
+func (m *MockGoalRepository) DeleteExpiredRows(ctx context.Context, namespace string, cutoff time.Time, batchSize int) (int64, error) {
+	args := m.Called(ctx, namespace, cutoff, batchSize)
 	return args.Get(0).(int64), args.Error(1)
 }
 
-func (m *MockGoalRepository) DeleteUserData(ctx context.Context, userID string) (int64, error) {
-	args := m.Called(ctx, userID)
+func (m *MockGoalRepository) DeleteUserData(ctx context.Context, namespace string, userID string) (int64, error) {
+	args := m.Called(ctx, namespace, userID)
 	return args.Get(0).(int64), args.Error(1)
 }
 
