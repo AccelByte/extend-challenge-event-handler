@@ -4,7 +4,7 @@ go 1.25
 
 require (
 	github.com/AccelByte/accelbyte-go-sdk v0.80.0
-	github.com/AccelByte/extend-challenge-common v0.10.2
+	github.com/AccelByte/extend-challenge-common v0.11.0
 	github.com/grpc-ecosystem/go-grpc-middleware/v2 v2.0.0-rc.5
 	github.com/grpc-ecosystem/go-grpc-prometheus v1.2.0
 	github.com/lib/pq v1.10.9
@@ -76,5 +76,3 @@ require (
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
-
-replace github.com/AccelByte/extend-challenge-common => ../extend-challenge-common
