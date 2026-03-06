@@ -61,19 +61,8 @@ func (m *MockGoalRepository) BatchUpsertProgress(ctx context.Context, updates []
 	return args.Error(0)
 }
 
-func (m *MockGoalRepository) BatchUpsertProgressWithCOPY(ctx context.Context, updates []*domain.UserGoalProgress) error {
-	args := m.Called(ctx, updates)
-	return args.Error(0)
-}
-
-func (m *MockGoalRepository) IncrementProgress(ctx context.Context, userID, goalID, challengeID, namespace string,
-	delta, targetValue int, isDailyIncrement bool) error {
-	args := m.Called(ctx, userID, goalID, challengeID, namespace, delta, targetValue, isDailyIncrement)
-	return args.Error(0)
-}
-
-func (m *MockGoalRepository) BatchIncrementProgress(ctx context.Context, increments []repository.ProgressIncrement) error {
-	args := m.Called(ctx, increments)
+func (m *MockGoalRepository) BatchUpsertProgressWithCOPY(ctx context.Context, rows []repository.CopyRow) error {
+	args := m.Called(ctx, rows)
 	return args.Error(0)
 }
 
@@ -207,6 +196,18 @@ func newTestLogger() zerolog.Logger {
 	})).Level(zerolog.Disabled)
 }
 
+// testGoal returns a *domain.Goal suitable for cache mock returns.
+func testGoal(goalID, challengeID string, targetValue int) *domain.Goal {
+	return &domain.Goal{
+		ID:          goalID,
+		ChallengeID: challengeID,
+		Requirement: domain.Requirement{
+			TargetValue:  targetValue,
+			ProgressMode: domain.ProgressModeAbsolute,
+		},
+	}
+}
+
 func TestNewBufferedRepository(t *testing.T) {
 	mockRepo := new(MockGoalRepository)
 	logger := newTestLogger()
@@ -225,58 +226,69 @@ func TestNewBufferedRepository(t *testing.T) {
 
 func TestUpdateProgress_Basic(t *testing.T) {
 	mockRepo := new(MockGoalRepository)
+	mockCache := new(MockGoalCache)
 	logger := newTestLogger()
 
-	repo := newTestBufferedRepository(mockRepo, nil, 10*time.Second, 1000, logger)
+	repo := newTestBufferedRepository(mockRepo, mockCache, 10*time.Second, 1000, logger)
 
-	// Allow BatchUpsertProgress to be called on Close()
+	// Allow BatchUpsertProgressWithCOPY to be called on Close()
 	mockRepo.On("BatchUpsertProgressWithCOPY", mock.Anything, mock.Anything).Return(nil).Maybe()
+	mockCache.On("GetGoalByID", mock.Anything).Return(testGoal("goal1", "challenge1", 100)).Maybe()
 	defer func() {
 		_ = repo.Close()
 	}()
 
-	progress := &domain.UserGoalProgress{
-		UserID:      "user1",
-		GoalID:      "goal1",
-		ChallengeID: "challenge1",
-		Namespace:   "test",
-		Progress:    10,
-		Status:      domain.GoalStatusInProgress,
+	event := &domain.BufferedEvent{
+		UserID:       "user1",
+		GoalID:       "goal1",
+		ChallengeID:  "challenge1",
+		Namespace:    "test",
+		Progress:     intPtr(10),
+		IncValue:     0,
+		ProgressMode: domain.ProgressModeAbsolute,
 	}
 
-	err := repo.UpdateProgress(context.Background(), progress)
+	err := repo.UpdateProgress(context.Background(), event)
 	assert.NoError(t, err)
 	assert.Equal(t, 1, repo.GetBufferSize())
 }
 
 func TestUpdateProgress_Deduplication(t *testing.T) {
 	mockRepo := new(MockGoalRepository)
+	mockCache := new(MockGoalCache)
 	logger := newTestLogger()
 
-	repo := newTestBufferedRepository(mockRepo, nil, 10*time.Second, 1000, logger)
+	repo := newTestBufferedRepository(mockRepo, mockCache, 10*time.Second, 1000, logger)
 	mockRepo.On("BatchUpsertProgressWithCOPY", mock.Anything, mock.Anything).Return(nil).Maybe()
+	mockCache.On("GetGoalByID", mock.Anything).Return(testGoal("goal1", "challenge1", 100)).Maybe()
 	defer func() {
 		_ = repo.Close()
 	}()
 
-	// Add first update
-	progress1 := &domain.UserGoalProgress{
-		UserID:   "user1",
-		GoalID:   "goal1",
-		Progress: 5,
-		Status:   domain.GoalStatusInProgress,
+	// Add first update (absolute event with Progress=5)
+	event1 := &domain.BufferedEvent{
+		UserID:       "user1",
+		GoalID:       "goal1",
+		ChallengeID:  "challenge1",
+		Namespace:    "test",
+		Progress:     intPtr(5),
+		IncValue:     0,
+		ProgressMode: domain.ProgressModeAbsolute,
 	}
-	err := repo.UpdateProgress(context.Background(), progress1)
+	err := repo.UpdateProgress(context.Background(), event1)
 	assert.NoError(t, err)
 
-	// Add second update for same user-goal pair
-	progress2 := &domain.UserGoalProgress{
-		UserID:   "user1",
-		GoalID:   "goal1",
-		Progress: 10,
-		Status:   domain.GoalStatusCompleted,
+	// Add second update for same user-goal pair (absolute event with Progress=10)
+	event2 := &domain.BufferedEvent{
+		UserID:       "user1",
+		GoalID:       "goal1",
+		ChallengeID:  "challenge1",
+		Namespace:    "test",
+		Progress:     intPtr(10),
+		IncValue:     0,
+		ProgressMode: domain.ProgressModeAbsolute,
 	}
-	err = repo.UpdateProgress(context.Background(), progress2)
+	err = repo.UpdateProgress(context.Background(), event2)
 	assert.NoError(t, err)
 
 	// Buffer should contain only one entry (deduplicated)
@@ -285,43 +297,54 @@ func TestUpdateProgress_Deduplication(t *testing.T) {
 	// Check that latest update is in buffer
 	buffered := repo.GetFromBuffer("user1", "goal1")
 	assert.NotNil(t, buffered)
-	assert.Equal(t, 10, buffered.Progress)
-	assert.Equal(t, domain.GoalStatusCompleted, buffered.Status)
+	assert.NotNil(t, buffered.Progress)
+	assert.Equal(t, 10, *buffered.Progress)
 }
 
 func TestFlush_Success(t *testing.T) {
 	mockRepo := new(MockGoalRepository)
+	mockCache := new(MockGoalCache)
 	logger := newTestLogger()
 
-	repo := newTestBufferedRepository(mockRepo, nil, 10*time.Second, 1000, logger)
+	repo := newTestBufferedRepository(mockRepo, mockCache, 10*time.Second, 1000, logger)
 	defer func() {
 		_ = repo.Close()
 	}()
 
 	// Add some progress updates
-	progress1 := &domain.UserGoalProgress{
-		UserID:   "user1",
-		GoalID:   "goal1",
-		Progress: 10,
-		Status:   domain.GoalStatusInProgress,
+	event1 := &domain.BufferedEvent{
+		UserID:       "user1",
+		GoalID:       "goal1",
+		ChallengeID:  "challenge1",
+		Namespace:    "test",
+		Progress:     intPtr(10),
+		IncValue:     0,
+		ProgressMode: domain.ProgressModeAbsolute,
 	}
-	progress2 := &domain.UserGoalProgress{
-		UserID:   "user1",
-		GoalID:   "goal2",
-		Progress: 20,
-		Status:   domain.GoalStatusCompleted,
+	event2 := &domain.BufferedEvent{
+		UserID:       "user1",
+		GoalID:       "goal2",
+		ChallengeID:  "challenge1",
+		Namespace:    "test",
+		Progress:     intPtr(20),
+		IncValue:     0,
+		ProgressMode: domain.ProgressModeAbsolute,
 	}
 
-	err := repo.UpdateProgress(context.Background(), progress1)
+	err := repo.UpdateProgress(context.Background(), event1)
 	assert.NoError(t, err)
-	err = repo.UpdateProgress(context.Background(), progress2)
+	err = repo.UpdateProgress(context.Background(), event2)
 	assert.NoError(t, err)
 
 	assert.Equal(t, 2, repo.GetBufferSize())
 
-	// Expect BatchUpsertProgressWithCOPY to be called with 2 updates
-	mockRepo.On("BatchUpsertProgressWithCOPY", mock.Anything, mock.MatchedBy(func(updates []*domain.UserGoalProgress) bool {
-		return len(updates) == 2
+	// Set up cache mocks for enrichment during flush
+	mockCache.On("GetGoalByID", "goal1").Return(testGoal("goal1", "challenge1", 100))
+	mockCache.On("GetGoalByID", "goal2").Return(testGoal("goal2", "challenge1", 50))
+
+	// Expect BatchUpsertProgressWithCOPY to be called with 2 CopyRows
+	mockRepo.On("BatchUpsertProgressWithCOPY", mock.Anything, mock.MatchedBy(func(rows []repository.CopyRow) bool {
+		return len(rows) == 2
 	})).Return(nil)
 
 	// Flush the buffer
@@ -330,6 +353,7 @@ func TestFlush_Success(t *testing.T) {
 	assert.Equal(t, 0, repo.GetBufferSize())
 
 	mockRepo.AssertExpectations(t)
+	mockCache.AssertExpectations(t)
 }
 
 func TestFlush_EmptyBuffer(t *testing.T) {
@@ -352,22 +376,29 @@ func TestFlush_EmptyBuffer(t *testing.T) {
 
 func TestFlush_Failure_KeepsBuffer(t *testing.T) {
 	mockRepo := new(MockGoalRepository)
+	mockCache := new(MockGoalCache)
 	logger := newTestLogger()
 
-	repo := newTestBufferedRepository(mockRepo, nil, 10*time.Second, 1000, logger)
+	repo := newTestBufferedRepository(mockRepo, mockCache, 10*time.Second, 1000, logger)
 	defer func() {
 		_ = repo.Close()
 	}()
 
 	// Add progress update
-	progress := &domain.UserGoalProgress{
-		UserID:   "user1",
-		GoalID:   "goal1",
-		Progress: 10,
-		Status:   domain.GoalStatusInProgress,
+	event := &domain.BufferedEvent{
+		UserID:       "user1",
+		GoalID:       "goal1",
+		ChallengeID:  "challenge1",
+		Namespace:    "test",
+		Progress:     intPtr(10),
+		IncValue:     0,
+		ProgressMode: domain.ProgressModeAbsolute,
 	}
-	err := repo.UpdateProgress(context.Background(), progress)
+	err := repo.UpdateProgress(context.Background(), event)
 	assert.NoError(t, err)
+
+	// Set up cache mock for enrichment
+	mockCache.On("GetGoalByID", "goal1").Return(testGoal("goal1", "challenge1", 100))
 
 	// Simulate database error
 	mockRepo.On("BatchUpsertProgressWithCOPY", mock.Anything, mock.Anything).Return(errors.New("database error"))
@@ -384,28 +415,35 @@ func TestFlush_Failure_KeepsBuffer(t *testing.T) {
 
 func TestSizeBasedFlush(t *testing.T) {
 	mockRepo := new(MockGoalRepository)
+	mockCache := new(MockGoalCache)
 	logger := newTestLogger()
 
 	// Small buffer size to trigger size-based flush
-	repo := newTestBufferedRepository(mockRepo, nil, 10*time.Second, 5, logger)
+	repo := newTestBufferedRepository(mockRepo, mockCache, 10*time.Second, 5, logger)
 	defer func() {
 		_ = repo.Close()
 	}()
 
+	// Set up cache mock for enrichment (all goals use same target)
+	mockCache.On("GetGoalByID", mock.Anything).Return(testGoal("goalX", "challenge1", 100)).Maybe()
+
 	// Expect flush after 5 updates
-	mockRepo.On("BatchUpsertProgressWithCOPY", mock.Anything, mock.MatchedBy(func(updates []*domain.UserGoalProgress) bool {
-		return len(updates) >= 5
+	mockRepo.On("BatchUpsertProgressWithCOPY", mock.Anything, mock.MatchedBy(func(rows []repository.CopyRow) bool {
+		return len(rows) >= 5
 	})).Return(nil).Maybe()
 
 	// Add 5 updates (should trigger size-based flush)
 	for i := 0; i < 5; i++ {
-		progress := &domain.UserGoalProgress{
-			UserID:   "user1",
-			GoalID:   fmt.Sprintf("goal%d", i),
-			Progress: i,
-			Status:   domain.GoalStatusInProgress,
+		event := &domain.BufferedEvent{
+			UserID:       "user1",
+			GoalID:       fmt.Sprintf("goal%d", i),
+			ChallengeID:  "challenge1",
+			Namespace:    "test",
+			Progress:     intPtr(i),
+			IncValue:     0,
+			ProgressMode: domain.ProgressModeAbsolute,
 		}
-		err := repo.UpdateProgress(context.Background(), progress)
+		err := repo.UpdateProgress(context.Background(), event)
 		assert.NoError(t, err)
 	}
 
@@ -419,31 +457,38 @@ func TestSizeBasedFlush(t *testing.T) {
 
 func TestTimeBasedFlush(t *testing.T) {
 	mockRepo := new(MockGoalRepository)
+	mockCache := new(MockGoalCache)
 	logger := newTestLogger()
 
 	// Short flush interval for testing
-	repo := newTestBufferedRepository(mockRepo, nil, 100*time.Millisecond, 1000, logger)
+	repo := newTestBufferedRepository(mockRepo, mockCache, 100*time.Millisecond, 1000, logger)
 	defer func() {
 		_ = repo.Close()
 	}()
 
 	// Add some updates
 	for i := 0; i < 3; i++ {
-		progress := &domain.UserGoalProgress{
-			UserID:   "user1",
-			GoalID:   fmt.Sprintf("goal%d", i),
-			Progress: i,
-			Status:   domain.GoalStatusInProgress,
+		event := &domain.BufferedEvent{
+			UserID:       "user1",
+			GoalID:       fmt.Sprintf("goal%d", i),
+			ChallengeID:  "challenge1",
+			Namespace:    "test",
+			Progress:     intPtr(i),
+			IncValue:     0,
+			ProgressMode: domain.ProgressModeAbsolute,
 		}
-		err := repo.UpdateProgress(context.Background(), progress)
+		err := repo.UpdateProgress(context.Background(), event)
 		assert.NoError(t, err)
 	}
 
 	assert.Equal(t, 3, repo.GetBufferSize())
 
+	// Set up cache mock for enrichment
+	mockCache.On("GetGoalByID", mock.Anything).Return(testGoal("goalX", "challenge1", 100)).Maybe()
+
 	// Expect flush within 100ms
-	mockRepo.On("BatchUpsertProgressWithCOPY", mock.Anything, mock.MatchedBy(func(updates []*domain.UserGoalProgress) bool {
-		return len(updates) == 3
+	mockRepo.On("BatchUpsertProgressWithCOPY", mock.Anything, mock.MatchedBy(func(rows []repository.CopyRow) bool {
+		return len(rows) == 3
 	})).Return(nil)
 
 	// Wait for time-based flush
@@ -457,15 +502,17 @@ func TestTimeBasedFlush(t *testing.T) {
 
 func TestConcurrentUpdates(t *testing.T) {
 	mockRepo := new(MockGoalRepository)
+	mockCache := new(MockGoalCache)
 	logger := newTestLogger()
 
-	repo := newTestBufferedRepository(mockRepo, nil, 10*time.Second, 1000, logger)
+	repo := newTestBufferedRepository(mockRepo, mockCache, 10*time.Second, 1000, logger)
 	defer func() {
 		_ = repo.Close()
 	}()
 
 	// Allow multiple flushes
 	mockRepo.On("BatchUpsertProgressWithCOPY", mock.Anything, mock.Anything).Return(nil).Maybe()
+	mockCache.On("GetGoalByID", mock.Anything).Return(testGoal("goalX", "challenge1", 100)).Maybe()
 
 	var wg sync.WaitGroup
 	numGoroutines := 10
@@ -477,13 +524,16 @@ func TestConcurrentUpdates(t *testing.T) {
 		go func(goroutineID int) {
 			defer wg.Done()
 			for j := 0; j < updatesPerGoroutine; j++ {
-				progress := &domain.UserGoalProgress{
-					UserID:   fmt.Sprintf("user%d", goroutineID),
-					GoalID:   fmt.Sprintf("goal%d", j),
-					Progress: j,
-					Status:   domain.GoalStatusInProgress,
+				event := &domain.BufferedEvent{
+					UserID:       fmt.Sprintf("user%d", goroutineID),
+					GoalID:       fmt.Sprintf("goal%d", j),
+					ChallengeID:  "challenge1",
+					Namespace:    "test",
+					Progress:     intPtr(j),
+					IncValue:     0,
+					ProgressMode: domain.ProgressModeAbsolute,
 				}
-				err := repo.UpdateProgress(context.Background(), progress)
+				err := repo.UpdateProgress(context.Background(), event)
 				assert.NoError(t, err)
 			}
 		}(i)
@@ -492,28 +542,33 @@ func TestConcurrentUpdates(t *testing.T) {
 	wg.Wait()
 
 	// Each user should have 100 different goals
-	// Total: 10 users × 100 goals = 1000 unique entries
+	// Total: 10 users x 100 goals = 1000 unique entries
 	expectedSize := numGoroutines * updatesPerGoroutine
 	assert.Equal(t, expectedSize, repo.GetBufferSize())
 }
 
 func TestGetFromBuffer(t *testing.T) {
 	mockRepo := new(MockGoalRepository)
+	mockCache := new(MockGoalCache)
 	logger := newTestLogger()
 
-	repo := newTestBufferedRepository(mockRepo, nil, 10*time.Second, 1000, logger)
+	repo := newTestBufferedRepository(mockRepo, mockCache, 10*time.Second, 1000, logger)
 	mockRepo.On("BatchUpsertProgressWithCOPY", mock.Anything, mock.Anything).Return(nil).Maybe()
+	mockCache.On("GetGoalByID", mock.Anything).Return(testGoal("goal1", "challenge1", 100)).Maybe()
 	defer func() {
 		_ = repo.Close()
 	}()
 
-	progress := &domain.UserGoalProgress{
-		UserID:   "user1",
-		GoalID:   "goal1",
-		Progress: 10,
-		Status:   domain.GoalStatusInProgress,
+	event := &domain.BufferedEvent{
+		UserID:       "user1",
+		GoalID:       "goal1",
+		ChallengeID:  "challenge1",
+		Namespace:    "test",
+		Progress:     intPtr(10),
+		IncValue:     0,
+		ProgressMode: domain.ProgressModeAbsolute,
 	}
-	err := repo.UpdateProgress(context.Background(), progress)
+	err := repo.UpdateProgress(context.Background(), event)
 	assert.NoError(t, err)
 
 	// Should retrieve from buffer
@@ -521,7 +576,8 @@ func TestGetFromBuffer(t *testing.T) {
 	assert.NotNil(t, buffered)
 	assert.Equal(t, "user1", buffered.UserID)
 	assert.Equal(t, "goal1", buffered.GoalID)
-	assert.Equal(t, 10, buffered.Progress)
+	assert.NotNil(t, buffered.Progress)
+	assert.Equal(t, 10, *buffered.Progress)
 
 	// Non-existent entry
 	notFound := repo.GetFromBuffer("user2", "goal2")
@@ -530,23 +586,30 @@ func TestGetFromBuffer(t *testing.T) {
 
 func TestClose_FinalFlush(t *testing.T) {
 	mockRepo := new(MockGoalRepository)
+	mockCache := new(MockGoalCache)
 	logger := newTestLogger()
 
-	repo := newTestBufferedRepository(mockRepo, nil, 10*time.Second, 1000, logger)
+	repo := newTestBufferedRepository(mockRepo, mockCache, 10*time.Second, 1000, logger)
 
 	// Add some updates
-	progress := &domain.UserGoalProgress{
-		UserID:   "user1",
-		GoalID:   "goal1",
-		Progress: 10,
-		Status:   domain.GoalStatusInProgress,
+	event := &domain.BufferedEvent{
+		UserID:       "user1",
+		GoalID:       "goal1",
+		ChallengeID:  "challenge1",
+		Namespace:    "test",
+		Progress:     intPtr(10),
+		IncValue:     0,
+		ProgressMode: domain.ProgressModeAbsolute,
 	}
-	err := repo.UpdateProgress(context.Background(), progress)
+	err := repo.UpdateProgress(context.Background(), event)
 	assert.NoError(t, err)
 
+	// Set up cache mock for enrichment
+	mockCache.On("GetGoalByID", "goal1").Return(testGoal("goal1", "challenge1", 100))
+
 	// Expect final flush on close
-	mockRepo.On("BatchUpsertProgressWithCOPY", mock.Anything, mock.MatchedBy(func(updates []*domain.UserGoalProgress) bool {
-		return len(updates) == 1
+	mockRepo.On("BatchUpsertProgressWithCOPY", mock.Anything, mock.MatchedBy(func(rows []repository.CopyRow) bool {
+		return len(rows) == 1
 	})).Return(nil)
 
 	// Close should trigger final flush
@@ -555,23 +618,31 @@ func TestClose_FinalFlush(t *testing.T) {
 	assert.Equal(t, 0, repo.GetBufferSize())
 
 	mockRepo.AssertExpectations(t)
+	mockCache.AssertExpectations(t)
 }
 
 func TestClose_FinalFlushError(t *testing.T) {
 	mockRepo := new(MockGoalRepository)
+	mockCache := new(MockGoalCache)
 	logger := newTestLogger()
 
-	repo := newTestBufferedRepository(mockRepo, nil, 10*time.Second, 1000, logger)
+	repo := newTestBufferedRepository(mockRepo, mockCache, 10*time.Second, 1000, logger)
 
 	// Add some updates
-	progress := &domain.UserGoalProgress{
-		UserID:   "user1",
-		GoalID:   "goal1",
-		Progress: 10,
-		Status:   domain.GoalStatusInProgress,
+	event := &domain.BufferedEvent{
+		UserID:       "user1",
+		GoalID:       "goal1",
+		ChallengeID:  "challenge1",
+		Namespace:    "test",
+		Progress:     intPtr(10),
+		IncValue:     0,
+		ProgressMode: domain.ProgressModeAbsolute,
 	}
-	err := repo.UpdateProgress(context.Background(), progress)
+	err := repo.UpdateProgress(context.Background(), event)
 	assert.NoError(t, err)
+
+	// Set up cache mock for enrichment
+	mockCache.On("GetGoalByID", "goal1").Return(testGoal("goal1", "challenge1", 100))
 
 	// Simulate flush error
 	mockRepo.On("BatchUpsertProgressWithCOPY", mock.Anything, mock.Anything).Return(errors.New("database error"))
@@ -597,7 +668,7 @@ func TestNewBufferedRepository_NilLogger(t *testing.T) {
 	assert.NotNil(t, repo.logger)
 }
 
-func TestUpdateProgress_NilProgress(t *testing.T) {
+func TestUpdateProgress_NilEvent(t *testing.T) {
 	mockRepo := new(MockGoalRepository)
 	logger := newTestLogger()
 
@@ -607,7 +678,7 @@ func TestUpdateProgress_NilProgress(t *testing.T) {
 		_ = repo.Close()
 	}()
 
-	// Should return error for nil progress
+	// Should return error for nil event
 	err := repo.UpdateProgress(context.Background(), nil)
 	assert.Error(t, err)
 	assert.Contains(t, err.Error(), "cannot be nil")
@@ -626,16 +697,17 @@ func TestUpdateProgress_EmptyUserID(t *testing.T) {
 		_ = repo.Close()
 	}()
 
-	progress := &domain.UserGoalProgress{
-		UserID:      "", // Empty userID
-		GoalID:      "goal1",
-		ChallengeID: "challenge1",
-		Namespace:   "test",
-		Progress:    10,
-		Status:      domain.GoalStatusInProgress,
+	event := &domain.BufferedEvent{
+		UserID:       "", // Empty userID
+		GoalID:       "goal1",
+		ChallengeID:  "challenge1",
+		Namespace:    "test",
+		Progress:     intPtr(10),
+		IncValue:     0,
+		ProgressMode: domain.ProgressModeAbsolute,
 	}
 
-	err := repo.UpdateProgress(context.Background(), progress)
+	err := repo.UpdateProgress(context.Background(), event)
 	assert.Error(t, err)
 	assert.Contains(t, err.Error(), "userID cannot be empty")
 
@@ -653,16 +725,17 @@ func TestUpdateProgress_EmptyGoalID(t *testing.T) {
 		_ = repo.Close()
 	}()
 
-	progress := &domain.UserGoalProgress{
-		UserID:      "user1",
-		GoalID:      "", // Empty goalID
-		ChallengeID: "challenge1",
-		Namespace:   "test",
-		Progress:    10,
-		Status:      domain.GoalStatusInProgress,
+	event := &domain.BufferedEvent{
+		UserID:       "user1",
+		GoalID:       "", // Empty goalID
+		ChallengeID:  "challenge1",
+		Namespace:    "test",
+		Progress:     intPtr(10),
+		IncValue:     0,
+		ProgressMode: domain.ProgressModeAbsolute,
 	}
 
-	err := repo.UpdateProgress(context.Background(), progress)
+	err := repo.UpdateProgress(context.Background(), event)
 	assert.Error(t, err)
 	assert.Contains(t, err.Error(), "goalID cannot be empty")
 
@@ -670,16 +743,190 @@ func TestUpdateProgress_EmptyGoalID(t *testing.T) {
 	assert.Equal(t, 0, repo.GetBufferSize())
 }
 
+func TestUpdateProgress_NilProgress_LoginEvent(t *testing.T) {
+	mockRepo := new(MockGoalRepository)
+	mockCache := new(MockGoalCache)
+	logger := newTestLogger()
+
+	repo := newTestBufferedRepository(mockRepo, mockCache, 10*time.Second, 1000, logger)
+	mockRepo.On("BatchUpsertProgressWithCOPY", mock.Anything, mock.Anything).Return(nil).Maybe()
+	mockCache.On("GetGoalByID", mock.Anything).Return(testGoal("goal1", "challenge1", 7)).Maybe()
+	defer func() {
+		_ = repo.Close()
+	}()
+
+	// BufferedEvent with nil Progress (login event), IncValue=1
+	event := &domain.BufferedEvent{
+		UserID:       "user1",
+		GoalID:       "goal1",
+		ChallengeID:  "challenge1",
+		Namespace:    "test",
+		Progress:     nil,
+		IncValue:     1,
+		ProgressMode: domain.ProgressModeRelative,
+	}
+
+	err := repo.UpdateProgress(context.Background(), event)
+	assert.NoError(t, err)
+	assert.Equal(t, 1, repo.GetBufferSize())
+
+	// Verify it's in the buffer
+	buffered := repo.GetFromBuffer("user1", "goal1")
+	assert.NotNil(t, buffered)
+	assert.Nil(t, buffered.Progress)
+	assert.Equal(t, 1, buffered.IncValue)
+}
+
+func TestUpdateProgress_NilProgress_Accumulation(t *testing.T) {
+	mockRepo := new(MockGoalRepository)
+	mockCache := new(MockGoalCache)
+	logger := newTestLogger()
+
+	repo := newTestBufferedRepository(mockRepo, mockCache, 10*time.Second, 1000, logger)
+	mockRepo.On("BatchUpsertProgressWithCOPY", mock.Anything, mock.Anything).Return(nil).Maybe()
+	mockCache.On("GetGoalByID", mock.Anything).Return(testGoal("goal1", "challenge1", 7)).Maybe()
+	defer func() {
+		_ = repo.Close()
+	}()
+
+	// First login event: Progress=nil, IncValue=1
+	event1 := &domain.BufferedEvent{
+		UserID:       "user1",
+		GoalID:       "goal1",
+		ChallengeID:  "challenge1",
+		Namespace:    "test",
+		Progress:     nil,
+		IncValue:     1,
+		ProgressMode: domain.ProgressModeRelative,
+	}
+	err := repo.UpdateProgress(context.Background(), event1)
+	assert.NoError(t, err)
+
+	// Second login event: Progress=nil, IncValue=1
+	event2 := &domain.BufferedEvent{
+		UserID:       "user1",
+		GoalID:       "goal1",
+		ChallengeID:  "challenge1",
+		Namespace:    "test",
+		Progress:     nil,
+		IncValue:     1,
+		ProgressMode: domain.ProgressModeRelative,
+	}
+	err = repo.UpdateProgress(context.Background(), event2)
+	assert.NoError(t, err)
+
+	// Buffer should contain only one entry (same user-goal pair)
+	assert.Equal(t, 1, repo.GetBufferSize())
+
+	// IncValue should be accumulated (1+1=2)
+	buffered := repo.GetFromBuffer("user1", "goal1")
+	assert.NotNil(t, buffered)
+	assert.Nil(t, buffered.Progress)
+	assert.Equal(t, 2, buffered.IncValue)
+}
+
+func TestFlush_EnrichesFromCache(t *testing.T) {
+	mockRepo := new(MockGoalRepository)
+	mockCache := new(MockGoalCache)
+	logger := newTestLogger()
+
+	repo := newTestBufferedRepository(mockRepo, mockCache, 10*time.Second, 1000, logger)
+	defer func() {
+		_ = repo.Close()
+	}()
+
+	// Add event to buffer
+	event := &domain.BufferedEvent{
+		UserID:       "user1",
+		GoalID:       "goal1",
+		ChallengeID:  "challenge1",
+		Namespace:    "test",
+		Progress:     intPtr(50),
+		IncValue:     0,
+		ProgressMode: domain.ProgressModeAbsolute,
+	}
+	err := repo.UpdateProgress(context.Background(), event)
+	assert.NoError(t, err)
+
+	// Set up cache mock with goal metadata (targetValue=100)
+	mockCache.On("GetGoalByID", "goal1").Return(testGoal("goal1", "challenge1", 100))
+
+	// Verify BatchUpsertProgressWithCOPY receives CopyRow with TargetValue from cache
+	mockRepo.On("BatchUpsertProgressWithCOPY", mock.Anything, mock.MatchedBy(func(rows []repository.CopyRow) bool {
+		if len(rows) != 1 {
+			return false
+		}
+		row := rows[0]
+		return row.UserID == "user1" &&
+			row.GoalID == "goal1" &&
+			row.ChallengeID == "challenge1" &&
+			row.Namespace == "test" &&
+			row.Progress != nil && *row.Progress == 50 &&
+			row.ProgressMode == "absolute" &&
+			row.TargetValue == 100
+	})).Return(nil)
+
+	err = repo.Flush(context.Background())
+	assert.NoError(t, err)
+	assert.Equal(t, 0, repo.GetBufferSize())
+
+	mockRepo.AssertExpectations(t)
+	mockCache.AssertExpectations(t)
+}
+
+func TestFlush_GoalNotInCache_Skipped(t *testing.T) {
+	mockRepo := new(MockGoalRepository)
+	mockCache := new(MockGoalCache)
+	logger := newTestLogger()
+
+	repo := newTestBufferedRepository(mockRepo, mockCache, 10*time.Second, 1000, logger)
+	defer func() {
+		_ = repo.Close()
+	}()
+
+	// Add event for a goal that's not in cache
+	event := &domain.BufferedEvent{
+		UserID:       "user1",
+		GoalID:       "missing_goal",
+		ChallengeID:  "challenge1",
+		Namespace:    "test",
+		Progress:     intPtr(10),
+		IncValue:     0,
+		ProgressMode: domain.ProgressModeAbsolute,
+	}
+	err := repo.UpdateProgress(context.Background(), event)
+	assert.NoError(t, err)
+
+	// Goal is not in cache
+	mockCache.On("GetGoalByID", "missing_goal").Return(nil)
+
+	// BatchUpsertProgressWithCOPY should NOT be called since the only event was skipped
+	// (no CopyRows to flush)
+
+	// Flush should succeed gracefully (no error, just skips)
+	err = repo.Flush(context.Background())
+	assert.NoError(t, err)
+
+	// Buffer should be empty (swapped out during flush)
+	assert.Equal(t, 0, repo.GetBufferSize())
+
+	mockCache.AssertExpectations(t)
+}
+
 func TestSizeBasedFlush_NoGoroutineFlood(t *testing.T) {
 	mockRepo := new(MockGoalRepository)
+	mockCache := new(MockGoalCache)
 	logger := newTestLogger()
 
 	// Small buffer size to trigger size-based flushes
 	// Use 15 to allow for overflow protection (2x = 30), giving room for slow flushes
-	repo := newTestBufferedRepository(mockRepo, nil, 10*time.Second, 15, logger)
+	repo := newTestBufferedRepository(mockRepo, mockCache, 10*time.Second, 15, logger)
 	defer func() {
 		_ = repo.Close()
 	}()
+
+	// Set up cache mock for enrichment
+	mockCache.On("GetGoalByID", mock.Anything).Return(testGoal("goalX", "challenge1", 100)).Maybe()
 
 	// Track flush count with atomic counter
 	flushCount := atomic.Int32{}
@@ -695,13 +942,16 @@ func TestSizeBasedFlush_NoGoroutineFlood(t *testing.T) {
 	// Without goroutine flood prevention: would spawn ~5+ goroutines (one per event after threshold)
 	// With goroutine flood prevention: should spawn at most 2-3 goroutines
 	for i := 0; i < 20; i++ {
-		progress := &domain.UserGoalProgress{
-			UserID:   "user1",
-			GoalID:   fmt.Sprintf("goal%d", i),
-			Progress: i,
-			Status:   domain.GoalStatusInProgress,
+		event := &domain.BufferedEvent{
+			UserID:       "user1",
+			GoalID:       fmt.Sprintf("goal%d", i),
+			ChallengeID:  "challenge1",
+			Namespace:    "test",
+			Progress:     intPtr(i),
+			IncValue:     0,
+			ProgressMode: domain.ProgressModeAbsolute,
 		}
-		err := repo.UpdateProgress(context.Background(), progress)
+		err := repo.UpdateProgress(context.Background(), event)
 		assert.NoError(t, err)
 	}
 
@@ -721,14 +971,18 @@ func TestSizeBasedFlush_NoGoroutineFlood(t *testing.T) {
 
 func TestSizeBasedFlush_AtomicFlagBehavior(t *testing.T) {
 	mockRepo := new(MockGoalRepository)
+	mockCache := new(MockGoalCache)
 	logger := newTestLogger()
 
 	// Use 10 to allow for overflow protection (2x = 20), giving room for test
 	// Use very long flush interval to prevent background flush interference
-	repo := newTestBufferedRepository(mockRepo, nil, 1*time.Hour, 10, logger)
+	repo := newTestBufferedRepository(mockRepo, mockCache, 1*time.Hour, 10, logger)
 	defer func() {
 		_ = repo.Close()
 	}()
+
+	// Set up cache mock for enrichment
+	mockCache.On("GetGoalByID", mock.Anything).Return(testGoal("goalX", "challenge1", 100)).Maybe()
 
 	// Track when flush is called
 	flushCount := atomic.Int32{}
@@ -754,13 +1008,16 @@ func TestSizeBasedFlush_AtomicFlagBehavior(t *testing.T) {
 
 	// Add 10 updates to reach threshold and trigger first flush
 	for i := 0; i < 10; i++ {
-		progress := &domain.UserGoalProgress{
-			UserID:   "user1",
-			GoalID:   fmt.Sprintf("goal%d", i),
-			Progress: i,
-			Status:   domain.GoalStatusInProgress,
+		event := &domain.BufferedEvent{
+			UserID:       "user1",
+			GoalID:       fmt.Sprintf("goal%d", i),
+			ChallengeID:  "challenge1",
+			Namespace:    "test",
+			Progress:     intPtr(i),
+			IncValue:     0,
+			ProgressMode: domain.ProgressModeAbsolute,
 		}
-		err := repo.UpdateProgress(context.Background(), progress)
+		err := repo.UpdateProgress(context.Background(), event)
 		assert.NoError(t, err)
 	}
 
@@ -770,13 +1027,16 @@ func TestSizeBasedFlush_AtomicFlagBehavior(t *testing.T) {
 	// Add more updates while flush is in progress
 	// These should NOT spawn new goroutines
 	for i := 10; i < 15; i++ {
-		progress := &domain.UserGoalProgress{
-			UserID:   "user1",
-			GoalID:   fmt.Sprintf("goal%d", i),
-			Progress: i,
-			Status:   domain.GoalStatusInProgress,
+		event := &domain.BufferedEvent{
+			UserID:       "user1",
+			GoalID:       fmt.Sprintf("goal%d", i),
+			ChallengeID:  "challenge1",
+			Namespace:    "test",
+			Progress:     intPtr(i),
+			IncValue:     0,
+			ProgressMode: domain.ProgressModeAbsolute,
 		}
-		err := repo.UpdateProgress(context.Background(), progress)
+		err := repo.UpdateProgress(context.Background(), event)
 		assert.NoError(t, err)
 	}
 
@@ -793,14 +1053,15 @@ func TestSizeBasedFlush_AtomicFlagBehavior(t *testing.T) {
 
 func TestBufferOverflow_ReturnsError(t *testing.T) {
 	mockRepo := new(MockGoalRepository)
+	mockCache := new(MockGoalCache)
 	logger := newTestLogger()
 
 	// Small buffer size for testing circuit breaker
-	// maxBufferSize=10 → backpressure at 15, circuit breaker at 25
+	// maxBufferSize=10 -> backpressure at 15, circuit breaker at 25
 	// Use very long flush interval to prevent background flush interference
 	// IMPORTANT: Disable size-based flush by setting maxBufferSize to very large value
 	// We want to test circuit breaker at 25, so set maxBufferSize > 25
-	repo := newTestBufferedRepository(mockRepo, nil, 1*time.Hour, 50, logger)
+	repo := newTestBufferedRepository(mockRepo, mockCache, 1*time.Hour, 50, logger)
 	// Manually override thresholds for this test
 	// Set backpressure very high so it doesn't interfere with circuit breaker test
 	repo.backpressureThreshold = 1000
@@ -809,19 +1070,25 @@ func TestBufferOverflow_ReturnsError(t *testing.T) {
 		_ = repo.Close()
 	}()
 
+	// Set up cache mock for enrichment
+	mockCache.On("GetGoalByID", mock.Anything).Return(testGoal("goalX", "challenge1", 100)).Maybe()
+
 	// Simulate database failure - all flushes fail
 	mockRepo.On("BatchUpsertProgressWithCOPY", mock.Anything, mock.Anything).Return(errors.New("database unavailable")).Maybe()
 
 	// Add updates up to circuit breaker threshold (25 updates with maxBufferSize=10)
 	// First 25 should succeed (up to 2.5x limit)
 	for i := 0; i < 25; i++ {
-		progress := &domain.UserGoalProgress{
-			UserID:   "user1",
-			GoalID:   fmt.Sprintf("goal%d", i),
-			Progress: i,
-			Status:   domain.GoalStatusInProgress,
+		event := &domain.BufferedEvent{
+			UserID:       "user1",
+			GoalID:       fmt.Sprintf("goal%d", i),
+			ChallengeID:  "challenge1",
+			Namespace:    "test",
+			Progress:     intPtr(i),
+			IncValue:     0,
+			ProgressMode: domain.ProgressModeAbsolute,
 		}
-		err := repo.UpdateProgress(context.Background(), progress)
+		err := repo.UpdateProgress(context.Background(), event)
 		assert.NoError(t, err, "Update %d should succeed (buffer size %d)", i, repo.GetBufferSize())
 	}
 
@@ -829,13 +1096,16 @@ func TestBufferOverflow_ReturnsError(t *testing.T) {
 	assert.Equal(t, 25, repo.GetBufferSize(), "Buffer should be at circuit breaker threshold")
 
 	// Next update should fail with circuit breaker error
-	progress := &domain.UserGoalProgress{
-		UserID:   "user1",
-		GoalID:   "goal_circuit_breaker",
-		Progress: 999,
-		Status:   domain.GoalStatusInProgress,
+	event := &domain.BufferedEvent{
+		UserID:       "user1",
+		GoalID:       "goal_circuit_breaker",
+		ChallengeID:  "challenge1",
+		Namespace:    "test",
+		Progress:     intPtr(999),
+		IncValue:     0,
+		ProgressMode: domain.ProgressModeAbsolute,
 	}
-	err := repo.UpdateProgress(context.Background(), progress)
+	err := repo.UpdateProgress(context.Background(), event)
 	assert.Error(t, err, "Update should fail with circuit breaker")
 	assert.Contains(t, err.Error(), "circuit breaker", "Error should mention circuit breaker")
 	assert.Contains(t, err.Error(), "25", "Error should mention current buffer size")
@@ -846,12 +1116,16 @@ func TestBufferOverflow_ReturnsError(t *testing.T) {
 
 func TestBufferOverflow_PreventOOM(t *testing.T) {
 	mockRepo := new(MockGoalRepository)
+	mockCache := new(MockGoalCache)
 	logger := newTestLogger()
 
-	repo := newTestBufferedRepository(mockRepo, nil, 10*time.Second, 100, logger)
+	repo := newTestBufferedRepository(mockRepo, mockCache, 10*time.Second, 100, logger)
 	defer func() {
 		_ = repo.Close()
 	}()
+
+	// Set up cache mock for enrichment
+	mockCache.On("GetGoalByID", mock.Anything).Return(testGoal("goalX", "challenge1", 100)).Maybe()
 
 	// Simulate persistent database failure
 	mockRepo.On("BatchUpsertProgressWithCOPY", mock.Anything, mock.Anything).Return(errors.New("database down")).Maybe()
@@ -862,13 +1136,16 @@ func TestBufferOverflow_PreventOOM(t *testing.T) {
 	// Try to add many updates (simulating prolonged outage)
 	// Should succeed up to ~2x threshold, then start failing
 	for i := 0; i < 250; i++ {
-		progress := &domain.UserGoalProgress{
-			UserID:   fmt.Sprintf("user%d", i%10),
-			GoalID:   fmt.Sprintf("goal%d", i),
-			Progress: i,
-			Status:   domain.GoalStatusInProgress,
+		event := &domain.BufferedEvent{
+			UserID:       fmt.Sprintf("user%d", i%10),
+			GoalID:       fmt.Sprintf("goal%d", i),
+			ChallengeID:  "challenge1",
+			Namespace:    "test",
+			Progress:     intPtr(i),
+			IncValue:     0,
+			ProgressMode: domain.ProgressModeAbsolute,
 		}
-		err := repo.UpdateProgress(context.Background(), progress)
+		err := repo.UpdateProgress(context.Background(), event)
 		if err != nil {
 			errorCount++
 			assert.Contains(t, err.Error(), "buffer overflow")
@@ -882,7 +1159,7 @@ func TestBufferOverflow_PreventOOM(t *testing.T) {
 
 	// Verify overflow protection works (buffer doesn't grow unbounded)
 	// Note: With swap pattern + failed flushes, buffer can temporarily exceed 2x threshold
-	// This is expected: swap clears buffer → overflow check passes → flush fails → restores entries
+	// This is expected: swap clears buffer -> overflow check passes -> flush fails -> restores entries
 	// Key requirement: Buffer growth is bounded (not unlimited)
 	// We may see few or no overflow errors if async flush timing allows all updates to succeed
 	assert.Equal(t, 250, successCount+errorCount, "Total should equal attempts")
@@ -895,536 +1172,23 @@ func TestBufferOverflow_PreventOOM(t *testing.T) {
 }
 
 // ============================================================================
-// IncrementProgress Tests - Phase 5.2.2c
-// ============================================================================
-
-func TestIncrementProgress_Basic(t *testing.T) {
-	mockRepo := new(MockGoalRepository)
-	mockCache := new(MockGoalCache)
-	logger := newTestLogger()
-
-	repo := newTestBufferedRepository(mockRepo, mockCache, 10*time.Second, 1000, logger)
-	mockRepo.On("BatchIncrementProgress", mock.Anything, mock.Anything).Return(nil).Maybe()
-	mockCache.On("GetGoalByID", mock.Anything).Return(nil).Maybe() // Return nil to skip flush processing
-	defer func() {
-		_ = repo.Close()
-	}()
-
-	err := repo.IncrementProgress(context.Background(), "user1", "goal1", "challenge1", "test", 5, 100, false)
-	assert.NoError(t, err)
-
-	// Verify increment is buffered (check internal state via reflection or flush)
-	repo.mu.RLock()
-	key := "user1:goal1"
-	delta, exists := repo.bufferIncrement[key]
-	repo.mu.RUnlock()
-
-	assert.True(t, exists, "Increment should be buffered")
-	assert.Equal(t, 5, delta, "Delta should match")
-}
-
-func TestIncrementProgress_DeltaAccumulation(t *testing.T) {
-	mockRepo := new(MockGoalRepository)
-	mockCache := new(MockGoalCache)
-	logger := newTestLogger()
-
-	repo := newTestBufferedRepository(mockRepo, mockCache, 10*time.Second, 1000, logger)
-	mockRepo.On("BatchIncrementProgress", mock.Anything, mock.Anything).Return(nil).Maybe()
-	mockCache.On("GetGoalByID", mock.Anything).Return(nil).Maybe()
-	defer func() {
-		_ = repo.Close()
-	}()
-
-	// Add multiple increments for same goal
-	err := repo.IncrementProgress(context.Background(), "user1", "goal1", "challenge1", "test", 3, 100, false)
-	assert.NoError(t, err)
-
-	err = repo.IncrementProgress(context.Background(), "user1", "goal1", "challenge1", "test", 2, 100, false)
-	assert.NoError(t, err)
-
-	err = repo.IncrementProgress(context.Background(), "user1", "goal1", "challenge1", "test", 5, 100, false)
-	assert.NoError(t, err)
-
-	// Verify deltas are accumulated (3 + 2 + 5 = 10)
-	repo.mu.RLock()
-	key := "user1:goal1"
-	delta := repo.bufferIncrement[key]
-	repo.mu.RUnlock()
-
-	assert.Equal(t, 10, delta, "Deltas should be accumulated")
-}
-
-func TestIncrementProgress_DailyFirstEvent(t *testing.T) {
-	mockRepo := new(MockGoalRepository)
-	mockCache := new(MockGoalCache)
-	logger := newTestLogger()
-
-	repo := newTestBufferedRepository(mockRepo, mockCache, 10*time.Second, 1000, logger)
-	mockRepo.On("BatchIncrementProgress", mock.Anything, mock.Anything).Return(nil).Maybe()
-	mockCache.On("GetGoalByID", mock.Anything).Return(nil).Maybe()
-	defer func() {
-		_ = repo.Close()
-	}()
-
-	// First daily increment event
-	err := repo.IncrementProgress(context.Background(), "user1", "goal1", "challenge1", "test", 1, 1, true)
-	assert.NoError(t, err)
-
-	// Verify timestamp is stored
-	repo.mu.RLock()
-	key := "user1:goal1"
-	_, exists := repo.bufferIncrementDaily[key]
-	delta := repo.bufferIncrement[key]
-	repo.mu.RUnlock()
-
-	assert.True(t, exists, "Timestamp should be stored for daily increment")
-	assert.Equal(t, 1, delta, "Delta should be 1 for daily increment")
-}
-
-func TestIncrementProgress_DailySameDaySkip(t *testing.T) {
-	mockRepo := new(MockGoalRepository)
-	mockCache := new(MockGoalCache)
-	logger := newTestLogger()
-
-	repo := newTestBufferedRepository(mockRepo, mockCache, 10*time.Second, 1000, logger)
-	mockRepo.On("BatchIncrementProgress", mock.Anything, mock.Anything).Return(nil).Maybe()
-	mockCache.On("GetGoalByID", mock.Anything).Return(nil).Maybe()
-	defer func() {
-		_ = repo.Close()
-	}()
-
-	// First event
-	err := repo.IncrementProgress(context.Background(), "user1", "goal1", "challenge1", "test", 1, 1, true)
-	assert.NoError(t, err)
-
-	// Second event same day (should be skipped)
-	err = repo.IncrementProgress(context.Background(), "user1", "goal1", "challenge1", "test", 1, 1, true)
-	assert.NoError(t, err) // No error, but should be skipped
-
-	// Verify delta is still 1 (not 2)
-	repo.mu.RLock()
-	key := "user1:goal1"
-	delta := repo.bufferIncrement[key]
-	repo.mu.RUnlock()
-
-	assert.Equal(t, 1, delta, "Same-day increment should be skipped")
-}
-
-func TestIncrementProgress_DailyNewDayIncrement(t *testing.T) {
-	mockRepo := new(MockGoalRepository)
-	mockCache := new(MockGoalCache)
-	logger := newTestLogger()
-
-	repo := newTestBufferedRepository(mockRepo, mockCache, 10*time.Second, 1000, logger)
-	mockRepo.On("BatchIncrementProgress", mock.Anything, mock.Anything).Return(nil).Maybe()
-	mockCache.On("GetGoalByID", mock.Anything).Return(nil).Maybe()
-	defer func() {
-		_ = repo.Close()
-	}()
-
-	// Simulate first event on "yesterday" with pending increment (failed flush scenario)
-	yesterday := time.Now().Add(-25 * time.Hour) // More than 24h ago
-	repo.mu.Lock()
-	repo.bufferIncrementDaily["user1:goal1"] = yesterday
-	repo.bufferIncrement["user1:goal1"] = 1 // Yesterday's increment still buffered (flush failed)
-	repo.mu.Unlock()
-
-	// Event today (should succeed and accumulate)
-	err := repo.IncrementProgress(context.Background(), "user1", "goal1", "challenge1", "test", 1, 2, true)
-	assert.NoError(t, err)
-
-	// Verify delta is now 2 (yesterday's 1 + today's 1)
-	// This prevents data loss when flush fails and new day arrives
-	repo.mu.RLock()
-	delta := repo.bufferIncrement["user1:goal1"]
-	timestamp := repo.bufferIncrementDaily["user1:goal1"]
-	repo.mu.RUnlock()
-
-	assert.Equal(t, 2, delta, "New day increment should accumulate (prevents data loss on flush failure)")
-	// Timestamp should be updated to today
-	assert.True(t, timestamp.After(yesterday), "Timestamp should be updated to today")
-}
-
-func TestIncrementProgress_DailyGracefulDegradation(t *testing.T) {
-	mockRepo := new(MockGoalRepository)
-	mockCache := new(MockGoalCache)
-	logger := newTestLogger()
-
-	repo := newTestBufferedRepository(mockRepo, mockCache, 10*time.Second, 1000, logger)
-	mockRepo.On("BatchIncrementProgress", mock.Anything, mock.Anything).Return(nil).Maybe()
-	mockCache.On("GetGoalByID", mock.Anything).Return(nil).Maybe()
-	defer func() {
-		_ = repo.Close()
-	}()
-
-	// Fill daily buffer to capacity (200K)
-	repo.mu.Lock()
-	for i := 0; i < 200000; i++ {
-		key := fmt.Sprintf("user%d:goal%d", i/100, i%100)
-		repo.bufferIncrementDaily[key] = time.Now()
-	}
-	repo.mu.Unlock()
-
-	// Try to add new daily increment (should still succeed, but timestamp not stored)
-	err := repo.IncrementProgress(context.Background(), "newuser", "newgoal", "challenge1", "test", 1, 1, true)
-	assert.NoError(t, err)
-
-	// Verify increment is buffered, but timestamp not stored (graceful degradation)
-	repo.mu.RLock()
-	key := "newuser:newgoal"
-	delta, deltaExists := repo.bufferIncrement[key]
-	_, timestampExists := repo.bufferIncrementDaily[key]
-	repo.mu.RUnlock()
-
-	assert.True(t, deltaExists, "Increment should be buffered")
-	assert.Equal(t, 1, delta)
-	assert.False(t, timestampExists, "Timestamp should NOT be stored at capacity (graceful degradation)")
-}
-
-func TestIncrementProgress_EmptyUserID(t *testing.T) {
-	mockRepo := new(MockGoalRepository)
-	mockCache := new(MockGoalCache)
-	logger := newTestLogger()
-
-	repo := newTestBufferedRepository(mockRepo, mockCache, 10*time.Second, 1000, logger)
-	mockRepo.On("BatchIncrementProgress", mock.Anything, mock.Anything).Return(nil).Maybe()
-	mockCache.On("GetGoalByID", mock.Anything).Return(nil).Maybe()
-	defer func() {
-		_ = repo.Close()
-	}()
-
-	err := repo.IncrementProgress(context.Background(), "", "goal1", "challenge1", "test", 5, 100, false)
-	assert.Error(t, err)
-	assert.Contains(t, err.Error(), "userID cannot be empty")
-}
-
-func TestIncrementProgress_EmptyGoalID(t *testing.T) {
-	mockRepo := new(MockGoalRepository)
-	mockCache := new(MockGoalCache)
-	logger := newTestLogger()
-
-	repo := newTestBufferedRepository(mockRepo, mockCache, 10*time.Second, 1000, logger)
-	mockRepo.On("BatchIncrementProgress", mock.Anything, mock.Anything).Return(nil).Maybe()
-	mockCache.On("GetGoalByID", mock.Anything).Return(nil).Maybe()
-	defer func() {
-		_ = repo.Close()
-	}()
-
-	err := repo.IncrementProgress(context.Background(), "user1", "", "challenge1", "test", 5, 100, false)
-	assert.Error(t, err)
-	assert.Contains(t, err.Error(), "goalID cannot be empty")
-}
-
-func TestIncrementProgress_NegativeDelta(t *testing.T) {
-	mockRepo := new(MockGoalRepository)
-	mockCache := new(MockGoalCache)
-	logger := newTestLogger()
-
-	repo := newTestBufferedRepository(mockRepo, mockCache, 10*time.Second, 1000, logger)
-	mockRepo.On("BatchIncrementProgress", mock.Anything, mock.Anything).Return(nil).Maybe()
-	mockCache.On("GetGoalByID", mock.Anything).Return(nil).Maybe()
-	defer func() {
-		_ = repo.Close()
-	}()
-
-	err := repo.IncrementProgress(context.Background(), "user1", "goal1", "challenge1", "test", -5, 100, false)
-	assert.Error(t, err)
-	assert.Contains(t, err.Error(), "delta cannot be negative")
-}
-
-func TestFlush_MixedAbsoluteAndIncrement(t *testing.T) {
-	mockRepo := new(MockGoalRepository)
-	mockCache := new(MockGoalCache)
-	logger := newTestLogger()
-
-	repo := newTestBufferedRepository(mockRepo, mockCache, 10*time.Second, 1000, logger)
-	defer func() {
-		_ = repo.Close()
-	}()
-
-	// Add absolute update
-	progress := &domain.UserGoalProgress{
-		UserID:   "user1",
-		GoalID:   "goal1",
-		Progress: 50,
-		Status:   domain.GoalStatusInProgress,
-	}
-	err := repo.UpdateProgress(context.Background(), progress)
-	assert.NoError(t, err)
-
-	// Add increment update
-	err = repo.IncrementProgress(context.Background(), "user1", "goal2", "challenge1", "test", 10, 100, false)
-	assert.NoError(t, err)
-
-	// Mock goal cache response
-	mockCache.On("GetGoalByID", "goal2").Return(&domain.Goal{
-		ID:          "goal2",
-		ChallengeID: "challenge1",
-		Type:        domain.GoalTypeIncrement,
-		Daily:       false,
-		Requirement: domain.Requirement{TargetValue: 100},
-	})
-
-	// Expect both BatchUpsertProgress and BatchIncrementProgress to be called
-	mockRepo.On("BatchUpsertProgressWithCOPY", mock.Anything, mock.MatchedBy(func(updates []*domain.UserGoalProgress) bool {
-		return len(updates) == 1 && updates[0].GoalID == "goal1"
-	})).Return(nil)
-
-	mockRepo.On("BatchIncrementProgress", mock.Anything, mock.MatchedBy(func(increments []repository.ProgressIncrement) bool {
-		return len(increments) == 1 && increments[0].GoalID == "goal2" && increments[0].Delta == 10
-	})).Return(nil)
-
-	// Flush
-	err = repo.Flush(context.Background())
-	assert.NoError(t, err)
-
-	// Verify both buffers are empty
-	assert.Equal(t, 0, repo.GetBufferSize())
-	repo.mu.RLock()
-	assert.Equal(t, 0, len(repo.bufferIncrement))
-	repo.mu.RUnlock()
-
-	mockRepo.AssertExpectations(t)
-	mockCache.AssertExpectations(t)
-}
-
-func TestFlush_IncrementOnly(t *testing.T) {
-	mockRepo := new(MockGoalRepository)
-	mockCache := new(MockGoalCache)
-	logger := newTestLogger()
-
-	repo := newTestBufferedRepository(mockRepo, mockCache, 10*time.Second, 1000, logger)
-	defer func() {
-		_ = repo.Close()
-	}()
-
-	// Add increment updates only
-	err := repo.IncrementProgress(context.Background(), "user1", "goal1", "challenge1", "test", 5, 100, false)
-	assert.NoError(t, err)
-	err = repo.IncrementProgress(context.Background(), "user1", "goal2", "challenge1", "test", 3, 50, false)
-	assert.NoError(t, err)
-
-	// Mock goal cache responses
-	mockCache.On("GetGoalByID", "goal1").Return(&domain.Goal{
-		ID:          "goal1",
-		ChallengeID: "challenge1",
-		Type:        domain.GoalTypeIncrement,
-		Daily:       false,
-		Requirement: domain.Requirement{TargetValue: 100},
-	})
-	mockCache.On("GetGoalByID", "goal2").Return(&domain.Goal{
-		ID:          "goal2",
-		ChallengeID: "challenge1",
-		Type:        domain.GoalTypeIncrement,
-		Daily:       false,
-		Requirement: domain.Requirement{TargetValue: 50},
-	})
-
-	// Expect only BatchIncrementProgress to be called (no BatchUpsertProgress)
-	mockRepo.On("BatchIncrementProgress", mock.Anything, mock.MatchedBy(func(increments []repository.ProgressIncrement) bool {
-		return len(increments) == 2
-	})).Return(nil)
-
-	// Flush
-	err = repo.Flush(context.Background())
-	assert.NoError(t, err)
-
-	// Verify increment buffer is empty
-	repo.mu.RLock()
-	assert.Equal(t, 0, len(repo.bufferIncrement))
-	repo.mu.RUnlock()
-
-	mockRepo.AssertExpectations(t)
-	mockCache.AssertExpectations(t)
-}
-
-func TestFlush_IncrementFailureRestoration(t *testing.T) {
-	mockRepo := new(MockGoalRepository)
-	mockCache := new(MockGoalCache)
-	logger := newTestLogger()
-
-	repo := newTestBufferedRepository(mockRepo, mockCache, 10*time.Second, 1000, logger)
-	defer func() {
-		_ = repo.Close()
-	}()
-
-	// Add increment update
-	err := repo.IncrementProgress(context.Background(), "user1", "goal1", "challenge1", "test", 10, 100, false)
-	assert.NoError(t, err)
-
-	// Add daily increment update
-	err = repo.IncrementProgress(context.Background(), "user1", "goal2", "challenge1", "test", 1, 7, true)
-	assert.NoError(t, err)
-
-	// Mock goal cache responses
-	mockCache.On("GetGoalByID", "goal1").Return(&domain.Goal{
-		ID:          "goal1",
-		ChallengeID: "challenge1",
-		Type:        domain.GoalTypeIncrement,
-		Daily:       false,
-		Requirement: domain.Requirement{TargetValue: 100},
-	})
-	mockCache.On("GetGoalByID", "goal2").Return(&domain.Goal{
-		ID:          "goal2",
-		ChallengeID: "challenge1",
-		Type:        domain.GoalTypeIncrement,
-		Daily:       true,
-		Requirement: domain.Requirement{TargetValue: 7},
-	})
-
-	// Simulate database error for BatchIncrementProgress
-	mockRepo.On("BatchIncrementProgress", mock.Anything, mock.Anything).Return(errors.New("database error"))
-
-	// Flush should fail
-	err = repo.Flush(context.Background())
-	assert.Error(t, err)
-
-	// Verify increment buffer is restored (for retry)
-	repo.mu.RLock()
-	delta1 := repo.bufferIncrement["user1:goal1"]
-	delta2 := repo.bufferIncrement["user1:goal2"]
-	_, dailyExists := repo.bufferIncrementDaily["user1:goal2"]
-	repo.mu.RUnlock()
-
-	assert.Equal(t, 10, delta1, "Regular increment should be restored")
-	assert.Equal(t, 1, delta2, "Daily increment should be restored")
-	assert.True(t, dailyExists, "Daily timestamp should be restored")
-
-	mockRepo.AssertExpectations(t)
-	mockCache.AssertExpectations(t)
-}
-
-func TestCleanupOldDailyEntries(t *testing.T) {
-	mockRepo := new(MockGoalRepository)
-	mockCache := new(MockGoalCache)
-	logger := newTestLogger()
-
-	repo := newTestBufferedRepository(mockRepo, mockCache, 10*time.Second, 1000, logger)
-	mockRepo.On("BatchIncrementProgress", mock.Anything, mock.Anything).Return(nil).Maybe()
-	mockCache.On("GetGoalByID", mock.Anything).Return(nil).Maybe()
-	defer func() {
-		_ = repo.Close()
-	}()
-
-	// Add old entries (>48h ago)
-	oldTime := time.Now().Add(-50 * time.Hour)
-	repo.mu.Lock()
-	repo.bufferIncrementDaily["user1:goal1"] = oldTime
-	repo.bufferIncrementDaily["user2:goal2"] = oldTime
-	repo.mu.Unlock()
-
-	// Add recent entries
-	err := repo.IncrementProgress(context.Background(), "user3", "goal3", "challenge1", "test", 1, 1, true)
-	assert.NoError(t, err)
-
-	// Manually trigger cleanup
-	repo.cleanupOldDailyEntries()
-
-	// Verify old entries are removed, recent entries remain
-	repo.mu.RLock()
-	_, old1Exists := repo.bufferIncrementDaily["user1:goal1"]
-	_, old2Exists := repo.bufferIncrementDaily["user2:goal2"]
-	_, recentExists := repo.bufferIncrementDaily["user3:goal3"]
-	repo.mu.RUnlock()
-
-	assert.False(t, old1Exists, "Old entry should be cleaned up")
-	assert.False(t, old2Exists, "Old entry should be cleaned up")
-	assert.True(t, recentExists, "Recent entry should remain")
-}
-
-func TestConcurrentIncrementUpdates(t *testing.T) {
-	mockRepo := new(MockGoalRepository)
-	mockCache := new(MockGoalCache)
-	logger := newTestLogger()
-
-	repo := newTestBufferedRepository(mockRepo, mockCache, 10*time.Second, 1000, logger)
-	defer func() {
-		_ = repo.Close()
-	}()
-
-	mockRepo.On("BatchIncrementProgress", mock.Anything, mock.Anything).Return(nil).Maybe()
-	mockCache.On("GetGoalByID", mock.Anything).Return(nil).Maybe()
-
-	var wg sync.WaitGroup
-	numGoroutines := 10
-	incrementsPerGoroutine := 100
-
-	// Spawn multiple goroutines to increment same goal concurrently
-	for i := 0; i < numGoroutines; i++ {
-		wg.Add(1)
-		go func() {
-			defer wg.Done()
-			for j := 0; j < incrementsPerGoroutine; j++ {
-				err := repo.IncrementProgress(context.Background(), "user1", "goal1", "challenge1", "test", 1, 1000, false)
-				assert.NoError(t, err)
-			}
-		}()
-	}
-
-	wg.Wait()
-
-	// Verify all deltas are accumulated (10 * 100 = 1000)
-	repo.mu.RLock()
-	delta := repo.bufferIncrement["user1:goal1"]
-	repo.mu.RUnlock()
-
-	assert.Equal(t, 1000, delta, "All concurrent increments should be accumulated")
-}
-
-func TestFlush_DailyIncrementWithCorrectFlag(t *testing.T) {
-	mockRepo := new(MockGoalRepository)
-	mockCache := new(MockGoalCache)
-	logger := newTestLogger()
-
-	repo := newTestBufferedRepository(mockRepo, mockCache, 10*time.Second, 1000, logger)
-	defer func() {
-		_ = repo.Close()
-	}()
-
-	// Add daily increment
-	err := repo.IncrementProgress(context.Background(), "user1", "goal1", "challenge1", "test", 1, 7, true)
-	assert.NoError(t, err)
-
-	// Mock goal cache to return daily increment goal
-	mockCache.On("GetGoalByID", "goal1").Return(&domain.Goal{
-		ID:          "goal1",
-		ChallengeID: "challenge1",
-		Type:        domain.GoalTypeIncrement,
-		Daily:       true, // ← Daily flag
-		Requirement: domain.Requirement{TargetValue: 7},
-	})
-
-	// Expect BatchIncrementProgress with isDailyIncrement=true
-	mockRepo.On("BatchIncrementProgress", mock.Anything, mock.MatchedBy(func(increments []repository.ProgressIncrement) bool {
-		if len(increments) != 1 {
-			return false
-		}
-		inc := increments[0]
-		return inc.IsDailyIncrement == true && inc.Delta == 1
-	})).Return(nil)
-
-	// Flush
-	err = repo.Flush(context.Background())
-	assert.NoError(t, err)
-
-	mockRepo.AssertExpectations(t)
-	mockCache.AssertExpectations(t)
-}
-
-// ============================================================================
-// Backpressure Tests - Phase 1 Buffer Overflow Solution
+// Backpressure Tests - Buffer Overflow Solution
 // ============================================================================
 
 func TestBackpressure_WaitsForFlush(t *testing.T) {
 	mockRepo := new(MockGoalRepository)
+	mockCache := new(MockGoalCache)
 	logger := newTestLogger()
 
-	// maxBufferSize=10 → backpressure at 15, circuit breaker at 25
+	// maxBufferSize=10 -> backpressure at 15, circuit breaker at 25
 	// Use very long flush interval to prevent background flush interference
-	repo := newTestBufferedRepository(mockRepo, nil, 1*time.Hour, 10, logger)
+	repo := newTestBufferedRepository(mockRepo, mockCache, 1*time.Hour, 10, logger)
 	defer func() {
 		_ = repo.Close()
 	}()
+
+	// Set up cache mock for enrichment
+	mockCache.On("GetGoalByID", mock.Anything).Return(testGoal("goalX", "challenge1", 100)).Maybe()
 
 	// Simulate slow flush (200ms)
 	mockRepo.On("BatchUpsertProgressWithCOPY", mock.Anything, mock.Anything).Run(func(args mock.Arguments) {
@@ -1433,13 +1197,16 @@ func TestBackpressure_WaitsForFlush(t *testing.T) {
 
 	// Fill buffer to backpressure threshold (15 entries)
 	for i := 0; i < 15; i++ {
-		progress := &domain.UserGoalProgress{
-			UserID:   "user1",
-			GoalID:   fmt.Sprintf("goal%d", i),
-			Progress: i,
-			Status:   domain.GoalStatusInProgress,
+		event := &domain.BufferedEvent{
+			UserID:       "user1",
+			GoalID:       fmt.Sprintf("goal%d", i),
+			ChallengeID:  "challenge1",
+			Namespace:    "test",
+			Progress:     intPtr(i),
+			IncValue:     0,
+			ProgressMode: domain.ProgressModeAbsolute,
 		}
-		err := repo.UpdateProgress(context.Background(), progress)
+		err := repo.UpdateProgress(context.Background(), event)
 		assert.NoError(t, err)
 	}
 
@@ -1448,13 +1215,16 @@ func TestBackpressure_WaitsForFlush(t *testing.T) {
 	startTime := time.Now()
 
 	go func() {
-		progress := &domain.UserGoalProgress{
-			UserID:   "user1",
-			GoalID:   "goal_backpressure",
-			Progress: 100,
-			Status:   domain.GoalStatusInProgress,
+		event := &domain.BufferedEvent{
+			UserID:       "user1",
+			GoalID:       "goal_backpressure",
+			ChallengeID:  "challenge1",
+			Namespace:    "test",
+			Progress:     intPtr(100),
+			IncValue:     0,
+			ProgressMode: domain.ProgressModeAbsolute,
 		}
-		done <- repo.UpdateProgress(context.Background(), progress)
+		done <- repo.UpdateProgress(context.Background(), event)
 	}()
 
 	// Verify it's blocking (shouldn't complete immediately)
@@ -1483,12 +1253,16 @@ func TestBackpressure_WaitsForFlush(t *testing.T) {
 
 func TestBackpressure_TimeoutWhenFlushNeverCompletes(t *testing.T) {
 	mockRepo := new(MockGoalRepository)
+	mockCache := new(MockGoalCache)
 	logger := newTestLogger()
 
-	// maxBufferSize=10 → backpressure at 15
-	repo := newTestBufferedRepository(mockRepo, nil, 1*time.Second, 10, logger) // 1s flush interval
+	// maxBufferSize=10 -> backpressure at 15
+	repo := newTestBufferedRepository(mockRepo, mockCache, 1*time.Second, 10, logger) // 1s flush interval
 	// Note: We intentionally don't defer Close() because the mock sleeps for 30s
 	// and Close() would block waiting for flush to complete
+
+	// Set up cache mock for enrichment
+	mockCache.On("GetGoalByID", mock.Anything).Return(testGoal("goalX", "challenge1", 100)).Maybe()
 
 	// Simulate database that never responds (block forever)
 	// This will cause automatic flushes to get stuck
@@ -1498,13 +1272,16 @@ func TestBackpressure_TimeoutWhenFlushNeverCompletes(t *testing.T) {
 
 	// Fill buffer to backpressure threshold (15 entries)
 	for i := 0; i < 15; i++ {
-		progress := &domain.UserGoalProgress{
-			UserID:   "user1",
-			GoalID:   fmt.Sprintf("goal%d", i),
-			Progress: i,
-			Status:   domain.GoalStatusInProgress,
+		event := &domain.BufferedEvent{
+			UserID:       "user1",
+			GoalID:       fmt.Sprintf("goal%d", i),
+			ChallengeID:  "challenge1",
+			Namespace:    "test",
+			Progress:     intPtr(i),
+			IncValue:     0,
+			ProgressMode: domain.ProgressModeAbsolute,
 		}
-		err := repo.UpdateProgress(context.Background(), progress)
+		err := repo.UpdateProgress(context.Background(), event)
 		assert.NoError(t, err)
 	}
 
@@ -1518,26 +1295,32 @@ func TestBackpressure_TimeoutWhenFlushNeverCompletes(t *testing.T) {
 
 	// Fill buffer to backpressure threshold again while flush is blocked
 	for i := 0; i < 15; i++ {
-		progress := &domain.UserGoalProgress{
-			UserID:   "user2",
-			GoalID:   fmt.Sprintf("goal%d", i),
-			Progress: i,
-			Status:   domain.GoalStatusInProgress,
+		event := &domain.BufferedEvent{
+			UserID:       "user2",
+			GoalID:       fmt.Sprintf("goal%d", i),
+			ChallengeID:  "challenge1",
+			Namespace:    "test",
+			Progress:     intPtr(i),
+			IncValue:     0,
+			ProgressMode: domain.ProgressModeAbsolute,
 		}
-		err := repo.UpdateProgress(context.Background(), progress)
+		err := repo.UpdateProgress(context.Background(), event)
 		assert.NoError(t, err)
 	}
 
 	// Next update should trigger backpressure and timeout after 5 seconds
 	// (because previous flush is still blocked and won't send completion signal)
 	start := time.Now()
-	progress := &domain.UserGoalProgress{
-		UserID:   "user2",
-		GoalID:   "goal_timeout",
-		Progress: 100,
-		Status:   domain.GoalStatusInProgress,
+	event := &domain.BufferedEvent{
+		UserID:       "user2",
+		GoalID:       "goal_timeout",
+		ChallengeID:  "challenge1",
+		Namespace:    "test",
+		Progress:     intPtr(100),
+		IncValue:     0,
+		ProgressMode: domain.ProgressModeAbsolute,
 	}
-	err := repo.UpdateProgress(context.Background(), progress)
+	err := repo.UpdateProgress(context.Background(), event)
 	duration := time.Since(start)
 
 	// Should return timeout error
@@ -1554,13 +1337,14 @@ func TestBackpressure_TimeoutWhenFlushNeverCompletes(t *testing.T) {
 
 func TestCircuitBreaker_RejectsWhenThresholdExceeded(t *testing.T) {
 	mockRepo := new(MockGoalRepository)
+	mockCache := new(MockGoalCache)
 	logger := newTestLogger()
 
-	// maxBufferSize=10 → circuit breaker at 25
+	// maxBufferSize=10 -> circuit breaker at 25
 	// Use very long flush interval to prevent background flush interference
 	// IMPORTANT: Disable size-based flush by setting maxBufferSize to very large value
 	// We want to test circuit breaker at 25, so set maxBufferSize > 25
-	repo := newTestBufferedRepository(mockRepo, nil, 1*time.Hour, 50, logger)
+	repo := newTestBufferedRepository(mockRepo, mockCache, 1*time.Hour, 50, logger)
 	// Manually override thresholds for this test
 	// Set backpressure very high so it doesn't interfere with circuit breaker test
 	repo.backpressureThreshold = 1000
@@ -1569,18 +1353,24 @@ func TestCircuitBreaker_RejectsWhenThresholdExceeded(t *testing.T) {
 		_ = repo.Close()
 	}()
 
+	// Set up cache mock for enrichment
+	mockCache.On("GetGoalByID", mock.Anything).Return(testGoal("goalX", "challenge1", 100)).Maybe()
+
 	// Simulate database failure - all flushes fail
 	mockRepo.On("BatchUpsertProgressWithCOPY", mock.Anything, mock.Anything).Return(errors.New("database unavailable")).Maybe()
 
 	// Fill buffer to circuit breaker threshold (25 entries)
 	for i := 0; i < 25; i++ {
-		progress := &domain.UserGoalProgress{
-			UserID:   "user1",
-			GoalID:   fmt.Sprintf("goal%d", i),
-			Progress: i,
-			Status:   domain.GoalStatusInProgress,
+		event := &domain.BufferedEvent{
+			UserID:       "user1",
+			GoalID:       fmt.Sprintf("goal%d", i),
+			ChallengeID:  "challenge1",
+			Namespace:    "test",
+			Progress:     intPtr(i),
+			IncValue:     0,
+			ProgressMode: domain.ProgressModeAbsolute,
 		}
-		err := repo.UpdateProgress(context.Background(), progress)
+		err := repo.UpdateProgress(context.Background(), event)
 		assert.NoError(t, err, "Update %d should succeed", i)
 	}
 
@@ -1588,13 +1378,16 @@ func TestCircuitBreaker_RejectsWhenThresholdExceeded(t *testing.T) {
 	assert.Equal(t, 25, repo.GetBufferSize())
 
 	// Next update should be rejected immediately by circuit breaker
-	progress := &domain.UserGoalProgress{
-		UserID:   "user1",
-		GoalID:   "goal_circuit_breaker",
-		Progress: 100,
-		Status:   domain.GoalStatusInProgress,
+	event := &domain.BufferedEvent{
+		UserID:       "user1",
+		GoalID:       "goal_circuit_breaker",
+		ChallengeID:  "challenge1",
+		Namespace:    "test",
+		Progress:     intPtr(100),
+		IncValue:     0,
+		ProgressMode: domain.ProgressModeAbsolute,
 	}
-	err := repo.UpdateProgress(context.Background(), progress)
+	err := repo.UpdateProgress(context.Background(), event)
 
 	// Should return circuit breaker error immediately
 	assert.Error(t, err)
@@ -1608,27 +1401,34 @@ func TestCircuitBreaker_RejectsWhenThresholdExceeded(t *testing.T) {
 
 func TestFlushCompletion_SignalsWaitingGoroutines(t *testing.T) {
 	mockRepo := new(MockGoalRepository)
+	mockCache := new(MockGoalCache)
 	logger := newTestLogger()
 
-	// maxBufferSize=10 → backpressure at 15
+	// maxBufferSize=10 -> backpressure at 15
 	// Use very long flush interval to prevent background flush interference
-	repo := newTestBufferedRepository(mockRepo, nil, 1*time.Hour, 10, logger)
+	repo := newTestBufferedRepository(mockRepo, mockCache, 1*time.Hour, 10, logger)
 	defer func() {
 		_ = repo.Close()
 	}()
+
+	// Set up cache mock for enrichment
+	mockCache.On("GetGoalByID", mock.Anything).Return(testGoal("goalX", "challenge1", 100)).Maybe()
 
 	// Simulate fast flush
 	mockRepo.On("BatchUpsertProgressWithCOPY", mock.Anything, mock.Anything).Return(nil).Maybe()
 
 	// Fill buffer to backpressure threshold (15 entries)
 	for i := 0; i < 15; i++ {
-		progress := &domain.UserGoalProgress{
-			UserID:   "user1",
-			GoalID:   fmt.Sprintf("goal%d", i),
-			Progress: i,
-			Status:   domain.GoalStatusInProgress,
+		event := &domain.BufferedEvent{
+			UserID:       "user1",
+			GoalID:       fmt.Sprintf("goal%d", i),
+			ChallengeID:  "challenge1",
+			Namespace:    "test",
+			Progress:     intPtr(i),
+			IncValue:     0,
+			ProgressMode: domain.ProgressModeAbsolute,
 		}
-		err := repo.UpdateProgress(context.Background(), progress)
+		err := repo.UpdateProgress(context.Background(), event)
 		assert.NoError(t, err)
 	}
 
@@ -1638,13 +1438,16 @@ func TestFlushCompletion_SignalsWaitingGoroutines(t *testing.T) {
 
 	for i := 0; i < numWaiters; i++ {
 		go func(id int) {
-			progress := &domain.UserGoalProgress{
-				UserID:   "user1",
-				GoalID:   fmt.Sprintf("goal_waiter_%d", id),
-				Progress: id,
-				Status:   domain.GoalStatusInProgress,
+			event := &domain.BufferedEvent{
+				UserID:       "user1",
+				GoalID:       fmt.Sprintf("goal_waiter_%d", id),
+				ChallengeID:  "challenge1",
+				Namespace:    "test",
+				Progress:     intPtr(id),
+				IncValue:     0,
+				ProgressMode: domain.ProgressModeAbsolute,
 			}
-			done <- repo.UpdateProgress(context.Background(), progress)
+			done <- repo.UpdateProgress(context.Background(), event)
 		}(i)
 	}
 
@@ -1674,18 +1477,22 @@ func TestFlushCompletion_SignalsWaitingGoroutines(t *testing.T) {
 
 func TestBackpressure_ContextCancellation(t *testing.T) {
 	mockRepo := new(MockGoalRepository)
+	mockCache := new(MockGoalCache)
 	logger := newTestLogger()
 
-	// maxBufferSize=10 → backpressure at 15
+	// maxBufferSize=10 -> backpressure at 15
 	// Use very long flush interval to prevent background flush interference
 	// IMPORTANT: Set maxBufferSize > 15 to prevent size-based flush from triggering
 	// during the test, which would leave a flush completion signal in the channel
-	repo := newTestBufferedRepository(mockRepo, nil, 1*time.Hour, 50, logger)
+	repo := newTestBufferedRepository(mockRepo, mockCache, 1*time.Hour, 50, logger)
 	// Manually set backpressure threshold to 15 for this test
 	repo.backpressureThreshold = 15
 	defer func() {
 		_ = repo.Close()
 	}()
+
+	// Set up cache mock for enrichment
+	mockCache.On("GetGoalByID", mock.Anything).Return(testGoal("goalX", "challenge1", 100)).Maybe()
 
 	// Simulate slow flush (won't be triggered due to high maxBufferSize)
 	mockRepo.On("BatchUpsertProgressWithCOPY", mock.Anything, mock.Anything).Run(func(args mock.Arguments) {
@@ -1694,13 +1501,16 @@ func TestBackpressure_ContextCancellation(t *testing.T) {
 
 	// Fill buffer to backpressure threshold
 	for i := 0; i < 15; i++ {
-		progress := &domain.UserGoalProgress{
-			UserID:   "user1",
-			GoalID:   fmt.Sprintf("goal%d", i),
-			Progress: i,
-			Status:   domain.GoalStatusInProgress,
+		event := &domain.BufferedEvent{
+			UserID:       "user1",
+			GoalID:       fmt.Sprintf("goal%d", i),
+			ChallengeID:  "challenge1",
+			Namespace:    "test",
+			Progress:     intPtr(i),
+			IncValue:     0,
+			ProgressMode: domain.ProgressModeAbsolute,
 		}
-		err := repo.UpdateProgress(context.Background(), progress)
+		err := repo.UpdateProgress(context.Background(), event)
 		assert.NoError(t, err)
 	}
 
@@ -1710,13 +1520,16 @@ func TestBackpressure_ContextCancellation(t *testing.T) {
 	// Start update with backpressure (will block)
 	done := make(chan error, 1)
 	go func() {
-		progress := &domain.UserGoalProgress{
-			UserID:   "user1",
-			GoalID:   "goal_cancel",
-			Progress: 100,
-			Status:   domain.GoalStatusInProgress,
+		event := &domain.BufferedEvent{
+			UserID:       "user1",
+			GoalID:       "goal_cancel",
+			ChallengeID:  "challenge1",
+			Namespace:    "test",
+			Progress:     intPtr(100),
+			IncValue:     0,
+			ProgressMode: domain.ProgressModeAbsolute,
 		}
-		done <- repo.UpdateProgress(ctx, progress)
+		done <- repo.UpdateProgress(ctx, event)
 	}()
 
 	// Wait for goroutine to start blocking
@@ -1769,26 +1582,33 @@ func TestBackpressure_ThresholdCalculation(t *testing.T) {
 
 func TestBackpressure_NoImpactBelowThreshold(t *testing.T) {
 	mockRepo := new(MockGoalRepository)
+	mockCache := new(MockGoalCache)
 	logger := newTestLogger()
 
-	// maxBufferSize=100 → backpressure at 150
-	repo := newTestBufferedRepository(mockRepo, nil, 10*time.Second, 100, logger)
+	// maxBufferSize=100 -> backpressure at 150
+	repo := newTestBufferedRepository(mockRepo, mockCache, 10*time.Second, 100, logger)
 	defer func() {
 		_ = repo.Close()
 	}()
+
+	// Set up cache mock for enrichment
+	mockCache.On("GetGoalByID", mock.Anything).Return(testGoal("goalX", "challenge1", 100)).Maybe()
 
 	mockRepo.On("BatchUpsertProgressWithCOPY", mock.Anything, mock.Anything).Return(nil).Maybe()
 
 	// Add updates well below backpressure threshold (100 < 150)
 	start := time.Now()
 	for i := 0; i < 100; i++ {
-		progress := &domain.UserGoalProgress{
-			UserID:   "user1",
-			GoalID:   fmt.Sprintf("goal%d", i),
-			Progress: i,
-			Status:   domain.GoalStatusInProgress,
+		event := &domain.BufferedEvent{
+			UserID:       "user1",
+			GoalID:       fmt.Sprintf("goal%d", i),
+			ChallengeID:  "challenge1",
+			Namespace:    "test",
+			Progress:     intPtr(i),
+			IncValue:     0,
+			ProgressMode: domain.ProgressModeAbsolute,
 		}
-		err := repo.UpdateProgress(context.Background(), progress)
+		err := repo.UpdateProgress(context.Background(), event)
 		assert.NoError(t, err)
 	}
 	duration := time.Since(start)
@@ -1796,4 +1616,119 @@ func TestBackpressure_NoImpactBelowThreshold(t *testing.T) {
 	// Should complete very quickly (no backpressure blocking)
 	assert.Less(t, duration, 100*time.Millisecond, "Should complete quickly without backpressure")
 	assert.Equal(t, 100, repo.GetBufferSize())
+}
+
+// testGoalWithRotation returns a *domain.Goal with rotation config for testing.
+func testGoalWithRotation(goalID, challengeID string, targetValue int, schedule domain.RotationSchedule, resetProgress, allowReselection bool) *domain.Goal {
+	return &domain.Goal{
+		ID:          goalID,
+		ChallengeID: challengeID,
+		Requirement: domain.Requirement{
+			TargetValue:  targetValue,
+			ProgressMode: domain.ProgressModeRelative,
+		},
+		Rotation: &domain.RotationConfig{
+			Enabled:  true,
+			Type:     domain.RotationTypeGlobal,
+			Schedule: schedule,
+			OnExpiry: domain.OnExpiryConfig{
+				ResetProgress:    resetProgress,
+				AllowReselection: allowReselection,
+			},
+		},
+	}
+}
+
+func TestFlush_EnrichesRotationMetadata(t *testing.T) {
+	mockRepo := new(MockGoalRepository)
+	mockCache := new(MockGoalCache)
+	logger := newTestLogger()
+
+	repo := newTestBufferedRepository(mockRepo, mockCache, 10*time.Second, 1000, logger)
+	defer func() {
+		_ = repo.Close()
+	}()
+
+	// Relative goal with daily rotation
+	event := &domain.BufferedEvent{
+		UserID:       "user1",
+		GoalID:       "goal-rot",
+		ChallengeID:  "ch1",
+		Namespace:    "test",
+		Progress:     intPtr(108),
+		IncValue:     3,
+		ProgressMode: domain.ProgressModeRelative,
+	}
+	err := repo.UpdateProgress(context.Background(), event)
+	assert.NoError(t, err)
+
+	mockCache.On("GetGoalByID", "goal-rot").Return(
+		testGoalWithRotation("goal-rot", "ch1", 10, domain.RotationScheduleDaily, true, false),
+	)
+
+	// Verify CopyRow has rotation fields populated
+	mockRepo.On("BatchUpsertProgressWithCOPY", mock.Anything, mock.MatchedBy(func(rows []repository.CopyRow) bool {
+		if len(rows) != 1 {
+			return false
+		}
+		row := rows[0]
+		return row.UserID == "user1" &&
+			row.GoalID == "goal-rot" &&
+			row.RotationBoundary != nil &&
+			row.NewExpiresAt != nil &&
+			row.ResetProgress == true &&
+			row.AllowReselection == false
+	})).Return(nil)
+
+	err = repo.Flush(context.Background())
+	assert.NoError(t, err)
+
+	mockRepo.AssertExpectations(t)
+	mockCache.AssertExpectations(t)
+}
+
+func TestFlush_NonRotatingGoal_NoRotationMetadata(t *testing.T) {
+	mockRepo := new(MockGoalRepository)
+	mockCache := new(MockGoalCache)
+	logger := newTestLogger()
+
+	repo := newTestBufferedRepository(mockRepo, mockCache, 10*time.Second, 1000, logger)
+	defer func() {
+		_ = repo.Close()
+	}()
+
+	// Absolute goal, no rotation
+	event := &domain.BufferedEvent{
+		UserID:       "user1",
+		GoalID:       "goal-abs",
+		ChallengeID:  "ch1",
+		Namespace:    "test",
+		Progress:     intPtr(50),
+		IncValue:     0,
+		ProgressMode: domain.ProgressModeAbsolute,
+	}
+	err := repo.UpdateProgress(context.Background(), event)
+	assert.NoError(t, err)
+
+	mockCache.On("GetGoalByID", "goal-abs").Return(testGoal("goal-abs", "ch1", 100))
+
+	// Verify CopyRow has nil rotation fields
+	mockRepo.On("BatchUpsertProgressWithCOPY", mock.Anything, mock.MatchedBy(func(rows []repository.CopyRow) bool {
+		if len(rows) != 1 {
+			return false
+		}
+		row := rows[0]
+		return row.UserID == "user1" &&
+			row.GoalID == "goal-abs" &&
+			row.RotationBoundary == nil &&
+			row.NewExpiresAt == nil &&
+			row.ResetProgress == false &&
+			row.AllowReselection == false
+	})).Return(nil)
+
+	err = repo.Flush(context.Background())
+	assert.NoError(t, err)
+
+	mockRepo.AssertExpectations(t)
+	mockCache.AssertExpectations(t)
 }

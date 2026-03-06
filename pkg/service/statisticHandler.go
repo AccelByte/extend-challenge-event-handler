@@ -133,6 +133,7 @@ func (h *StatisticHandler) OnMessage(ctx context.Context, msg *statpb.StatItemUp
 	// Extract latest_value and convert from double to int (truncate)
 	// Q1 Decision: Use truncation (floor) for double→int conversion
 	statValue := int(msg.Payload.LatestValue)
+	incValue := int(msg.Payload.Inc) // Extract Inc for future baseline computation
 
 	// Get goals tracking this stat_code from cache (O(1) lookup)
 	// Q3 Decision: Use GetGoalsByStatCode() for efficiency
@@ -160,9 +161,9 @@ func (h *StatisticHandler) OnMessage(ctx context.Context, msg *statpb.StatItemUp
 		return &emptypb.Empty{}, nil
 	}
 
-	// Build stat updates map
-	statUpdates := map[string]int{
-		statCode: statValue,
+	// Build stat updates map with StatUpdate (absolute value + incremental change)
+	statUpdates := map[string]domain.StatUpdate{
+		statCode: {Value: &statValue, Inc: incValue},
 	}
 
 	// Process via EventProcessor (handles goal type routing, buffering, etc.)

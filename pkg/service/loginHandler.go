@@ -118,16 +118,19 @@ func (h *LoginHandler) OnMessage(ctx context.Context, msg *pb.UserLoggedIn) (*em
 	}
 
 	// Build stat updates map for all login goals (Decision Q1: filter by event_source)
-	// Decision Q2: Always use statValue=1 for login events
-	statUpdates := make(map[string]int)
+	// Login events have no absolute stat value (Value=nil), synthesize Inc=1
+	statUpdates := make(map[string]domain.StatUpdate)
 	for _, goal := range goals {
 		// Skip non-login goals
 		if goal.EventSource != domain.EventSourceLogin {
 			continue
 		}
 
-		// Add this goal's stat_code to the map with value=1
-		statUpdates[goal.Requirement.StatCode] = 1
+		// Login events: no absolute value, synthetic Inc=1
+		statUpdates[goal.Requirement.StatCode] = domain.StatUpdate{
+			Value: nil, // Login events have no absolute stat value
+			Inc:   1,   // Synthetic: always 1 per login
+		}
 	}
 
 	// If no login goals, return success (no-op)

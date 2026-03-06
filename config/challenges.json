@@ -1,6 +1,32 @@
 {
   "challenges": [
     {
+      "challengeId": "challenge-001",
+      "name": "Daily Login Streak",
+      "description": "Complete goals to earn rewards",
+      "goals": [
+        {
+          "goalId": "challenge-001-goal-01",
+          "name": "Goal 1",
+          "description": "Reach 1 login_count to complete this goal",
+          "eventSource": "login",
+          "requirement": {
+            "statCode": "login_count",
+            "operator": ">=",
+            "targetValue": 1,
+            "progressMode": "absolute"
+          },
+          "reward": {
+            "type": "WALLET",
+            "rewardId": "GEMS",
+            "quantity": 10
+          },
+          "prerequisites": [],
+          "defaultAssigned": true
+        }
+      ]
+    },
+    {
       "challengeId": "winter-challenge-2025",
       "name": "Winter Challenge 2025",
       "description": "Complete winter-themed goals",
@@ -15,7 +41,8 @@
           "requirement": {
             "statCode": "tutorial_completed",
             "operator": ">=",
-            "targetValue": 1
+            "targetValue": 1,
+            "progressMode": "absolute"
           },
           "reward": {
             "type": "WALLET",
@@ -34,14 +61,17 @@
           "requirement": {
             "statCode": "snowmen_killed",
             "operator": ">=",
-            "targetValue": 10
+            "targetValue": 10,
+            "progressMode": "absolute"
           },
           "reward": {
             "type": "ITEM",
             "rewardId": "767d2217abe241aab2245794761e9dc4",
             "quantity": 1
           },
-          "prerequisites": ["complete-tutorial"]
+          "prerequisites": [
+            "complete-tutorial"
+          ]
         },
         {
           "goalId": "reach-level-5",
@@ -53,14 +83,17 @@
           "requirement": {
             "statCode": "player_level",
             "operator": ">=",
-            "targetValue": 5
+            "targetValue": 5,
+            "progressMode": "absolute"
           },
           "reward": {
             "type": "WALLET",
             "rewardId": "GEMS",
             "quantity": 50
           },
-          "prerequisites": ["kill-10-snowmen"]
+          "prerequisites": [
+            "kill-10-snowmen"
+          ]
         }
       ]
     },
@@ -79,7 +112,8 @@
           "requirement": {
             "statCode": "daily_login",
             "operator": ">=",
-            "targetValue": 1
+            "targetValue": 1,
+            "progressMode": "absolute"
           },
           "reward": {
             "type": "WALLET",
@@ -98,7 +132,8 @@
           "requirement": {
             "statCode": "matches_played",
             "operator": ">=",
-            "targetValue": 3
+            "targetValue": 3,
+            "progressMode": "absolute"
           },
           "reward": {
             "type": "ITEM",
@@ -112,159 +147,442 @@
     {
       "challengeId": "daily-challenges",
       "name": "Daily Challenges",
-      "description": "Complete daily challenge goals - M4 testing",
+      "description": "M4 Realistic Scenario Challenges",
       "goals": [
         {
-          "goalId": "daily-goal-1",
-          "name": "Complete 5 Battles",
-          "description": "Win or lose 5 battles",
-          "type": "daily",
-          "eventSource": "statistic",
-          "defaultAssigned": false,
+          "goalId": "daily-login",
+          "name": "Daily Login",
+          "description": "Log in once",
+          "eventSource": "login",
           "requirement": {
-            "statCode": "battles_completed",
+            "statCode": "login_count",
             "operator": ">=",
-            "targetValue": 5
+            "targetValue": 1,
+            "progressMode": "absolute"
           },
           "reward": {
             "type": "WALLET",
-            "rewardId": "GOLD",
-            "quantity": 50
+            "rewardId": "GEMS",
+            "quantity": 100
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
-          "goalId": "daily-goal-2",
-          "name": "Collect 100 Coins",
-          "description": "Collect a total of 100 coins",
-          "type": "daily",
+          "goalId": "daily-10-kills",
+          "name": "10 Kills",
+          "description": "Get 10 kills",
           "eventSource": "statistic",
-          "defaultAssigned": false,
           "requirement": {
-            "statCode": "coins_collected",
+            "statCode": "enemy_kills",
             "operator": ">=",
-            "targetValue": 100
+            "targetValue": 10,
+            "progressMode": "absolute"
+          },
+          "reward": {
+            "type": "WALLET",
+            "rewardId": "GEMS",
+            "quantity": 50
+          },
+          "prerequisites": [],
+          "defaultAssigned": false
+        },
+        {
+          "goalId": "daily-3-matches",
+          "name": "Play 3 Matches",
+          "description": "Play 3 matches",
+          "eventSource": "statistic",
+          "requirement": {
+            "statCode": "games_played",
+            "operator": ">=",
+            "targetValue": 3,
+            "progressMode": "absolute"
+          },
+          "reward": {
+            "type": "WALLET",
+            "rewardId": "GEMS",
+            "quantity": 50
+          },
+          "prerequisites": [],
+          "defaultAssigned": false
+        },
+        {
+          "goalId": "daily-headshots",
+          "name": "5 Headshots",
+          "description": "Get 5 headshots",
+          "eventSource": "statistic",
+          "requirement": {
+            "statCode": "headshots",
+            "operator": ">=",
+            "targetValue": 5,
+            "progressMode": "absolute"
+          },
+          "reward": {
+            "type": "WALLET",
+            "rewardId": "GEMS",
+            "quantity": 75
+          },
+          "prerequisites": [],
+          "defaultAssigned": false
+        },
+        {
+          "goalId": "daily-wins",
+          "name": "Win 1 Game",
+          "description": "Win 1 game",
+          "eventSource": "statistic",
+          "requirement": {
+            "statCode": "wins",
+            "operator": ">=",
+            "targetValue": 1,
+            "progressMode": "absolute"
+          },
+          "reward": {
+            "type": "WALLET",
+            "rewardId": "GEMS",
+            "quantity": 100
+          },
+          "prerequisites": [],
+          "defaultAssigned": false
+        },
+        {
+          "goalId": "daily-20-kills",
+          "name": "20 Kills",
+          "description": "Get 20 kills",
+          "eventSource": "statistic",
+          "requirement": {
+            "statCode": "enemy_kills",
+            "operator": ">=",
+            "targetValue": 20,
+            "progressMode": "absolute"
+          },
+          "reward": {
+            "type": "WALLET",
+            "rewardId": "GEMS",
+            "quantity": 100
+          },
+          "prerequisites": [],
+          "defaultAssigned": false
+        },
+        {
+          "goalId": "daily-5-matches",
+          "name": "Play 5 Matches",
+          "description": "Play 5 matches",
+          "eventSource": "statistic",
+          "requirement": {
+            "statCode": "games_played",
+            "operator": ">=",
+            "targetValue": 5,
+            "progressMode": "absolute"
+          },
+          "reward": {
+            "type": "WALLET",
+            "rewardId": "GEMS",
+            "quantity": 100
+          },
+          "prerequisites": [],
+          "defaultAssigned": false
+        },
+        {
+          "goalId": "daily-10-headshots",
+          "name": "10 Headshots",
+          "description": "Get 10 headshots",
+          "eventSource": "statistic",
+          "requirement": {
+            "statCode": "headshots",
+            "operator": ">=",
+            "targetValue": 10,
+            "progressMode": "absolute"
+          },
+          "reward": {
+            "type": "WALLET",
+            "rewardId": "GEMS",
+            "quantity": 150
+          },
+          "prerequisites": [],
+          "defaultAssigned": false
+        },
+        {
+          "goalId": "daily-extra-challenge-001-goal-01",
+          "name": "Goal 1",
+          "description": "Reach 1 login_count to complete this goal",
+          "eventSource": "login",
+          "requirement": {
+            "statCode": "login_count",
+            "operator": ">=",
+            "targetValue": 1,
+            "progressMode": "absolute"
           },
           "reward": {
             "type": "WALLET",
             "rewardId": "GEMS",
             "quantity": 10
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": false
         },
         {
-          "goalId": "daily-goal-3",
-          "name": "Defeat 20 Enemies",
-          "description": "Defeat any 20 enemies",
-          "type": "daily",
-          "eventSource": "statistic",
-          "defaultAssigned": false,
+          "goalId": "daily-extra-challenge-001-goal-02",
+          "name": "Goal 2",
+          "description": "Reach 2 login_count to complete this goal",
+          "eventSource": "login",
           "requirement": {
-            "statCode": "enemies_defeated",
+            "statCode": "login_count",
             "operator": ">=",
-            "targetValue": 20
+            "targetValue": 2,
+            "progressMode": "absolute"
           },
           "reward": {
-            "type": "ITEM",
-            "rewardId": "767d2217abe241aab2245794761e9dc4",
-            "quantity": 1
+            "type": "WALLET",
+            "rewardId": "GEMS",
+            "quantity": 20
           },
-          "prerequisites": []
-        },
+          "prerequisites": [],
+          "defaultAssigned": false
+        }
+      ]
+    },
+    {
+      "challengeId": "rotation-daily",
+      "name": "Daily Rotation Challenges",
+      "description": "Complete daily rotating goals for rewards",
+      "goals": [
         {
-          "goalId": "daily-goal-4",
-          "name": "Complete 3 Quests",
-          "description": "Complete any 3 quests",
-          "type": "daily",
+          "goalId": "daily-challenges-goal-01",
+          "name": "Daily Kills",
+          "description": "Get 10 kills today",
           "eventSource": "statistic",
-          "defaultAssigned": false,
           "requirement": {
-            "statCode": "quests_completed",
+            "statCode": "kills",
             "operator": ">=",
-            "targetValue": 3
+            "targetValue": 10,
+            "progressMode": "relative"
           },
           "reward": {
             "type": "WALLET",
             "rewardId": "GOLD",
-            "quantity": 75
+            "quantity": 50
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true,
+          "rotation": {
+            "enabled": true,
+            "type": "global",
+            "schedule": "daily",
+            "onExpiry": {
+              "resetProgress": true,
+              "allowReselection": true
+            }
+          }
         },
         {
-          "goalId": "daily-goal-5",
-          "name": "Earn 1000 XP",
-          "description": "Earn a total of 1000 experience points",
-          "type": "daily",
+          "goalId": "daily-challenges-goal-02",
+          "name": "Daily Wins",
+          "description": "Win 3 matches today",
           "eventSource": "statistic",
-          "defaultAssigned": false,
           "requirement": {
-            "statCode": "xp_earned",
+            "statCode": "wins",
             "operator": ">=",
-            "targetValue": 1000
+            "targetValue": 3,
+            "progressMode": "relative"
           },
           "reward": {
             "type": "WALLET",
             "rewardId": "GEMS",
             "quantity": 25
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true,
+          "rotation": {
+            "enabled": true,
+            "type": "global",
+            "schedule": "daily",
+            "onExpiry": {
+              "resetProgress": true,
+              "allowReselection": true
+            }
+          }
         },
         {
-          "goalId": "daily-goal-6",
-          "name": "Use 10 Power-Ups",
-          "description": "Use any 10 power-ups",
-          "type": "daily",
+          "goalId": "daily-wins-no-reselect",
+          "name": "Daily Wins (No Reselection)",
+          "description": "Win 3 matches today - permanently claimed once done",
           "eventSource": "statistic",
-          "defaultAssigned": false,
           "requirement": {
-            "statCode": "powerups_used",
+            "statCode": "wins",
             "operator": ">=",
-            "targetValue": 10
-          },
-          "reward": {
-            "type": "ITEM",
-            "rewardId": "689cac44689c452290b12922c4d135fd",
-            "quantity": 2
-          },
-          "prerequisites": []
-        },
-        {
-          "goalId": "daily-goal-7",
-          "name": "Play for 30 Minutes",
-          "description": "Play for a total of 30 minutes",
-          "type": "daily",
-          "eventSource": "statistic",
-          "defaultAssigned": false,
-          "requirement": {
-            "statCode": "play_time_minutes",
-            "operator": ">=",
-            "targetValue": 30
+            "targetValue": 3,
+            "progressMode": "relative"
           },
           "reward": {
             "type": "WALLET",
             "rewardId": "GOLD",
             "quantity": 100
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true,
+          "rotation": {
+            "enabled": true,
+            "type": "global",
+            "schedule": "daily",
+            "onExpiry": {
+              "resetProgress": true,
+              "allowReselection": false
+            }
+          }
         },
         {
-          "goalId": "daily-goal-8",
-          "name": "Open 5 Chests",
-          "description": "Open any 5 treasure chests",
-          "type": "daily",
-          "eventSource": "statistic",
-          "defaultAssigned": false,
+          "goalId": "daily-login-rotation",
+          "name": "Daily Login",
+          "description": "Log in today",
+          "eventSource": "login",
           "requirement": {
-            "statCode": "chests_opened",
+            "statCode": "login_count",
             "operator": ">=",
-            "targetValue": 5
+            "targetValue": 1,
+            "progressMode": "relative"
+          },
+          "reward": {
+            "type": "WALLET",
+            "rewardId": "GOLD",
+            "quantity": 10
+          },
+          "prerequisites": [],
+          "defaultAssigned": true,
+          "rotation": {
+            "enabled": true,
+            "type": "global",
+            "schedule": "daily",
+            "onExpiry": {
+              "resetProgress": true,
+              "allowReselection": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "challengeId": "weekly-challenges",
+      "name": "Weekly Challenges",
+      "description": "Complete weekly rotating goals for bigger rewards",
+      "goals": [
+        {
+          "goalId": "weekly-challenges-goal-01",
+          "name": "Weekly Kills",
+          "description": "Get 100 kills this week",
+          "eventSource": "statistic",
+          "requirement": {
+            "statCode": "kills",
+            "operator": ">=",
+            "targetValue": 100,
+            "progressMode": "relative"
+          },
+          "reward": {
+            "type": "WALLET",
+            "rewardId": "GOLD",
+            "quantity": 500
+          },
+          "prerequisites": [],
+          "defaultAssigned": true,
+          "rotation": {
+            "enabled": true,
+            "type": "global",
+            "schedule": "weekly",
+            "onExpiry": {
+              "resetProgress": true,
+              "allowReselection": true
+            }
+          }
+        },
+        {
+          "goalId": "weekly-challenges-goal-02",
+          "name": "Weekly Wins",
+          "description": "Win 20 matches this week",
+          "eventSource": "statistic",
+          "requirement": {
+            "statCode": "wins",
+            "operator": ">=",
+            "targetValue": 20,
+            "progressMode": "relative"
           },
           "reward": {
             "type": "WALLET",
             "rewardId": "GEMS",
-            "quantity": 15
+            "quantity": 250
           },
-          "prerequisites": []
+          "prerequisites": [],
+          "defaultAssigned": true,
+          "rotation": {
+            "enabled": true,
+            "type": "global",
+            "schedule": "weekly",
+            "onExpiry": {
+              "resetProgress": true,
+              "allowReselection": true
+            }
+          }
+        },
+        {
+          "goalId": "weekly-wins-no-reset",
+          "name": "Weekly Wins (No Reset)",
+          "description": "Win 5 matches this week - progress preserved across rotations",
+          "eventSource": "statistic",
+          "requirement": {
+            "statCode": "wins",
+            "operator": ">=",
+            "targetValue": 5,
+            "progressMode": "relative"
+          },
+          "reward": {
+            "type": "WALLET",
+            "rewardId": "GOLD",
+            "quantity": 200
+          },
+          "prerequisites": [],
+          "defaultAssigned": true,
+          "rotation": {
+            "enabled": true,
+            "type": "global",
+            "schedule": "weekly",
+            "onExpiry": {
+              "resetProgress": false,
+              "allowReselection": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "challengeId": "monthly-challenges",
+      "name": "Monthly Challenges",
+      "description": "Complete monthly rotating goals for premium rewards",
+      "goals": [
+        {
+          "goalId": "monthly-kills-goal",
+          "name": "Monthly Kills",
+          "description": "Get 500 kills this month",
+          "eventSource": "statistic",
+          "requirement": {
+            "statCode": "kills",
+            "operator": ">=",
+            "targetValue": 500,
+            "progressMode": "relative"
+          },
+          "reward": {
+            "type": "WALLET",
+            "rewardId": "GOLD",
+            "quantity": 1000
+          },
+          "prerequisites": [],
+          "defaultAssigned": true,
+          "rotation": {
+            "enabled": true,
+            "type": "global",
+            "schedule": "monthly",
+            "onExpiry": {
+              "resetProgress": true,
+              "allowReselection": true
+            }
+          }
         }
       ]
     }

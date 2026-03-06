@@ -36,6 +36,9 @@ ARG GOMODCACHE=/tmp/build-cache/go/modcache
 # Set working directory.
 WORKDIR /build
 
+# Copy shared common module for local replace directive (../extend-challenge-common)
+COPY --from=common . /extend-challenge-common
+
 # Copy and download the dependencies for application.
 COPY go.mod go.sum ./
 RUN go mod download

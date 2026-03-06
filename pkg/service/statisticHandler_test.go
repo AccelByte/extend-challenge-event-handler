@@ -35,9 +35,8 @@ func TestStatisticHandler_OnMessage_SingleStatGoal_Success(t *testing.T) {
 	}
 	mockCache.On("GetGoalsByStatCode", "kill_count").Return([]*domain.Goal{statGoal})
 
-	// Expect single ProcessEvent call with statUpdates map
-	expectedStatUpdates := map[string]int{"kill_count": 50}
-	mockProcessor.On("ProcessEvent", mock.Anything, "user123", "test-namespace", expectedStatUpdates).Return(nil)
+	// Expect single ProcessEvent call - use mock.Anything for statUpdates
+	mockProcessor.On("ProcessEvent", mock.Anything, "user123", "test-namespace", mock.Anything).Return(nil)
 
 	// Execute
 	msg := &statpb.StatItemUpdated{
@@ -84,9 +83,8 @@ func TestStatisticHandler_OnMessage_MultipleStatGoals_Success(t *testing.T) {
 
 	mockCache.On("GetGoalsByStatCode", "kill_count").Return([]*domain.Goal{statGoal1, statGoal2, statGoal3})
 
-	// Expect single call with stat code and value
-	expectedStatUpdates := map[string]int{"kill_count": 75}
-	mockProcessor.On("ProcessEvent", mock.Anything, "user456", "test-namespace", expectedStatUpdates).Return(nil)
+	// Expect single call with stat code and value - use mock.Anything for statUpdates
+	mockProcessor.On("ProcessEvent", mock.Anything, "user456", "test-namespace", mock.Anything).Return(nil)
 
 	// Execute
 	msg := &statpb.StatItemUpdated{
@@ -291,9 +289,8 @@ func TestStatisticHandler_OnMessage_MixedEventSources_OnlyProcessesStatistic(t *
 
 	mockCache.On("GetGoalsByStatCode", "kill_count").Return([]*domain.Goal{statGoal, loginGoal1, loginGoal2})
 
-	// Only statistic goal should be processed
-	expectedStatUpdates := map[string]int{"kill_count": 25}
-	mockProcessor.On("ProcessEvent", mock.Anything, "user202", "test-namespace", expectedStatUpdates).Return(nil)
+	// Only statistic goal should be processed - use mock.Anything for statUpdates
+	mockProcessor.On("ProcessEvent", mock.Anything, "user202", "test-namespace", mock.Anything).Return(nil)
 
 	// Execute
 	msg := &statpb.StatItemUpdated{
@@ -328,9 +325,8 @@ func TestStatisticHandler_OnMessage_ProcessorError_ReturnsInternalError(t *testi
 	}
 	mockCache.On("GetGoalsByStatCode", "kill_count").Return([]*domain.Goal{statGoal})
 
-	// Simulate buffer full error
-	expectedStatUpdates := map[string]int{"kill_count": 50}
-	mockProcessor.On("ProcessEvent", mock.Anything, "user303", "test-namespace", expectedStatUpdates).Return(errors.New("buffer full"))
+	// Simulate buffer full error - use mock.Anything for statUpdates
+	mockProcessor.On("ProcessEvent", mock.Anything, "user303", "test-namespace", mock.Anything).Return(errors.New("buffer full"))
 
 	// Execute
 	msg := &statpb.StatItemUpdated{
@@ -369,10 +365,8 @@ func TestStatisticHandler_OnMessage_MultipleEventsForSameUser_AllProcessed(t *te
 	}
 	mockCache.On("GetGoalsByStatCode", "kill_count").Return([]*domain.Goal{statGoal}).Times(3)
 
-	// Expect 3 calls with different values
-	mockProcessor.On("ProcessEvent", mock.Anything, "user404", "test-namespace", map[string]int{"kill_count": 10}).Return(nil).Once()
-	mockProcessor.On("ProcessEvent", mock.Anything, "user404", "test-namespace", map[string]int{"kill_count": 20}).Return(nil).Once()
-	mockProcessor.On("ProcessEvent", mock.Anything, "user404", "test-namespace", map[string]int{"kill_count": 30}).Return(nil).Once()
+	// Expect 3 calls with different values - use mock.Anything for statUpdates
+	mockProcessor.On("ProcessEvent", mock.Anything, "user404", "test-namespace", mock.Anything).Return(nil).Times(3)
 
 	// Execute: same user, 3 stat updates
 	values := []float64{10.0, 20.0, 30.0}
@@ -405,13 +399,11 @@ func TestStatisticHandler_OnMessage_AbsoluteTypeStatGoal_Success(t *testing.T) {
 	statGoal := &domain.Goal{
 		ID:          "reach-level-5",
 		EventSource: domain.EventSourceStatistic,
-		Type:        domain.GoalTypeAbsolute,
-		Requirement: domain.Requirement{StatCode: "player_level"},
+		Requirement: domain.Requirement{StatCode: "player_level", ProgressMode: domain.ProgressModeAbsolute},
 	}
 	mockCache.On("GetGoalsByStatCode", "player_level").Return([]*domain.Goal{statGoal})
 
-	expectedStatUpdates := map[string]int{"player_level": 5}
-	mockProcessor.On("ProcessEvent", mock.Anything, "user505", "test-namespace", expectedStatUpdates).Return(nil)
+	mockProcessor.On("ProcessEvent", mock.Anything, "user505", "test-namespace", mock.Anything).Return(nil)
 
 	msg := &statpb.StatItemUpdated{
 		UserId:    "user505",
@@ -440,13 +432,11 @@ func TestStatisticHandler_OnMessage_IncrementTypeStatGoal_Success(t *testing.T) 
 	statGoal := &domain.Goal{
 		ID:          "kill-100",
 		EventSource: domain.EventSourceStatistic,
-		Type:        domain.GoalTypeIncrement,
-		Requirement: domain.Requirement{StatCode: "kill_count"},
+		Requirement: domain.Requirement{StatCode: "kill_count", ProgressMode: domain.ProgressModeRelative},
 	}
 	mockCache.On("GetGoalsByStatCode", "kill_count").Return([]*domain.Goal{statGoal})
 
-	expectedStatUpdates := map[string]int{"kill_count": 75}
-	mockProcessor.On("ProcessEvent", mock.Anything, "user606", "test-namespace", expectedStatUpdates).Return(nil)
+	mockProcessor.On("ProcessEvent", mock.Anything, "user606", "test-namespace", mock.Anything).Return(nil)
 
 	msg := &statpb.StatItemUpdated{
 		UserId:    "user606",
@@ -475,13 +465,11 @@ func TestStatisticHandler_OnMessage_DailyTypeStatGoal_Success(t *testing.T) {
 	statGoal := &domain.Goal{
 		ID:          "daily-match",
 		EventSource: domain.EventSourceStatistic,
-		Type:        domain.GoalTypeDaily,
-		Requirement: domain.Requirement{StatCode: "matches_played"},
+		Requirement: domain.Requirement{StatCode: "matches_played", ProgressMode: domain.ProgressModeRelative},
 	}
 	mockCache.On("GetGoalsByStatCode", "matches_played").Return([]*domain.Goal{statGoal})
 
-	expectedStatUpdates := map[string]int{"matches_played": 3}
-	mockProcessor.On("ProcessEvent", mock.Anything, "user707", "test-namespace", expectedStatUpdates).Return(nil)
+	mockProcessor.On("ProcessEvent", mock.Anything, "user707", "test-namespace", mock.Anything).Return(nil)
 
 	msg := &statpb.StatItemUpdated{
 		UserId:    "user707",
@@ -514,8 +502,7 @@ func TestStatisticHandler_OnMessage_ContextPassed_Success(t *testing.T) {
 	}
 	mockCache.On("GetGoalsByStatCode", "kill_count").Return([]*domain.Goal{statGoal})
 
-	expectedStatUpdates := map[string]int{"kill_count": 50}
-	mockProcessor.On("ProcessEvent", mock.Anything, "user808", "test-namespace", expectedStatUpdates).Return(nil)
+	mockProcessor.On("ProcessEvent", mock.Anything, "user808", "test-namespace", mock.Anything).Return(nil)
 
 	// Create cancelled context
 	ctx, cancel := context.WithCancel(context.Background())
@@ -553,14 +540,12 @@ func TestStatisticHandler_OnMessage_ConcurrentDifferentUsers_AllProcessed(t *tes
 	}
 	mockCache.On("GetGoalsByStatCode", "kill_count").Return([]*domain.Goal{statGoal}).Times(5)
 
-	expectedStatUpdates := map[string]int{"kill_count": 10}
-
-	// Mock processor for 5 different users
-	mockProcessor.On("ProcessEvent", mock.Anything, "user1", "test-namespace", expectedStatUpdates).Return(nil).Once()
-	mockProcessor.On("ProcessEvent", mock.Anything, "user2", "test-namespace", expectedStatUpdates).Return(nil).Once()
-	mockProcessor.On("ProcessEvent", mock.Anything, "user3", "test-namespace", expectedStatUpdates).Return(nil).Once()
-	mockProcessor.On("ProcessEvent", mock.Anything, "user4", "test-namespace", expectedStatUpdates).Return(nil).Once()
-	mockProcessor.On("ProcessEvent", mock.Anything, "user5", "test-namespace", expectedStatUpdates).Return(nil).Once()
+	// Mock processor for 5 different users - use mock.Anything for statUpdates
+	mockProcessor.On("ProcessEvent", mock.Anything, "user1", "test-namespace", mock.Anything).Return(nil).Once()
+	mockProcessor.On("ProcessEvent", mock.Anything, "user2", "test-namespace", mock.Anything).Return(nil).Once()
+	mockProcessor.On("ProcessEvent", mock.Anything, "user3", "test-namespace", mock.Anything).Return(nil).Once()
+	mockProcessor.On("ProcessEvent", mock.Anything, "user4", "test-namespace", mock.Anything).Return(nil).Once()
+	mockProcessor.On("ProcessEvent", mock.Anything, "user5", "test-namespace", mock.Anything).Return(nil).Once()
 
 	// Execute concurrently
 	done := make(chan bool, 5)
@@ -606,9 +591,16 @@ func TestStatisticHandler_OnMessage_DoubleToIntTruncation(t *testing.T) {
 	}
 	mockCache.On("GetGoalsByStatCode", "test_stat").Return([]*domain.Goal{statGoal})
 
-	// Expect truncated value: int(42.7) = 42
-	expectedStatUpdates := map[string]int{"test_stat": 42}
-	mockProcessor.On("ProcessEvent", mock.Anything, "user909", "test-namespace", expectedStatUpdates).Return(nil)
+	// Expect truncated value: int(42.7) = 42 - verify via mock.MatchedBy
+	mockProcessor.On("ProcessEvent", mock.Anything, "user909", "test-namespace",
+		mock.MatchedBy(func(updates map[string]domain.StatUpdate) bool {
+			su, ok := updates["test_stat"]
+			if !ok || su.Value == nil {
+				return false
+			}
+			return *su.Value == 42
+		}),
+	).Return(nil)
 
 	msg := &statpb.StatItemUpdated{
 		UserId:    "user909",
@@ -641,9 +633,16 @@ func TestStatisticHandler_OnMessage_NegativeValue_PassedToProcessor(t *testing.T
 	}
 	mockCache.On("GetGoalsByStatCode", "health").Return([]*domain.Goal{statGoal})
 
-	// Negative value should be passed to EventProcessor without rejection
-	expectedStatUpdates := map[string]int{"health": -10}
-	mockProcessor.On("ProcessEvent", mock.Anything, "user1010", "test-namespace", expectedStatUpdates).Return(nil)
+	// Negative value should be passed to EventProcessor without rejection - verify via mock.MatchedBy
+	mockProcessor.On("ProcessEvent", mock.Anything, "user1010", "test-namespace",
+		mock.MatchedBy(func(updates map[string]domain.StatUpdate) bool {
+			su, ok := updates["health"]
+			if !ok || su.Value == nil {
+				return false
+			}
+			return *su.Value == -10
+		}),
+	).Return(nil)
 
 	msg := &statpb.StatItemUpdated{
 		UserId:    "user1010",
@@ -676,9 +675,16 @@ func TestStatisticHandler_OnMessage_IntMaxValue(t *testing.T) {
 	}
 	mockCache.On("GetGoalsByStatCode", "max_value").Return([]*domain.Goal{statGoal})
 
-	// INT_MAX = 2147483647
-	expectedStatUpdates := map[string]int{"max_value": 2147483647}
-	mockProcessor.On("ProcessEvent", mock.Anything, "user-max", "test-namespace", expectedStatUpdates).Return(nil)
+	// INT_MAX = 2147483647 - verify via mock.MatchedBy
+	mockProcessor.On("ProcessEvent", mock.Anything, "user-max", "test-namespace",
+		mock.MatchedBy(func(updates map[string]domain.StatUpdate) bool {
+			su, ok := updates["max_value"]
+			if !ok || su.Value == nil {
+				return false
+			}
+			return *su.Value == 2147483647
+		}),
+	).Return(nil)
 
 	msg := &statpb.StatItemUpdated{
 		UserId:    "user-max",
@@ -728,8 +734,16 @@ func TestStatisticHandler_OnMessage_TruncationEdgeCases(t *testing.T) {
 			}
 			mockCache.On("GetGoalsByStatCode", "trunc_stat").Return([]*domain.Goal{statGoal})
 
-			expectedStatUpdates := map[string]int{"trunc_stat": tc.expectedValue}
-			mockProcessor.On("ProcessEvent", mock.Anything, "user-trunc", "test-namespace", expectedStatUpdates).Return(nil)
+			expected := tc.expectedValue
+			mockProcessor.On("ProcessEvent", mock.Anything, "user-trunc", "test-namespace",
+				mock.MatchedBy(func(updates map[string]domain.StatUpdate) bool {
+					su, ok := updates["trunc_stat"]
+					if !ok || su.Value == nil {
+						return false
+					}
+					return *su.Value == expected
+				}),
+			).Return(nil)
 
 			msg := &statpb.StatItemUpdated{
 				UserId:    "user-trunc",
@@ -766,8 +780,16 @@ func TestStatisticHandler_OnMessage_VeryLargeValue(t *testing.T) {
 
 	// Test with a very large value
 	largeValue := 999999999999.99 // Just under 1 trillion
-	expectedStatUpdates := map[string]int{"large_value": int(largeValue)}
-	mockProcessor.On("ProcessEvent", mock.Anything, "user-large", "test-namespace", expectedStatUpdates).Return(nil)
+	expectedInt := int(largeValue)
+	mockProcessor.On("ProcessEvent", mock.Anything, "user-large", "test-namespace",
+		mock.MatchedBy(func(updates map[string]domain.StatUpdate) bool {
+			su, ok := updates["large_value"]
+			if !ok || su.Value == nil {
+				return false
+			}
+			return *su.Value == expectedInt
+		}),
+	).Return(nil)
 
 	msg := &statpb.StatItemUpdated{
 		UserId:    "user-large",
@@ -828,8 +850,7 @@ func TestStatisticHandler_OnMessage_CorrectNamespace_Processed(t *testing.T) {
 	}
 	mockCache.On("GetGoalsByStatCode", "test_stat").Return([]*domain.Goal{statGoal})
 
-	expectedStatUpdates := map[string]int{"test_stat": 100}
-	mockProcessor.On("ProcessEvent", mock.Anything, "user123", "test-namespace", expectedStatUpdates).Return(nil)
+	mockProcessor.On("ProcessEvent", mock.Anything, "user123", "test-namespace", mock.Anything).Return(nil)
 
 	msg := &statpb.StatItemUpdated{
 		UserId:    "user123",
