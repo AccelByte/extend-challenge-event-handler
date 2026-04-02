@@ -263,6 +263,11 @@ func main() {
 	statpb.RegisterStatisticStatItemUpdatedServiceServer(s, statisticHandler)
 	zerologLogger.Info().Msg("Statistic handler registered")
 
+	// Register GDPR Deletion Handler (uses direct repository, not buffered)
+	gdprHandler := service.NewGDPRDeletionHandler(postgresRepo, namespace, zerologLogger)
+	pb.RegisterDeletionAccountGdprGdprRequestDataDeletionResponseServiceServer(s, gdprHandler)
+	zerologLogger.Info().Msg("GDPR deletion handler registered")
+
 	// Enable gRPC Reflection
 	reflection.Register(s)
 	zerologLogger.Info().Msg("gRPC reflection enabled")
